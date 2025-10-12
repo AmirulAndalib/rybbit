@@ -10,12 +10,14 @@ import { useSetPageTitle } from "../../../hooks/useSetPageTitle";
 import { SubHeader } from "../components/SubHeader/SubHeader";
 import { GlobeSessions } from "./components/GlobeSessions";
 import MapViewSelector from "./components/ModeSelector";
+import { TimelineScrubber } from "./components/TimelineScrubber";
 import { useGlobeStore } from "./globeStore";
 import { useCoordinatesLayer } from "./hooks/useCoordinatesLayer";
 import { useCountriesLayer } from "./hooks/useCountriesLayer";
 import { useLayerVisibility } from "./hooks/useLayerVisibility";
 import { useMapbox } from "./hooks/useMapbox";
 import { useSubdivisionsLayer } from "./hooks/useSubdivisionsLayer";
+import { useTimelineLayer } from "./hooks/useTimelineLayer";
 
 export default function GlobePage() {
   useSetPageTitle("Rybbit · Globe");
@@ -41,6 +43,12 @@ export default function GlobePage() {
     map,
     mapLoaded,
     minutes: 30,
+    mapView,
+  });
+
+  useTimelineLayer({
+    map,
+    mapLoaded,
     mapView,
   });
 
@@ -80,11 +88,10 @@ export default function GlobePage() {
               />
             </div>
           )}
-          <div className="absolute bottom-0 left-4 z-99999">
-            <MapViewSelector />
-          </div>
-          <div className="absolute bottom-[60px] left-4 z-99999">
+          <div className="absolute bottom-4 left-4 z-99999 w-full flex flex-col gap-2">
             <GlobeSessions />
+            <MapViewSelector />
+            {mapView === "timeline" && <TimelineScrubber />}
           </div>
         </div>
       </div>

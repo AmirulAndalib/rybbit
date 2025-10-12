@@ -45,5 +45,12 @@ export function useLayerVisibility(
         mapView === "coordinates" ? "visible" : "none"
       );
     }
+    if (map.current.getLayer("timeline-sessions-layer")) {
+      map.current.setLayoutProperty(
+        "timeline-sessions-layer",
+        "visibility",
+        mapView === "timeline" ? "visible" : "none"
+      );
+    }
   }, [mapView, mapLoaded, map]);
 }
