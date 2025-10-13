@@ -199,12 +199,14 @@ export function useTimelineLayer({
   const { currentTime } = useTimelineStore();
   const popupRef = useRef<mapboxgl.Popup | null>(null);
   const markersMapRef = useRef<Map<string, { marker: mapboxgl.Marker; element: HTMLDivElement }>>(new Map());
+  const openTooltipSessionIdRef = useRef<string | null>(null);
   const [selectedSession, setSelectedSession] = useState<GetSessionsResponse[number] | null>(null);
 
   // Close tooltip when timeline time changes
   useEffect(() => {
     if (popupRef.current && popupRef.current.isOpen()) {
       popupRef.current.remove();
+      openTooltipSessionIdRef.current = null;
     }
   }, [currentTime]);
 
@@ -228,6 +230,7 @@ export function useTimelineLayer({
     const handleMapClick = () => {
       if (popupRef.current && popupRef.current.isOpen()) {
         popupRef.current.remove();
+        openTooltipSessionIdRef.current = null;
       }
     };
 
@@ -302,10 +305,16 @@ export function useTimelineLayer({
             e.stopPropagation();
             if (!map.current || !popupRef.current) return;
 
-            // If tooltip is already visible, hide it
+            // If clicking the same marker that has the tooltip open, close it
+            if (popupRef.current.isOpen() && openTooltipSessionIdRef.current === session.session_id) {
+              popupRef.current.remove();
+              openTooltipSessionIdRef.current = null;
+              return;
+            }
+
+            // If clicking a different marker (or no tooltip is open), show this one
             if (popupRef.current.isOpen()) {
               popupRef.current.remove();
-              return;
             }
 
             const avatarSVG = generateAvatarSVG(session.user_id, 36);
@@ -394,6 +403,7 @@ export function useTimelineLayer({
             `;
 
             popupRef.current.setLngLat([roundedLon, roundedLat]).setHTML(html).addTo(map.current);
+            openTooltipSessionIdRef.current = session.session_id;
 
             // Add click handler to the button
             const button = document.querySelector(`[data-session-id="${session.session_id}"]`);
@@ -402,6 +412,7 @@ export function useTimelineLayer({
                 e.stopPropagation();
                 setSelectedSession(session);
                 popupRef.current?.remove();
+                openTooltipSessionIdRef.current = null;
               });
             }
           };
