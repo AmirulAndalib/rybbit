@@ -103,8 +103,8 @@ export default function GlobePage() {
         <VisuallyHidden.Root>
           <DialogTitle>Session Details</DialogTitle>
         </VisuallyHidden.Root>
-        <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
-          {selectedSession && <SessionCard session={selectedSession} />}
+        <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto bg-transparent border-0 p-0 shadow-none [&>button]:hidden">
+          {selectedSession && <SessionCard session={selectedSession} expandedByDefault />}
         </DialogContent>
       </Dialog>
     </DisabledOverlay>
