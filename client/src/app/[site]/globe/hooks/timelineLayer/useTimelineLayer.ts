@@ -10,6 +10,7 @@ import {
   CLUSTER_MAX_ZOOM,
   CLUSTER_RADIUS,
   CLUSTERING_THRESHOLD,
+  SPREAD_START_ZOOM,
 } from "./timelineLayerConstants";
 import { setClusterLayersVisibility, updateGeoJSONData } from "./timelineLayerManager";
 import { updateMarkers as updateMarkersUtil, clearAllMarkers, type MarkerData } from "./timelineMarkerManager";
@@ -91,7 +92,12 @@ export function useTimelineLayer({
     setClusterLayersVisibility(mapInstance, shouldShowClusters);
 
     // Update GeoJSON data source
-    updateGeoJSONData(mapInstance, activeSessions);
+    updateGeoJSONData(mapInstance, activeSessions, SPREAD_START_ZOOM);
+
+    // Update GeoJSON when zoom changes (for point spreading)
+    const handleZoomChange = () => {
+      updateGeoJSONData(mapInstance, activeSessions, SPREAD_START_ZOOM);
+    };
 
     // Function to update HTML markers for unclustered points
     const updateMarkers = async () => {
@@ -103,7 +109,8 @@ export function useTimelineLayer({
         popupRef,
         openTooltipSessionIdRef,
         map,
-        setSelectedSession
+        setSelectedSession,
+        SPREAD_START_ZOOM
       );
     };
 
@@ -116,7 +123,8 @@ export function useTimelineLayer({
     // Initial update
     updateMarkers();
 
-    // Update markers on zoom and move (throttled)
+    // Update GeoJSON and markers on zoom (for point spreading)
+    mapInstance.on("zoom", handleZoomChange);
     mapInstance.on("zoom", throttledUpdateMarkers);
     mapInstance.on("move", throttledUpdateMarkers);
     mapInstance.on("sourcedata", throttledUpdateMarkers);
@@ -135,6 +143,7 @@ export function useTimelineLayer({
     return () => {
       clearAllMarkers(markersMap);
       throttledUpdateMarkers.cancel(); // Cancel any pending throttled calls
+      mapInstance.off("zoom", handleZoomChange);
       mapInstance.off("zoom", throttledUpdateMarkers);
       mapInstance.off("move", throttledUpdateMarkers);
       mapInstance.off("sourcedata", throttledUpdateMarkers);

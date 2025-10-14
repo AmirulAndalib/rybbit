@@ -2,6 +2,7 @@ import mapboxgl from "mapbox-gl";
 import { isNil, round } from "lodash";
 import type { GetSessionsResponse } from "../../../../../api/analytics/userSessions";
 import { SOURCE_ID, MIN_CLUSTER_SIZE } from "./timelineLayerConstants";
+import { spreadOverlappingPoints } from "./timelineLayerManager";
 
 /**
  * Query and expand features from the map, including expanding small clusters
@@ -10,19 +11,26 @@ import { SOURCE_ID, MIN_CLUSTER_SIZE } from "./timelineLayerConstants";
 export async function getUnclusteredFeatures(
   mapInstance: mapboxgl.Map,
   shouldShowClusters: boolean,
-  activeSessions: GetSessionsResponse
+  activeSessions: GetSessionsResponse,
+  spreadStartZoom: number
 ): Promise<any[]> {
+  const zoom = mapInstance.getZoom();
+  const spreadCoordinates = spreadOverlappingPoints(activeSessions, zoom, spreadStartZoom);
+
   if (!shouldShowClusters) {
-    // When clustering is disabled, show all sessions as individual markers
+    // When clustering is disabled, show all sessions as individual markers with spreading
     return activeSessions
       .filter(s => !isNil(s.lat) && !isNil(s.lon))
-      .map(session => ({
-        properties: session,
-        geometry: {
-          type: "Point" as const,
-          coordinates: [round(session.lon, 4), round(session.lat, 4)],
-        },
-      }));
+      .map(session => {
+        const coords = spreadCoordinates.get(session.session_id) || [round(session.lon, 4), round(session.lat, 4)];
+        return {
+          properties: session,
+          geometry: {
+            type: "Point" as const,
+            coordinates: coords,
+          },
+        };
+      });
   }
 
   // When clustering is enabled, show unclustered points and expand small clusters

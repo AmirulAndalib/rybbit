@@ -16,3 +16,9 @@ export const CLUSTERING_THRESHOLD = 500;
 
 export const PAGE_SIZE = 10000;
 export const MAX_PAGES = 10;
+
+// Point spreading configuration (for overlapping coordinates)
+// Zoom level at which points at the same location start spreading apart
+export const SPREAD_START_ZOOM = 8;
+// Maximum offset in degrees to apply when spreading points (roughly 11 meters at equator)
+export const SPREAD_RADIUS_DEGREES = 0.006;

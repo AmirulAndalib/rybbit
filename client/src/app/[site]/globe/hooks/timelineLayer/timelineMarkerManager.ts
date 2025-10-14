@@ -96,13 +96,15 @@ export async function updateMarkers(
   popupRef: React.RefObject<mapboxgl.Popup | null>,
   openTooltipSessionIdRef: React.MutableRefObject<string | null>,
   map: React.RefObject<mapboxgl.Map | null>,
-  setSelectedSession: (session: GetSessionsResponse[number]) => void
+  setSelectedSession: (session: GetSessionsResponse[number]) => void,
+  spreadStartZoom: number
 ): Promise<void> {
   // Get unclustered features (including expanded small clusters)
   const unclusteredFeatures = await getUnclusteredFeatures(
     mapInstance,
     shouldShowClusters,
-    activeSessions
+    activeSessions,
+    spreadStartZoom
   );
 
   // Build set of current session IDs
