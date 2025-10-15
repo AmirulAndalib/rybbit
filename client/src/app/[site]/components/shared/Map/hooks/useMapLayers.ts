@@ -64,7 +64,7 @@ export function useMapLayers({
         const dataKey = isCountryView ? feature.get("ISO_A2") : feature.get("iso_3166_2");
 
         const dataToUse = isCountryView ? countryData : subdivisionData;
-        const foundData = dataToUse?.find(({ value }: any) => value === dataKey);
+        const foundData = dataToUse?.find(({ value }) => value === dataKey);
 
         const metricValue = foundData?.count || 0;
 

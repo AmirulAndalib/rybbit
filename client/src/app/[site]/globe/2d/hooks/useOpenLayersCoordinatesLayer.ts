@@ -79,8 +79,13 @@ export function useOpenLayersCoordinatesLayer({ mapInstanceRef, mapViewRef, mapV
 
     // Calculate radius based on zoom level and count - continuous scale
     const getRadius = (count: number, zoom: number): number => {
-      const sqrt = Math.sqrt(count);
-      const normalizedCount = (sqrt - 1) / (topSize - 1); // 0 to 1
+      // Ensure count is at least 1
+      const safeCount = Math.max(count, 1);
+      const sqrt = Math.sqrt(safeCount);
+
+      // Guard against division by zero when topSize <= 1
+      const denominator = Math.max(topSize - 1, 1);
+      const normalizedCount = Math.max(0, Math.min(1, (sqrt - 1) / denominator)); // Clamp to [0, 1]
 
       // Exponential zoom scaling: radius grows exponentially with zoom
       // At zoom 0: min 1, max 4

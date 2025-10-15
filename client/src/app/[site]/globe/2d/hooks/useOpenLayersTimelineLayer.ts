@@ -27,6 +27,7 @@ type OverlayData = {
   overlay: Overlay;
   element: HTMLDivElement;
   session: GetSessionsResponse[number];
+  cleanup: () => void;
 };
 
 export function useOpenLayersTimelineLayer({ mapInstanceRef, mapViewRef, mapView }: TimelineLayerProps) {
@@ -107,7 +108,8 @@ export function useOpenLayersTimelineLayer({ mapInstanceRef, mapViewRef, mapView
     // Hide everything if not in timeline view
     if (mapView !== "timeline") {
       // Clear overlays
-      overlaysMap.forEach(({ overlay }) => {
+      overlaysMap.forEach(({ overlay, cleanup }) => {
+        cleanup();
         map.removeOverlay(overlay);
       });
       overlaysMap.clear();
@@ -223,8 +225,9 @@ export function useOpenLayersTimelineLayer({ mapInstanceRef, mapViewRef, mapView
 
         // Remove overlays that are no longer unclustered
         const toRemove: string[] = [];
-        overlaysMap.forEach(({ overlay }, sessionId) => {
+        overlaysMap.forEach(({ overlay, cleanup }, sessionId) => {
           if (!currentSessionIds.has(sessionId)) {
+            cleanup();
             map.removeOverlay(overlay);
             toRemove.push(sessionId);
           }
@@ -259,6 +262,11 @@ export function useOpenLayersTimelineLayer({ mapInstanceRef, mapViewRef, mapView
             const avatarSVG = generateAvatarSVG(session.user_id, 32);
             avatarContainer.innerHTML = avatarSVG;
 
+            // Track cleanup resources
+            let timeoutId: number | null = null;
+            let buttonHandler: ((e: Event) => void) | null = null;
+            let buttonElement: Element | null = null;
+
             const handleAvatarClick = (e: MouseEvent) => {
               e.stopPropagation();
 
@@ -274,17 +282,19 @@ export function useOpenLayersTimelineLayer({ mapInstanceRef, mapViewRef, mapView
                 tooltipOverlayRef.current.setPosition(fromLonLat([session.lon, session.lat]));
                 setOpenTooltipSessionId(session.session_id);
 
-                setTimeout(() => {
+                timeoutId = window.setTimeout(() => {
                   const button = document.querySelector(`[data-session-id="${session.session_id}"]`);
                   if (button) {
-                    button.addEventListener("click", (e: Event) => {
+                    buttonHandler = (e: Event) => {
                       e.stopPropagation();
                       setSelectedSession(session);
                       if (tooltipOverlayRef.current) {
                         tooltipOverlayRef.current.setPosition(undefined);
                         setOpenTooltipSessionId(null);
                       }
-                    });
+                    };
+                    buttonElement = button;
+                    button.addEventListener("click", buttonHandler);
                   }
                 }, 0);
               }
@@ -301,7 +311,18 @@ export function useOpenLayersTimelineLayer({ mapInstanceRef, mapViewRef, mapView
             overlay.setPosition(fromLonLat([session.lon, session.lat]));
             map.addOverlay(overlay);
 
-            overlaysMap.set(session.session_id, { overlay, element: avatarContainer, session });
+            // Cleanup function to remove all event listeners and clear timeouts
+            const cleanup = () => {
+              if (timeoutId !== null) {
+                clearTimeout(timeoutId);
+              }
+              if (buttonHandler && buttonElement) {
+                buttonElement.removeEventListener("click", buttonHandler);
+              }
+              avatarContainer.removeEventListener("click", handleAvatarClick);
+            };
+
+            overlaysMap.set(session.session_id, { overlay, element: avatarContainer, session, cleanup });
           }
         });
       };
@@ -353,8 +374,9 @@ export function useOpenLayersTimelineLayer({ mapInstanceRef, mapViewRef, mapView
 
       // Remove overlays that are no longer active
       const toRemove: string[] = [];
-      overlaysMap.forEach(({ overlay }, sessionId) => {
+      overlaysMap.forEach(({ overlay, cleanup }, sessionId) => {
         if (!currentSessionIds.has(sessionId)) {
+          cleanup();
           map.removeOverlay(overlay);
           toRemove.push(sessionId);
         }
@@ -389,6 +411,11 @@ export function useOpenLayersTimelineLayer({ mapInstanceRef, mapViewRef, mapView
         const avatarSVG = generateAvatarSVG(session.user_id, 32);
         avatarContainer.innerHTML = avatarSVG;
 
+        // Track cleanup resources
+        let timeoutId: number | null = null;
+        let buttonHandler: ((e: Event) => void) | null = null;
+        let buttonElement: Element | null = null;
+
         // Add click handler for tooltip
         const handleAvatarClick = (e: MouseEvent) => {
           e.stopPropagation();
@@ -408,17 +435,19 @@ export function useOpenLayersTimelineLayer({ mapInstanceRef, mapViewRef, mapView
             setOpenTooltipSessionId(session.session_id);
 
             // Add click handler to "View Details" button
-            setTimeout(() => {
+            timeoutId = window.setTimeout(() => {
               const button = document.querySelector(`[data-session-id="${session.session_id}"]`);
               if (button) {
-                button.addEventListener("click", (e: Event) => {
+                buttonHandler = (e: Event) => {
                   e.stopPropagation();
                   setSelectedSession(session);
                   if (tooltipOverlayRef.current) {
                     tooltipOverlayRef.current.setPosition(undefined);
                     setOpenTooltipSessionId(null);
                   }
-                });
+                };
+                buttonElement = button;
+                button.addEventListener("click", buttonHandler);
               }
             }, 0);
           }
@@ -435,7 +464,18 @@ export function useOpenLayersTimelineLayer({ mapInstanceRef, mapViewRef, mapView
         overlay.setPosition(fromLonLat([session.lon, session.lat]));
         map.addOverlay(overlay);
 
-        overlaysMap.set(session.session_id, { overlay, element: avatarContainer, session });
+        // Cleanup function to remove all event listeners and clear timeouts
+        const cleanup = () => {
+          if (timeoutId !== null) {
+            clearTimeout(timeoutId);
+          }
+          if (buttonHandler && buttonElement) {
+            buttonElement.removeEventListener("click", buttonHandler);
+          }
+          avatarContainer.removeEventListener("click", handleAvatarClick);
+        };
+
+        overlaysMap.set(session.session_id, { overlay, element: avatarContainer, session, cleanup });
       }
     });
     }
@@ -457,9 +497,15 @@ export function useOpenLayersTimelineLayer({ mapInstanceRef, mapViewRef, mapView
           // Zoom in on the cluster
           const extent = feature.getGeometry()?.getExtent();
           if (extent) {
-            map.getView().fit(extent, {
+            const view = map.getView();
+            const currentZoom = view.getZoom() ?? view.getMinZoom() ?? 0;
+            const targetZoom = currentZoom + 2;
+            const viewMaxZoom = view.getMaxZoom();
+            const clampedMaxZoom = viewMaxZoom !== undefined ? Math.min(targetZoom, viewMaxZoom) : targetZoom;
+
+            view.fit(extent, {
               duration: 500,
-              maxZoom: map.getView().getZoom()! + 2,
+              maxZoom: clampedMaxZoom,
               padding: [50, 50, 50, 50],
             });
           }
@@ -491,7 +537,8 @@ export function useOpenLayersTimelineLayer({ mapInstanceRef, mapViewRef, mapView
         delete (map as any).__clusterMoveEndHandler;
       }
 
-      overlaysMap.forEach(({ overlay }) => {
+      overlaysMap.forEach(({ overlay, cleanup }) => {
+        cleanup();
         map.removeOverlay(overlay);
       });
       overlaysMap.clear();

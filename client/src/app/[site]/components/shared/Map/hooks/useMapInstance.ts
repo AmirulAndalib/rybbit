@@ -78,7 +78,7 @@ export function useMapInstance({
         setHoveredId(code);
 
         const dataToUse = isCountryView ? countryData : subdivisionData;
-        const foundData = dataToUse?.find(({ value }: any) => value === code);
+        const foundData = dataToUse?.find(({ value }) => value === code);
         const count = foundData?.count || 0;
         const percentage = foundData?.percentage || 0;
 
