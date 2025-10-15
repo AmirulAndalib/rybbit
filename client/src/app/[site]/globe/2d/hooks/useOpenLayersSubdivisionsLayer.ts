@@ -166,6 +166,12 @@ export function useOpenLayersSubdivisionsLayer({
       if (mapInstanceRef.current) {
         mapInstanceRef.current.un("pointermove", handlePointerMove);
         mapInstanceRef.current.un("click", handleClick);
+
+        // Remove layer on cleanup
+        if (vectorLayerRef.current) {
+          mapInstanceRef.current.removeLayer(vectorLayerRef.current);
+          vectorLayerRef.current = null;
+        }
       }
     };
   }, [subdivisionsGeoData, processedSubdivisionData, colorScale, mapView]);
