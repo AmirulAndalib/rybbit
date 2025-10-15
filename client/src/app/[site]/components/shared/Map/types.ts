@@ -3,7 +3,6 @@ export interface TooltipContent {
   code: string;
   count: number;
   percentage: number;
-  perCapita?: number;
 }
 
 export interface TooltipPosition {
@@ -13,7 +12,6 @@ export interface TooltipPosition {
 
 export interface MapComponentProps {
   height: string;
-  mode?: "total" | "perCapita";
   mapView?: "countries" | "subdivisions";
 }
 
@@ -21,5 +19,4 @@ export interface ProcessedData {
   value: string;
   count: number;
   percentage: number;
-  perCapita: number;
 }

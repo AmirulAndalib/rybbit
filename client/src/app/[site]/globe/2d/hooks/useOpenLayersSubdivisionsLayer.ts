@@ -1,14 +1,13 @@
-import { useEffect, useMemo, useRef, MutableRefObject, useState } from "react";
+import { FilterParameter } from "@rybbit/shared";
 import Map from "ol/Map";
+import GeoJSON from "ol/format/GeoJSON";
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
-import GeoJSON from "ol/format/GeoJSON";
-import { Style, Fill, Stroke } from "ol/style";
-import { FilterParameter } from "@rybbit/shared";
-import { addFilter } from "../../../../../lib/store";
+import { Fill, Stroke, Style } from "ol/style";
+import { MutableRefObject, useEffect, useMemo, useRef, useState } from "react";
 import { useSingleCol } from "../../../../../api/analytics/useSingleCol";
 import { useSubdivisions } from "../../../../../lib/geo";
-import { processSubdivisionData } from "../../utils/processData";
+import { addFilter } from "../../../../../lib/store";
 import { createColorScale } from "../../utils/colorScale";
 import { renderCountryFlag } from "../../utils/renderCountryFlag";
 
@@ -34,8 +33,7 @@ export function useOpenLayersSubdivisionsLayer({
 }: UseOpenLayersSubdivisionsLayerProps) {
   const { data: subdivisionData } = useSingleCol({ parameter: "region", limit: 10000 });
   const { data: subdivisionsGeoData } = useSubdivisions();
-  const processedSubdivisionData = useMemo(() => processSubdivisionData(subdivisionData), [subdivisionData]);
-  const colorScale = useMemo(() => createColorScale(processedSubdivisionData), [processedSubdivisionData]);
+  const colorScale = useMemo(() => createColorScale(subdivisionData?.data), [subdivisionData?.data]);
 
   const vectorLayerRef = useRef<VectorLayer<VectorSource> | null>(null);
   const [hoveredId, setHoveredId] = useState<string | null>(null);
@@ -43,7 +41,7 @@ export function useOpenLayersSubdivisionsLayer({
 
   // Add/update subdivisions layer
   useEffect(() => {
-    if (!mapInstanceRef.current || !subdivisionsGeoData || !processedSubdivisionData) return;
+    if (!mapInstanceRef.current || !subdivisionsGeoData || !subdivisionData?.data) return;
 
     // Remove existing layer
     if (vectorLayerRef.current) {
@@ -62,7 +60,7 @@ export function useOpenLayersSubdivisionsLayer({
       source: vectorSource,
       style: feature => {
         const code = feature.get("iso_3166_2");
-        const foundData = processedSubdivisionData.find((d: any) => d.value === code);
+        const foundData = subdivisionData?.data?.find((d: any) => d.value === code);
         const count = foundData?.count || 0;
 
         let fillColor: string;
@@ -114,7 +112,7 @@ export function useOpenLayersSubdivisionsLayer({
         const name = feature.get("name");
         setHoveredId(code);
 
-        const foundData = processedSubdivisionData.find((d: any) => d.value === code);
+        const foundData = subdivisionData?.data?.find((d: any) => d.value === code);
         const count = foundData?.count || 0;
         const percentage = foundData?.percentage || 0;
 
@@ -174,7 +172,7 @@ export function useOpenLayersSubdivisionsLayer({
         }
       }
     };
-  }, [subdivisionsGeoData, processedSubdivisionData, colorScale, mapView]);
+  }, [subdivisionsGeoData, subdivisionData?.data, colorScale, mapView]);
 
   // Update layer visibility
   useEffect(() => {

@@ -1,10 +1,9 @@
-import { useEffect, useMemo, useRef } from "react";
-import mapboxgl from "mapbox-gl";
 import { FilterParameter } from "@rybbit/shared";
-import { addFilter } from "../../../../../lib/store";
+import mapboxgl from "mapbox-gl";
+import { useEffect, useMemo, useRef } from "react";
 import { useSingleCol } from "../../../../../api/analytics/useSingleCol";
 import { useCountries } from "../../../../../lib/geo";
-import { processCountryData } from "../../utils/processData";
+import { addFilter } from "../../../../../lib/store";
 import { createColorScale } from "../../utils/colorScale";
 import { renderCountryFlag } from "../../utils/renderCountryFlag";
 
@@ -17,13 +16,12 @@ interface UseCountriesLayerProps {
 export function useCountriesLayer({ map, mapLoaded, mapView }: UseCountriesLayerProps) {
   const { data: countryData } = useSingleCol({ parameter: "country" });
   const { data: countriesGeoData } = useCountries();
-  const processedCountryData = useMemo(() => processCountryData(countryData), [countryData]);
-  const colorScale = useMemo(() => createColorScale(processedCountryData), [processedCountryData]);
+  const colorScale = useMemo(() => createColorScale(countryData?.data), [countryData?.data]);
 
   const popupRef = useRef<mapboxgl.Popup | null>(null);
 
   useEffect(() => {
-    if (!map.current || !countriesGeoData || !processedCountryData || !mapLoaded) return;
+    if (!map.current || !countriesGeoData || !countryData?.data || !mapLoaded) return;
 
     // Initialize popup once
     if (!popupRef.current) {
@@ -40,7 +38,7 @@ export function useCountriesLayer({ map, mapLoaded, mapView }: UseCountriesLayer
       const geoDataCopy = JSON.parse(JSON.stringify(countriesGeoData));
       geoDataCopy.features.forEach((feature: any) => {
         const code = feature.properties?.ISO_A2;
-        const foundData = processedCountryData.find((d: any) => d.value === code);
+        const foundData = countryData?.data?.find((d: any) => d.value === code);
         const count = foundData?.count || 0;
         const color = count > 0 ? colorScale(count) : "rgba(0, 0, 0, 0)";
         feature.properties.fillColor = color;
@@ -137,5 +135,5 @@ export function useCountriesLayer({ map, mapLoaded, mapView }: UseCountriesLayer
     };
 
     addCountriesLayer();
-  }, [countriesGeoData, processedCountryData, colorScale, map, countryData, mapLoaded]);
+  }, [countriesGeoData, countryData?.data, colorScale, map, mapLoaded]);
 }

@@ -1,6 +1,6 @@
 import { scalePow } from "d3-scale";
 
-export function createColorScale(data: any[] | null): (value: number) => string {
+export function createColorScale(data?: any[] | null): (value: number) => string {
   if (!data) return () => "#222";
 
   const getComputedColor = (cssVar: string) => {

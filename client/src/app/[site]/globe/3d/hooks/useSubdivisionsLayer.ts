@@ -1,10 +1,9 @@
-import { useEffect, useMemo, useRef } from "react";
-import mapboxgl from "mapbox-gl";
 import { FilterParameter } from "@rybbit/shared";
-import { addFilter } from "../../../../../lib/store";
+import mapboxgl from "mapbox-gl";
+import { useEffect, useMemo, useRef } from "react";
 import { useSingleCol } from "../../../../../api/analytics/useSingleCol";
 import { useSubdivisions } from "../../../../../lib/geo";
-import { processSubdivisionData } from "../../utils/processData";
+import { addFilter } from "../../../../../lib/store";
 import { createColorScale } from "../../utils/colorScale";
 import { renderCountryFlag } from "../../utils/renderCountryFlag";
 
@@ -19,11 +18,10 @@ export function useSubdivisionsLayer({ map, mapLoaded, mapView }: UseSubdivision
 
   const { data: subdivisionData } = useSingleCol({ parameter: "region", limit: 10000 });
   const { data: subdivisionsGeoData } = useSubdivisions();
-  const processedSubdivisionData = useMemo(() => processSubdivisionData(subdivisionData), [subdivisionData]);
-  const colorScale = useMemo(() => createColorScale(processedSubdivisionData), [processedSubdivisionData]);
+  const colorScale = useMemo(() => createColorScale(subdivisionData?.data), [subdivisionData?.data]);
 
   useEffect(() => {
-    if (!map.current || !subdivisionsGeoData || !processedSubdivisionData || !mapLoaded) return;
+    if (!map.current || !subdivisionsGeoData || !subdivisionData?.data || !mapLoaded) return;
 
     // Initialize popup once
     if (!popupRef.current) {
@@ -40,7 +38,7 @@ export function useSubdivisionsLayer({ map, mapLoaded, mapView }: UseSubdivision
       const geoDataCopy = JSON.parse(JSON.stringify(subdivisionsGeoData));
       geoDataCopy.features.forEach((feature: any) => {
         const code = feature.properties?.iso_3166_2;
-        const foundData = processedSubdivisionData.find((d: any) => d.value === code);
+        const foundData = subdivisionData?.data?.find((d: any) => d.value === code);
         const count = foundData?.count || 0;
         const color = count > 0 ? colorScale(count) : "rgba(0, 0, 0, 0)";
         feature.properties.fillColor = color;
@@ -138,5 +136,5 @@ export function useSubdivisionsLayer({ map, mapLoaded, mapView }: UseSubdivision
     };
 
     addSubdivisionsLayer();
-  }, [subdivisionsGeoData, processedSubdivisionData, colorScale, map, subdivisionData, mapLoaded]);
+  }, [subdivisionsGeoData, subdivisionData?.data, colorScale, map, mapLoaded]);
 }

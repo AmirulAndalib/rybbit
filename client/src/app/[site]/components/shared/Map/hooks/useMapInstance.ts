@@ -1,16 +1,16 @@
-import { useEffect, useRef, MutableRefObject } from "react";
+import { FilterParameter } from "@rybbit/shared";
 import Map from "ol/Map";
 import View from "ol/View";
 import { fromLonLat } from "ol/proj";
-import { FilterParameter } from "@rybbit/shared";
+import { useEffect, useRef } from "react";
 import { addFilter } from "../../../../../../lib/store";
-import type { TooltipContent, ProcessedData } from "../types";
+import type { ProcessedData, TooltipContent } from "../types";
 
 interface UseMapInstanceParams {
   mapView: "countries" | "subdivisions";
   zoom: number;
-  processedCountryDataRef: MutableRefObject<ProcessedData[] | null>;
-  processedSubdivisionDataRef: MutableRefObject<ProcessedData[] | null>;
+  countryData: ProcessedData[] | null;
+  subdivisionData: ProcessedData[] | null;
   setInternalMapView: (view: "countries" | "subdivisions") => void;
   setTooltipContent: (content: TooltipContent | null) => void;
   setTooltipPosition: (pos: { x: number; y: number }) => void;
@@ -20,8 +20,8 @@ interface UseMapInstanceParams {
 export function useMapInstance({
   mapView,
   zoom,
-  processedCountryDataRef,
-  processedSubdivisionDataRef,
+  countryData,
+  subdivisionData,
   setInternalMapView,
   setTooltipContent,
   setTooltipPosition,
@@ -62,13 +62,13 @@ export function useMapInstance({
     });
 
     // Handle pointer move for hover effects
-    map.on("pointermove", (evt) => {
+    map.on("pointermove", evt => {
       if (evt.dragging) {
         return;
       }
 
       const pixel = map.getEventPixel(evt.originalEvent);
-      const feature = map.forEachFeatureAtPixel(pixel, (feature) => feature);
+      const feature = map.forEachFeatureAtPixel(pixel, feature => feature);
 
       if (feature) {
         const isCountryView = mapViewRef.current === "countries";
@@ -77,18 +77,16 @@ export function useMapInstance({
 
         setHoveredId(code);
 
-        const dataToUse = isCountryView ? processedCountryDataRef.current : processedSubdivisionDataRef.current;
+        const dataToUse = isCountryView ? countryData : subdivisionData;
         const foundData = dataToUse?.find(({ value }: any) => value === code);
         const count = foundData?.count || 0;
         const percentage = foundData?.percentage || 0;
-        const perCapita = foundData?.perCapita || 0;
 
         setTooltipContent({
           name,
           code,
           count,
           percentage,
-          perCapita,
         });
 
         // Update tooltip position
@@ -107,9 +105,9 @@ export function useMapInstance({
     });
 
     // Handle click for filtering
-    map.on("click", (evt) => {
+    map.on("click", evt => {
       const pixel = map.getEventPixel(evt.originalEvent);
-      const feature = map.forEachFeatureAtPixel(pixel, (feature) => feature);
+      const feature = map.forEachFeatureAtPixel(pixel, feature => feature);
 
       if (feature) {
         const isCountryView = mapViewRef.current === "countries";

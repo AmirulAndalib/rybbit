@@ -1,33 +1,41 @@
 "use client";
 
-import "ol/ol.css";
-import { round } from "lodash";
-import { useEffect, useState } from "react";
 import { useMeasure } from "@uidotdev/usehooks";
+import "ol/ol.css";
+import { useEffect, useState } from "react";
+import { useSingleCol } from "../../../../../api/analytics/useSingleCol";
 import { useCountries, useSubdivisions } from "../../../../../lib/geo";
 import { CountryFlag } from "../icons/CountryFlag";
-import { useMapData } from "./hooks/useMapData";
-import { useMapStyles } from "./hooks/useMapStyles";
 import { useMapInstance } from "./hooks/useMapInstance";
 import { useMapLayers } from "./hooks/useMapLayers";
+import { useMapStyles } from "./hooks/useMapStyles";
 import type { MapComponentProps, TooltipContent, TooltipPosition } from "./types";
 
-export function MapComponent({ height, mode = "total", mapView: controlledMapView }: MapComponentProps) {
+export function MapComponent({ height, mapView: controlledMapView }: MapComponentProps) {
   const {
-    processedCountryData,
-    processedSubdivisionData,
-    processedCountryDataRef,
-    processedSubdivisionDataRef,
-    isLoading,
-  } = useMapData();
+    data: countryData,
+    isLoading: isCountryLoading,
+    isFetching: isCountryFetching,
+  } = useSingleCol({
+    parameter: "country",
+  });
+
+  const {
+    data: subdivisionData,
+    isLoading: isSubdivisionLoading,
+    isFetching: isSubdivisionFetching,
+  } = useSingleCol({
+    parameter: "region",
+    limit: 10000,
+  });
 
   const [dataVersion, setDataVersion] = useState<number>(0);
 
   useEffect(() => {
-    if (processedCountryData || processedSubdivisionData) {
-      setDataVersion((prev) => prev + 1);
+    if (countryData || subdivisionData) {
+      setDataVersion(prev => prev + 1);
     }
-  }, [processedCountryData, processedSubdivisionData]);
+  }, [countryData, subdivisionData]);
 
   const [tooltipContent, setTooltipContent] = useState<TooltipContent | null>(null);
   const [tooltipPosition, setTooltipPosition] = useState<TooltipPosition>({
@@ -39,7 +47,7 @@ export function MapComponent({ height, mode = "total", mapView: controlledMapVie
   const mapView = controlledMapView ?? internalMapView;
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
-  const { colorScale } = useMapStyles(mapView, processedCountryData, processedSubdivisionData, mode);
+  const { colorScale } = useMapStyles(mapView, countryData?.data ?? null, subdivisionData?.data ?? null);
 
   const { data: subdivisionsGeoData } = useSubdivisions();
   const { data: countriesGeoData } = useCountries();
@@ -50,8 +58,8 @@ export function MapComponent({ height, mode = "total", mapView: controlledMapVie
   const { mapRef, mapInstanceRef, mapViewRef } = useMapInstance({
     mapView,
     zoom,
-    processedCountryDataRef,
-    processedSubdivisionDataRef,
+    countryData: countryData?.data ?? null,
+    subdivisionData: subdivisionData?.data ?? null,
     setInternalMapView,
     setTooltipContent,
     setTooltipPosition,
@@ -64,12 +72,9 @@ export function MapComponent({ height, mode = "total", mapView: controlledMapVie
     mapView,
     countriesGeoData,
     subdivisionsGeoData,
-    processedCountryData,
-    processedSubdivisionData,
-    processedCountryDataRef,
-    processedSubdivisionDataRef,
+    countryData: countryData?.data ?? null,
+    subdivisionData: subdivisionData?.data ?? null,
     dataVersion,
-    mode,
     colorScale,
     hoveredId,
   });
@@ -81,14 +86,15 @@ export function MapComponent({ height, mode = "total", mapView: controlledMapVie
       }}
       ref={ref}
     >
-      {isLoading && (
-        <div className="absolute inset-0 bg-neutral-900/30 backdrop-blur-sm z-10 flex items-center justify-center">
-          <div className="flex flex-col items-center gap-2">
-            <div className="h-8 w-8 rounded-full border-2 border-accent-400 border-t-transparent animate-spin"></div>
-            <span className="text-sm text-neutral-300">Loading map data...</span>
+      {isCountryLoading ||
+        (isSubdivisionLoading && (
+          <div className="absolute inset-0 bg-neutral-900/30 backdrop-blur-sm z-10 flex items-center justify-center">
+            <div className="flex flex-col items-center gap-2">
+              <div className="h-8 w-8 rounded-full border-2 border-accent-400 border-t-transparent animate-spin"></div>
+              <span className="text-sm text-neutral-300">Loading map data...</span>
+            </div>
           </div>
-        </div>
-      )}
+        ))}
       <div
         ref={mapRef}
         style={{
@@ -116,12 +122,6 @@ export function MapComponent({ height, mode = "total", mapView: controlledMapVie
             <span className="font-bold text-accent-400">{tooltipContent.count.toLocaleString()}</span>{" "}
             <span className="text-neutral-300">({tooltipContent.percentage.toFixed(1)}%) sessions</span>
           </div>
-          {mode === "perCapita" && mapView === "countries" && (
-            <div className="text-sm text-neutral-300">
-              <span className="font-bold text-accent-400">{round(tooltipContent.perCapita ?? 0, 2)}</span> per million
-              people
-            </div>
-          )}
         </div>
       )}
     </div>

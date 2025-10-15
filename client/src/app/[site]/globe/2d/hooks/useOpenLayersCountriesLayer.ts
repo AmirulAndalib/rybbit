@@ -1,14 +1,13 @@
-import { useEffect, useMemo, useRef, MutableRefObject, useState } from "react";
+import { FilterParameter } from "@rybbit/shared";
 import Map from "ol/Map";
+import GeoJSON from "ol/format/GeoJSON";
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
-import GeoJSON from "ol/format/GeoJSON";
-import { Style, Fill, Stroke } from "ol/style";
-import { FilterParameter } from "@rybbit/shared";
-import { addFilter } from "../../../../../lib/store";
+import { Fill, Stroke, Style } from "ol/style";
+import { MutableRefObject, useEffect, useMemo, useRef, useState } from "react";
 import { useSingleCol } from "../../../../../api/analytics/useSingleCol";
 import { useCountries } from "../../../../../lib/geo";
-import { processCountryData } from "../../utils/processData";
+import { addFilter } from "../../../../../lib/store";
 import { createColorScale } from "../../utils/colorScale";
 import { renderCountryFlag } from "../../utils/renderCountryFlag";
 
@@ -30,8 +29,7 @@ interface TooltipData {
 export function useOpenLayersCountriesLayer({ mapInstanceRef, mapViewRef, mapView }: UseOpenLayersCountriesLayerProps) {
   const { data: countryData } = useSingleCol({ parameter: "country" });
   const { data: countriesGeoData } = useCountries();
-  const processedCountryData = useMemo(() => processCountryData(countryData), [countryData]);
-  const colorScale = useMemo(() => createColorScale(processedCountryData), [processedCountryData]);
+  const colorScale = useMemo(() => createColorScale(countryData?.data), [countryData?.data]);
 
   const vectorLayerRef = useRef<VectorLayer<VectorSource> | null>(null);
   const [hoveredId, setHoveredId] = useState<string | null>(null);
@@ -39,7 +37,7 @@ export function useOpenLayersCountriesLayer({ mapInstanceRef, mapViewRef, mapVie
 
   // Add/update countries layer
   useEffect(() => {
-    if (!mapInstanceRef.current || !countriesGeoData || !processedCountryData) return;
+    if (!mapInstanceRef.current || !countriesGeoData || !countryData?.data) return;
 
     // Remove existing layer
     if (vectorLayerRef.current) {
@@ -58,7 +56,7 @@ export function useOpenLayersCountriesLayer({ mapInstanceRef, mapViewRef, mapVie
       source: vectorSource,
       style: feature => {
         const code = feature.get("ISO_A2");
-        const foundData = processedCountryData.find((d: any) => d.value === code);
+        const foundData = countryData?.data?.find((d: any) => d.value === code);
         const count = foundData?.count || 0;
 
         let fillColor: string;
@@ -110,7 +108,7 @@ export function useOpenLayersCountriesLayer({ mapInstanceRef, mapViewRef, mapVie
         const name = feature.get("ADMIN");
         setHoveredId(code);
 
-        const foundData = processedCountryData.find((d: any) => d.value === code);
+        const foundData = countryData?.data?.find((d: any) => d.value === code);
         const count = foundData?.count || 0;
         const percentage = foundData?.percentage || 0;
 
@@ -170,7 +168,7 @@ export function useOpenLayersCountriesLayer({ mapInstanceRef, mapViewRef, mapVie
         }
       }
     };
-  }, [countriesGeoData, processedCountryData, colorScale, mapView]);
+  }, [countriesGeoData, countryData?.data, colorScale, mapView]);
 
   // Update layer visibility
   useEffect(() => {

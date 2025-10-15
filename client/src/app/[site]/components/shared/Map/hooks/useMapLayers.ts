@@ -12,12 +12,9 @@ interface UseMapLayersParams {
   mapView: "countries" | "subdivisions";
   countriesGeoData: any;
   subdivisionsGeoData: any;
-  processedCountryData: ProcessedData[] | null;
-  processedSubdivisionData: ProcessedData[] | null;
-  processedCountryDataRef: MutableRefObject<ProcessedData[] | null>;
-  processedSubdivisionDataRef: MutableRefObject<ProcessedData[] | null>;
+  countryData: ProcessedData[] | null;
+  subdivisionData: ProcessedData[] | null;
   dataVersion: number;
-  mode: "total" | "perCapita";
   colorScale: (value: number) => string;
   hoveredId: string | null;
 }
@@ -28,12 +25,9 @@ export function useMapLayers({
   mapView,
   countriesGeoData,
   subdivisionsGeoData,
-  processedCountryData,
-  processedSubdivisionData,
-  processedCountryDataRef,
-  processedSubdivisionDataRef,
+  countryData,
+  subdivisionData,
   dataVersion,
-  mode,
   colorScale,
   hoveredId,
 }: UseMapLayersParams) {
@@ -47,7 +41,7 @@ export function useMapLayers({
     if (!geoData) return;
 
     // Wait for data to be available
-    const dataToCheck = mapView === "countries" ? processedCountryData : processedSubdivisionData;
+    const dataToCheck = mapView === "countries" ? countryData : subdivisionData;
     if (!dataToCheck) return;
 
     // Remove existing layer
@@ -65,14 +59,14 @@ export function useMapLayers({
     // Create new vector layer with a style function
     const vectorLayer = new VectorLayer({
       source: vectorSource,
-      style: (feature) => {
+      style: feature => {
         const isCountryView = mapViewRef.current === "countries";
         const dataKey = isCountryView ? feature.get("ISO_A2") : feature.get("iso_3166_2");
 
-        const dataToUse = isCountryView ? processedCountryDataRef.current : processedSubdivisionDataRef.current;
+        const dataToUse = isCountryView ? countryData : subdivisionData;
         const foundData = dataToUse?.find(({ value }: any) => value === dataKey);
 
-        const metricValue = mode === "perCapita" ? foundData?.perCapita || 0 : foundData?.count || 0;
+        const metricValue = foundData?.count || 0;
 
         let fillColor: string;
         let strokeColor: string;
@@ -108,16 +102,7 @@ export function useMapLayers({
 
     vectorLayerRef.current = vectorLayer;
     mapInstanceRef.current.addLayer(vectorLayer);
-  }, [
-    mapView,
-    countriesGeoData,
-    subdivisionsGeoData,
-    dataVersion,
-    mode,
-    colorScale,
-    processedCountryData,
-    processedSubdivisionData,
-  ]);
+  }, [mapView, countriesGeoData, subdivisionsGeoData, dataVersion, colorScale, countryData, subdivisionData]);
 
   // Update styles when hoveredId changes (without recreating the layer)
   useEffect(() => {
