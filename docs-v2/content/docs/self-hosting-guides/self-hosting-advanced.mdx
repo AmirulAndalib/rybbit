@@ -33,9 +33,6 @@ Examples:
 
 # Custom ports with your own webserver
 ./setup.sh tracking.example.com --no-webserver --backend-port 8080 --client-port 8081
-
-# All options combined
-./setup.sh tracking.example.com --mapbox-token YOUR_MAPBOX_TOKEN --backend-port 8080 --client-port 8081
 ```
 
 <Callout type="info">
@@ -68,13 +65,12 @@ DOMAIN_NAME=your.domain.com
 BASE_URL=https://your.domain.com
 BETTER_AUTH_SECRET=generated_secret
 DISABLE_SIGNUP=false
-MAPBOX_TOKEN=your_mapbox_token  # Optional, only added if --mapbox-token is provided
 ```
 
 Optional variables that can be added:
 
 ```bash
-# Mapbox token for map visualizations (recommended)
+# Mapbox token for 3D map visualizations
 MAPBOX_TOKEN=your_mapbox_token
 
 # Database configuration (uses defaults if not specified)
