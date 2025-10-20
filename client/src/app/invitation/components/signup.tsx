@@ -44,7 +44,7 @@ export function Signup({ inviterEmail, organization }: SignupProps) {
         {
           onRequest: context => {
             if (IS_CLOUD && turnstileToken) {
-              context.headers.set("X-Turnstile-Token", turnstileToken);
+              context.headers.set("x-captcha-response", turnstileToken);
             }
           },
         }

@@ -150,7 +150,7 @@ server.register(cors, {
     callback(null, true);
   },
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
-  allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With", "X-Turnstile-Token"],
+  allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With", "x-captcha-response"],
   credentials: true,
 });
 
@@ -162,59 +162,23 @@ server.register(fastifyStatic, {
 
 server.register(
   async (fastify, options) => {
-    await fastify.register(async fastify => {
+    await fastify.register(fastify => {
       const authHandler = toNodeHandler(options.auth);
 
-      // Specific route for email signup with Turnstile verification
-      if (IS_CLOUD) {
-        fastify.post("/api/auth/sign-up/email", async (request, reply) => {
-          // Verify Turnstile token from header
-          const turnstileToken = request.headers["x-turnstile-token"] as string;
-
-          server.log.info("Turnstile verification - token received:", !!turnstileToken);
-
-          if (!turnstileToken) {
-            return reply.status(400).send({
-              error: "Captcha verification required",
-              message: "Please complete the captcha verification",
-            });
-          }
-
-          // Verify the token
-          const { verifyTurnstileToken } = await import("./lib/turnstile.js");
-          const isValid = await verifyTurnstileToken(turnstileToken, request.ip);
-
-          if (!isValid) {
-            return reply.status(400).send({
-              error: "Captcha verification failed",
-              message: "Invalid captcha. Please try again.",
-            });
-          }
-
-          server.log.info("Turnstile verification successful - passing to better-auth");
-
-          // Verification passed, forward to better-auth
-          const headers = mapHeaders(reply.getHeaders());
-          for (const [key, value] of Object.entries(headers)) {
-            reply.raw.setHeader(key, value);
-          }
-          await authHandler(request.raw, reply.raw);
-        });
-      }
-
-      // All other auth routes
-      fastify.all("/api/auth/*", async (request, reply: any) => {
-        const headers = mapHeaders(reply.getHeaders());
-        for (const [key, value] of Object.entries(headers)) {
-          reply.raw.setHeader(key, value);
+      fastify.addContentTypeParser(
+        "application/json",
+        /* c8 ignore next 3 */
+        (_request, _payload, done) => {
+          done(null, null);
         }
+      );
+
+      fastify.all("/api/auth/*", async (request, reply: any) => {
+        reply.raw.setHeaders(mapHeaders(reply.getHeaders()));
         await authHandler(request.raw, reply.raw);
       });
       fastify.all("/auth/*", async (request, reply: any) => {
-        const headers = mapHeaders(reply.getHeaders());
-        for (const [key, value] of Object.entries(headers)) {
-          reply.raw.setHeader(key, value);
-        }
+        reply.raw.setHeaders(mapHeaders(reply.getHeaders()));
         await authHandler(request.raw, reply.raw);
       });
     });
