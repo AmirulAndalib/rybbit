@@ -31,9 +31,10 @@ export async function registerTurnstileMiddleware(
     // Only verify Turnstile for email signup in cloud mode
     if (isCloud && request.url === "/api/auth/sign-up/email" && request.method === "POST") {
       try {
-        const body = (request.body as any)?.parsed;
         const rawBuffer = (request.body as any)?.buffer;
-        const turnstileToken = body?.turnstileToken;
+
+        // Read the Turnstile token from the custom header
+        const turnstileToken = request.headers["x-turnstile-token"] as string;
 
         logger.info("Turnstile verification - token received:", !!turnstileToken);
 

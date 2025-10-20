@@ -90,12 +90,20 @@ export default function SignupPage() {
         return;
       }
 
-      const { data, error } = await authClient.signUp.email({
-        email,
-        name: email.split("@")[0], // Use email prefix as default name
-        password,
-        ...(IS_CLOUD && turnstileToken ? { turnstileToken } : {}),
-      });
+      const { data, error } = await authClient.signUp.email(
+        {
+          email,
+          name: email.split("@")[0], // Use email prefix as default name
+          password,
+        },
+        {
+          onRequest: context => {
+            if (IS_CLOUD && turnstileToken) {
+              context.headers.set("X-Turnstile-Token", turnstileToken);
+            }
+          },
+        }
+      );
 
       if (data?.user) {
         userStore.setState({
