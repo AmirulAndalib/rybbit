@@ -45,7 +45,7 @@ export class ImportQuotaTracker {
     const monthlyLimit = subscriptionInfo.eventLimit;
     const historicalWindowMonths = subscriptionInfo.tierInfo.monthsAllowed;
 
-    const oldestAllowedDate = DateTime.now().minus({ months: historicalWindowMonths }).startOf("month");
+    const oldestAllowedDate = DateTime.utc().minus({ months: historicalWindowMonths }).startOf("month");
     const oldestAllowedMonth = oldestAllowedDate.toFormat("yyyyMM");
 
     const siteRecords = await db
@@ -173,7 +173,7 @@ export class ImportQuotaTracker {
       return quotas;
     }
 
-    const now = DateTime.now();
+    const now = DateTime.utc();
     for (let i = 0; i < this.historicalWindowMonths; i++) {
       const monthDate = now.minus({ months: i }).startOf("month");
       const month = monthDate.toFormat("yyyyMM");
