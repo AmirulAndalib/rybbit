@@ -130,7 +130,6 @@ async function getLocationFromIPAPI(ips: string[]): Promise<Record<string, Locat
 
   // If all IPs were cached, return immediately
   if (uncachedIps.length === 0) {
-    logger.info(`All ${ips.length} IPs served from cache`);
     return results;
   }
 
