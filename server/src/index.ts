@@ -77,6 +77,8 @@ import { telemetryService } from "./services/telemetryService.js";
 import { weeklyReportService } from "./services/weekyReports/weeklyReportService.js";
 import { extractSiteId } from "./utils.js";
 import { getTrackingConfig } from "./api/sites/getTrackingConfig.js";
+import { updateSitePrivateLinkConfig } from "./api/sites/updateSitePrivateLinkConfig.js";
+import { getSitePrivateLinkConfig } from "./api/sites/getSitePrivateLinkConfig.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -339,6 +341,8 @@ server.get("/api/get-sites-from-org/:organizationId", getSitesFromOrg);
 server.get("/api/get-site/:id", getSite);
 server.get("/api/site/:siteId/api-config", getSiteApiConfig);
 server.post("/api/site/:siteId/api-config", updateSiteApiConfig);
+server.get("/api/site/:siteId/private-link-config", getSitePrivateLinkConfig);
+server.post("/api/site/:siteId/private-link-config", updateSitePrivateLinkConfig);
 server.get("/api/site/:siteId/tracking-config", getTrackingConfig);
 server.get("/api/site/:siteId/excluded-ips", getSiteExcludedIPs);
 server.get("/api/site/:siteId/excluded-countries", getSiteExcludedCountries);
