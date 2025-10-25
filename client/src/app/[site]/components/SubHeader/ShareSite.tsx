@@ -43,14 +43,15 @@ export function ShareSite() {
           <>
             <div className="flex items-center">
               <Input
-                value={`https://${globalThis.location.hostname}/${site}/${privateLink?.privateLinkKey}`}
+                value={`${globalThis.location.protocol}//${globalThis.location.host}/${site}/${privateLink?.privateLinkKey}`}
                 readOnly
                 className="rounded-r-none bg-neutral-900"
               />
               <Button
                 size="icon"
                 onClick={() => {
-                  navigator.clipboard.writeText(privateLink?.privateLinkKey ?? "");
+                  const fullUrl = `${globalThis.location.protocol}//${globalThis.location.host}/${site}/${privateLink?.privateLinkKey}`;
+                  navigator.clipboard.writeText(fullUrl);
                   toast.success("Copied to clipboard");
                 }}
                 className="w-10 rounded-l-none"

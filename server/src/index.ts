@@ -153,7 +153,7 @@ server.register(cors, {
     callback(null, true);
   },
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
-  allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With", "x-captcha-response"],
+  allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With", "x-captcha-response", "x-private-key"],
   credentials: true,
 });
 
@@ -260,9 +260,16 @@ server.addHook("onRequest", async (request, reply) => {
   if (ANALYTICS_ROUTES.some(route => processedUrl.startsWith(route))) {
     const siteId = extractSiteId(processedUrl);
 
-    if (siteId && (await siteConfig.getConfig(siteId))?.public) {
-      // Skip auth check for public sites
-      return;
+    if (siteId) {
+      // Import getUserHasAccessToSitePublic dynamically to check all access methods
+      const { getUserHasAccessToSitePublic } = await import("./lib/auth-utils.js");
+      const hasAccess = await getUserHasAccessToSitePublic(request, siteId);
+
+      if (hasAccess) {
+        // User has access via: direct access, public site, or valid private key
+        // Skip auth requirement and allow the request through
+        return;
+      }
     }
   }
 
