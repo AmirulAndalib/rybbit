@@ -254,31 +254,57 @@ async function handleUpgradeEvent(licenseKey: string, tier: any, prevLicenseKey?
   const organizationId = oldLicense.organization_id;
 
   // Create new license with the organization transferred
-  await db.execute(sql`
-    INSERT INTO as_licenses (
-      organization_id,
-      license_key,
-      tier,
-      status,
-      activated_at,
-      created_at,
-      updated_at
-    ) VALUES (
-      ${organizationId},
-      ${licenseKey},
-      ${tierValue},
-      ${organizationId ? 'active' : 'pending'},
-      ${organizationId ? sql`NOW()` : null},
-      NOW(),
-      NOW()
-    )
-    ON CONFLICT (license_key) DO UPDATE SET
-      organization_id = ${organizationId},
-      tier = ${tierValue},
-      status = ${organizationId ? 'active' : 'pending'},
-      activated_at = ${organizationId ? sql`NOW()` : null},
-      updated_at = NOW()
-  `);
+  if (organizationId) {
+    // Organization exists - create active license
+    await db.execute(sql`
+      INSERT INTO as_licenses (
+        organization_id,
+        license_key,
+        tier,
+        status,
+        activated_at,
+        created_at,
+        updated_at
+      ) VALUES (
+        ${organizationId},
+        ${licenseKey},
+        ${tierValue},
+        'active',
+        NOW(),
+        NOW(),
+        NOW()
+      )
+      ON CONFLICT (license_key) DO UPDATE SET
+        organization_id = ${organizationId},
+        tier = ${tierValue},
+        status = 'active',
+        activated_at = NOW(),
+        updated_at = NOW()
+    `);
+  } else {
+    // No organization yet - create pending license
+    await db.execute(sql`
+      INSERT INTO as_licenses (
+        organization_id,
+        license_key,
+        tier,
+        status,
+        created_at,
+        updated_at
+      ) VALUES (
+        NULL,
+        ${licenseKey},
+        ${tierValue},
+        'pending',
+        NOW(),
+        NOW()
+      )
+      ON CONFLICT (license_key) DO UPDATE SET
+        tier = ${tierValue},
+        status = 'pending',
+        updated_at = NOW()
+    `);
+  }
 
   // Deactivate the old license
   await db.execute(sql`
@@ -316,31 +342,57 @@ async function handleDowngradeEvent(licenseKey: string, tier: any, prevLicenseKe
   const organizationId = oldLicense.organization_id;
 
   // Create new license with the organization transferred
-  await db.execute(sql`
-    INSERT INTO as_licenses (
-      organization_id,
-      license_key,
-      tier,
-      status,
-      activated_at,
-      created_at,
-      updated_at
-    ) VALUES (
-      ${organizationId},
-      ${licenseKey},
-      ${tierValue},
-      ${organizationId ? 'active' : 'pending'},
-      ${organizationId ? sql`NOW()` : null},
-      NOW(),
-      NOW()
-    )
-    ON CONFLICT (license_key) DO UPDATE SET
-      organization_id = ${organizationId},
-      tier = ${tierValue},
-      status = ${organizationId ? 'active' : 'pending'},
-      activated_at = ${organizationId ? sql`NOW()` : null},
-      updated_at = NOW()
-  `);
+  if (organizationId) {
+    // Organization exists - create active license
+    await db.execute(sql`
+      INSERT INTO as_licenses (
+        organization_id,
+        license_key,
+        tier,
+        status,
+        activated_at,
+        created_at,
+        updated_at
+      ) VALUES (
+        ${organizationId},
+        ${licenseKey},
+        ${tierValue},
+        'active',
+        NOW(),
+        NOW(),
+        NOW()
+      )
+      ON CONFLICT (license_key) DO UPDATE SET
+        organization_id = ${organizationId},
+        tier = ${tierValue},
+        status = 'active',
+        activated_at = NOW(),
+        updated_at = NOW()
+    `);
+  } else {
+    // No organization yet - create pending license
+    await db.execute(sql`
+      INSERT INTO as_licenses (
+        organization_id,
+        license_key,
+        tier,
+        status,
+        created_at,
+        updated_at
+      ) VALUES (
+        NULL,
+        ${licenseKey},
+        ${tierValue},
+        'pending',
+        NOW(),
+        NOW()
+      )
+      ON CONFLICT (license_key) DO UPDATE SET
+        tier = ${tierValue},
+        status = 'pending',
+        updated_at = NOW()
+    `);
+  }
 
   // Deactivate the old license
   await db.execute(sql`
