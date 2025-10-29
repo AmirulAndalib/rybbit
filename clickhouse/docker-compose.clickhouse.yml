@@ -1,5 +1,5 @@
 # Standalone ClickHouse server for migration testing
-# Usage: docker-compose -f docker-compose.clickhouse.yml up -d
+# Usage: docker compose -f docker-compose.clickhouse.yml up -d
 
 services:
   clickhouse:
@@ -19,8 +19,8 @@ services:
       start_period: 10s
     restart: unless-stopped
     ports:
-      - "8123:8123"  # HTTP interface
-      - "9000:9000"  # Native protocol
+      - "8123:8123" # HTTP interface
+      - "9000:9000" # Native protocol
     mem_limit: 12g
     mem_reservation: 6g
     logging:
