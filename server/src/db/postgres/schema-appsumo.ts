@@ -1,8 +1,8 @@
 import { pgSchema, serial, text, timestamp } from "drizzle-orm/pg-core";
 import { organization } from "./schema.js";
 
-// Create the 'as' schema for AppSumo tables
-export const asSchema = pgSchema("as");
+// Create the 'appsumo' schema for AppSumo tables
+export const asSchema = pgSchema("appsumo");
 
 // AppSumo licenses table (only created in cloud environments)
 export const asLicenses = asSchema.table("licenses", {
