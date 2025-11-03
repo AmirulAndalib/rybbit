@@ -25,6 +25,7 @@ import { deleteSite, SiteResponse, updateSiteConfig, useGetSitesFromOrg } from "
 import { normalizeDomain } from "@/lib/utils";
 import { IPExclusionManager } from "./IPExclusionManager";
 import { CountryExclusionManager } from "./CountryExclusionManager";
+import { GSCManager } from "./GSCManager";
 import { useStripeSubscription } from "../../lib/subscription/useStripeSubscription";
 import { Badge } from "../ui/badge";
 import { IS_CLOUD } from "../../lib/const";
@@ -304,6 +305,9 @@ export function SiteConfiguration({ siteMetadata, disabled = false, onClose }: S
 
       {/* Country Exclusions Section */}
       <CountryExclusionManager siteId={siteMetadata.siteId} disabled={disabled} />
+
+      {/* Google Search Console Section */}
+      <GSCManager siteId={siteMetadata.siteId} disabled={disabled} />
 
       {/* Domain Settings Section */}
       <div className="space-y-3">
