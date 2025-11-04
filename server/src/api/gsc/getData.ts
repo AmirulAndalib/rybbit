@@ -60,7 +60,7 @@ export async function getGSCData(req: FastifyRequest<GetGSCDataRequest>, res: Fa
           startDate,
           endDate,
           dimensions: [dimension],
-          rowLimit: 100,
+          rowLimit: 1000,
         }),
       }
     );
