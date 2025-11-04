@@ -1,4 +1,4 @@
-import { SquareArrowOutUpRight } from "lucide-react";
+import { Expand, SquareArrowOutUpRight } from "lucide-react";
 import { useState } from "react";
 import { useConnectGSC, useGSCConnection } from "../../../../../api/gsc/useGSCConnection";
 import { GSCDimension, useGSCData } from "../../../../../api/gsc/useGSCData";
@@ -8,6 +8,7 @@ import { Card, CardContent, CardLoader } from "../../../../../components/ui/card
 import { formatter, getCountryName } from "../../../../../lib/utils";
 import { CountryFlag } from "../../../components/shared/icons/CountryFlag";
 import { StandardSkeleton } from "../../../components/shared/StandardSection/Skeleton";
+import { SearchConsoleDialog } from "./SearchConsoleDialog";
 
 type Tab = "queries" | "pages" | "countries" | "devices";
 
@@ -30,9 +31,11 @@ interface DataListProps {
   dimension: GSCDimension;
   label: string;
   renderName?: (name: string) => React.ReactNode;
+  expanded: boolean;
+  close: () => void;
 }
 
-function DataList({ dimension, label, renderName }: DataListProps) {
+function DataList({ dimension, label, renderName, expanded, close }: DataListProps) {
   const { data, isLoading, isFetching } = useGSCData(dimension);
 
   const totalClicks = data?.reduce((acc, item) => acc + item.clicks, 0) || 0;
@@ -89,12 +92,21 @@ function DataList({ dimension, label, renderName }: DataListProps) {
           )}
         </div>
       </div>
+      <SearchConsoleDialog
+        title={label}
+        dimension={dimension}
+        renderName={renderName}
+        expanded={expanded}
+        close={close}
+      />
     </>
   );
 }
 
 export function SearchConsole() {
   const [tab, setTab] = useState<Tab>("queries");
+  const [expanded, setExpanded] = useState(false);
+  const close = () => setExpanded(false);
   const { data: connection, isLoading: isLoadingConnection } = useGSCConnection();
 
   if (isLoadingConnection) {
@@ -122,13 +134,18 @@ export function SearchConsole() {
                 <TabsTrigger value="devices">Devices</TabsTrigger>
               </TabsList>
             </div>
+            <div className="w-8">
+              <Button size="smIcon" onClick={() => setExpanded(!expanded)}>
+                <Expand className="w-4 h-4" />
+              </Button>
+            </div>
           </div>
           {!isConnected ? (
             <ConnectPrompt />
           ) : (
             <>
               <TabsContent value="queries">
-                <DataList dimension="query" label="Keyword" />
+                <DataList dimension="query" label="Keyword" expanded={expanded} close={close} />
               </TabsContent>
               <TabsContent value="pages">
                 <DataList
@@ -145,6 +162,8 @@ export function SearchConsole() {
                       </a>
                     </div>
                   )}
+                  expanded={expanded}
+                  close={close}
                 />
               </TabsContent>
               <TabsContent value="countries">
@@ -157,10 +176,12 @@ export function SearchConsole() {
                       {getCountryName(name)}
                     </div>
                   )}
+                  expanded={expanded}
+                  close={close}
                 />
               </TabsContent>
               <TabsContent value="devices">
-                <DataList dimension="device" label="Device" />
+                <DataList dimension="device" label="Device" expanded={expanded} close={close} />
               </TabsContent>
             </>
           )}
