@@ -35,10 +35,10 @@ function MainPageContent() {
         <Pages />
         <Devices />
         <Countries />
-        {IS_CLOUD && <Network />}
-        <SearchConsole />
         <Events />
         <Weekdays />
+        {IS_CLOUD && <Network />}
+        {IS_CLOUD && <SearchConsole />}
       </div>
     </div>
   );
