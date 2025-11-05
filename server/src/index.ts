@@ -85,6 +85,7 @@ import { gscCallback } from "./api/gsc/callback.js";
 import { getGSCStatus } from "./api/gsc/status.js";
 import { disconnectGSC } from "./api/gsc/disconnect.js";
 import { getGSCData } from "./api/gsc/getData.js";
+import { selectGSCProperty } from "./api/gsc/selectProperty.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -370,6 +371,7 @@ server.get("/api/gsc/connect/:site", connectGSC);
 server.get("/api/gsc/callback", gscCallback);
 server.get("/api/gsc/status/:site", getGSCStatus);
 server.delete("/api/gsc/disconnect/:site", disconnectGSC);
+server.post("/api/gsc/select-property/:site", selectGSCProperty);
 server.get("/api/gsc/data/:site", getGSCData);
 
 // UPTIME MONITORING

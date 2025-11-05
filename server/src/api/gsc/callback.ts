@@ -76,45 +76,42 @@ export async function gscCallback(req: FastifyRequest<GSCCallbackRequest>, res: 
     const properties = await getGSCProperties(tokens.access_token);
 
     if (properties.length === 0) {
-      return res.redirect(`${process.env.BASE_URL}/error?message=No GSC properties found`);
+      return res.redirect(`${process.env.CLIENT_URL}/error?message=No GSC properties found`);
     }
-
-    // Use the first property by default
-    // TODO: In a future iteration, allow user to select which property to use
-    const gscPropertyUrl = properties[0];
 
     const expiresAt = new Date(Date.now() + tokens.expires_in * 1000);
 
-    // Check if connection already exists
+    // Store tokens temporarily WITHOUT a property URL
+    // We'll update with the selected property after user chooses
     const [existingConnection] = await db.select().from(gscConnections).where(eq(gscConnections.siteId, siteId));
 
     if (existingConnection) {
-      // Update existing connection
+      // Update existing connection with new tokens (but keep old property if it exists)
       await db
         .update(gscConnections)
         .set({
           accessToken: tokens.access_token,
           refreshToken: tokens.refresh_token,
           expiresAt: expiresAt.toISOString(),
-          gscPropertyUrl,
           updatedAt: new Date().toISOString(),
         })
         .where(eq(gscConnections.siteId, siteId));
     } else {
-      // Create new connection
+      // Create new connection with temporary placeholder
       await db.insert(gscConnections).values({
         siteId,
         accessToken: tokens.access_token,
         refreshToken: tokens.refresh_token,
         expiresAt: expiresAt.toISOString(),
-        gscPropertyUrl,
+        gscPropertyUrl: "PENDING_SELECTION", // Placeholder until user selects
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       });
     }
 
-    // Redirect back to the client with success
-    return res.redirect(`${process.env.BASE_URL}/${siteId}/settings?gsc=success`);
+    // Redirect to property selection page with properties as query params
+    const propertiesParam = encodeURIComponent(JSON.stringify(properties));
+    return res.redirect(`${process.env.BASE_URL}/${siteId}/gsc/select-property?properties=${propertiesParam}`);
   } catch (error) {
     console.error("Error handling GSC callback:", error);
     return res.redirect(`${process.env.BASE_URL}/error?message=Callback failed`);
