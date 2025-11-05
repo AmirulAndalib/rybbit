@@ -1,4 +1,4 @@
-import { Expand, SquareArrowOutUpRight } from "lucide-react";
+import { Expand, Info, SquareArrowOutUpRight } from "lucide-react";
 import { useState } from "react";
 import { useConnectGSC, useGSCConnection } from "../../../../../api/gsc/useGSCConnection";
 import { GSCDimension, useGSCData } from "../../../../../api/gsc/useGSCData";
@@ -9,6 +9,7 @@ import { formatter, getCountryName } from "../../../../../lib/utils";
 import { CountryFlag } from "../../../components/shared/icons/CountryFlag";
 import { StandardSkeleton } from "../../../components/shared/StandardSection/Skeleton";
 import { SearchConsoleDialog } from "./SearchConsoleDialog";
+import { SiGoogle } from "@icons-pack/react-simple-icons";
 
 type Tab = "queries" | "pages" | "countries" | "devices";
 
@@ -16,11 +17,12 @@ function ConnectPrompt() {
   const { mutate: connect, isPending } = useConnectGSC();
 
   return (
-    <div className="flex flex-col items-center justify-center h-[344px] gap-4">
+    <div className="flex flex-col items-center justify-center mt-12 gap-4">
       <div className="text-sm text-neutral-400 text-center max-w-sm">
         Connect your Google Search Console account to view search performance data including top keywords and pages.
       </div>
       <Button onClick={() => connect()} disabled={isPending}>
+        <SiGoogle />
         {isPending ? "Connecting..." : "Connect Google Search Console"}
       </Button>
     </div>
@@ -84,9 +86,12 @@ function DataList({ dimension, label, renderName, expanded, close }: DataListPro
             <StandardSkeleton />
           ) : (
             <div className="text-neutral-300 w-full text-center mt-6 flex flex-row gap-2 items-center justify-center">
-              <div className="text-sm text-neutral-500">
-                <div>No {label.toLowerCase()} data available for the selected date range</div>
-                <div className="text-xs mt-2">Google Search Console data has a 2-3 day delay</div>
+              <div className="text-neutral-500">
+                <div className="text-neutral-300 w-full text-center flex flex-row gap-2 items-center justify-center">
+                  <Info className="w-5 h-5" />
+                  No Data
+                </div>
+                <div className="text-sm mt-2">Google Search Console data has a 2-3 day delay</div>
               </div>
             </div>
           )}
@@ -109,11 +114,32 @@ export function SearchConsole() {
   const close = () => setExpanded(false);
   const { data: connection, isLoading: isLoadingConnection } = useGSCConnection();
 
+  const topSection = (
+    <div className="flex flex-row gap-2 justify-between items-center">
+      <div className="overflow-x-auto">
+        <TabsList>
+          <TabsTrigger value="queries">Keywords</TabsTrigger>
+          <TabsTrigger value="pages">Pages</TabsTrigger>
+          <TabsTrigger value="countries">Countries</TabsTrigger>
+          <TabsTrigger value="devices">Devices</TabsTrigger>
+        </TabsList>
+      </div>
+      <div className="w-8">
+        <Button size="smIcon" onClick={() => setExpanded(!expanded)}>
+          <Expand className="w-4 h-4" />
+        </Button>
+      </div>
+    </div>
+  );
+
   if (isLoadingConnection) {
     return (
       <Card className="h-[405px]">
+        <CardLoader />
         <CardContent className="mt-2">
-          <CardLoader />
+          <Tabs defaultValue="queries" value={tab} onValueChange={value => setTab(value as Tab)}>
+            {topSection}
+          </Tabs>
         </CardContent>
       </Card>
     );
@@ -125,21 +151,7 @@ export function SearchConsole() {
     <Card className="h-[405px]">
       <CardContent className="mt-2">
         <Tabs defaultValue="queries" value={tab} onValueChange={value => setTab(value as Tab)}>
-          <div className="flex flex-row gap-2 justify-between items-center">
-            <div className="overflow-x-auto">
-              <TabsList>
-                <TabsTrigger value="queries">Keywords</TabsTrigger>
-                <TabsTrigger value="pages">Pages</TabsTrigger>
-                <TabsTrigger value="countries">Countries</TabsTrigger>
-                <TabsTrigger value="devices">Devices</TabsTrigger>
-              </TabsList>
-            </div>
-            <div className="w-8">
-              <Button size="smIcon" onClick={() => setExpanded(!expanded)}>
-                <Expand className="w-4 h-4" />
-              </Button>
-            </div>
-          </div>
+          {topSection}
           {!isConnected ? (
             <ConnectPrompt />
           ) : (
