@@ -44,6 +44,11 @@ import {
   Search,
   ShieldAlert,
   MousePointerClick,
+  Lock,
+  UserCog,
+  Globe2,
+  MapPin,
+  MailQuestion,
 } from "lucide-react";
 import { EventTracking } from "@/components/Cards/EventTracking";
 import { GoalConversion } from "@/components/Cards/GoalConversion";
@@ -67,121 +72,102 @@ const analyticsFeatures = [
   {
     icon: <Eye className="w-5 h-5" />,
     title: "Page views",
-    description: "Knowing which of your pages gets the most traffic is essential to improving your website content.",
+    description: "See which pages attract the most attention and optimize your content strategy.",
   },
   {
     icon: <Users className="w-5 h-5" />,
     title: "Visitors",
-    description: "Get detailed information about your visitors like their device, browser, OS and location.",
+    description: "Detailed visitor profiles with device, browser, OS, and location data.",
   },
   {
     icon: <TrendingUp className="w-5 h-5" />,
     title: "Bounce rate",
-    description: "See which pages keep your visitors engaged versus those they are abandoning.",
+    description: "Identify which pages engage visitors and which need improvement.",
   },
   {
     icon: <Layers className="w-5 h-5" />,
     title: "Traffic sources",
-    description: "See where your traffic is coming from to better understand where you should be spending your effort.",
+    description: "Discover where visitors come from to optimize your marketing channels.",
   },
   {
     icon: <Globe className="w-5 h-5" />,
     title: "Location",
-    description: "Find out where your visitors are coming from including the city, region and country.",
+    description: "Geographic data down to city level for global audience insights.",
   },
   {
     icon: <Smartphone className="w-5 h-5" />,
     title: "Devices",
-    description: "See the most popular devices used by visitors to help you optimize your pages.",
+    description: "Optimize your design for the devices your visitors actually use.",
   },
   {
     icon: <Languages className="w-5 h-5" />,
     title: "Languages",
-    description: "Know which languages are the most popular among your visitors to help you tailor your content.",
+    description: "Know which languages your audience speaks to create targeted content.",
   },
   {
     icon: <Filter className="w-5 h-5" />,
     title: "Filtering",
-    description: "Gain further insight into your data by applying filters like country, browser, and URL.",
+    description: "Slice and dice your data to uncover patterns and actionable insights.",
   },
   {
     icon: <Activity className="w-5 h-5" />,
     title: "Realtime data",
-    description:
-      "Data available in seconds, not days. The data that Rybbit collects is immediately available on your dashboard",
-  },
-  {
-    icon: <Users className="w-5 h-5" />,
-    title: "Organizations",
-    description: "The organizations feature allows you to securely share websites access with different team members.",
+    description: "Instant analytics updates—see what's happening on your site right now.",
   },
   {
     icon: <Zap className="w-5 h-5" />,
     title: "Custom events",
-    description: "Track everything that happens on your website like signups and cart checkouts using custom events.",
+    description: "Track sign-ups, purchases, downloads, and any custom user interaction.",
   },
   {
     icon: <Layers className="w-5 h-5" />,
     title: "Custom data",
-    description: "Use custom data properties to help you further analyze your data.",
+    description: "Attach custom properties to events for deeper behavioral insights.",
   },
   {
     icon: <Tag className="w-5 h-5" />,
     title: "UTM tracking",
-    description:
-      "Measure the effectiveness of your campaign by analyzing UTM query parameters that are automatically collected.",
-  },
-  {
-    icon: <Share2 className="w-5 h-5" />,
-    title: "Sharing",
-    description: "Easily share your stats with others through a secure, uniquely generated URL.",
+    description: "Automatically capture UTM parameters to measure campaign performance.",
   },
   {
     icon: <Link2 className="w-5 h-5" />,
     title: "Links",
-    description:
-      "Monitor and record clicks on URLs to show where visitors come from and how they interact with your links.",
-  },
-  {
-    icon: <Grid3x3 className="w-5 h-5" />,
-    title: "Pixels",
-    description: "Embed a tracking pixel anywhere to start collecting data.",
+    description: "Track link clicks to measure external campaign effectiveness.",
   },
   {
     icon: <Video className="w-5 h-5" />,
     title: "Session replay",
-    description: "Watch real user sessions to understand behavior, identify issues, and improve user experience.",
+    description: "Watch real user sessions to spot usability issues and improvement opportunities.",
   },
   {
     icon: <Gauge className="w-5 h-5" />,
     title: "Web vitals",
-    description: "Monitor Core Web Vitals and performance metrics to ensure your site delivers a great experience.",
+    description: "Monitor Core Web Vitals to maintain fast, smooth user experiences.",
   },
   {
     icon: <AlertTriangle className="w-5 h-5" />,
     title: "Error tracking",
-    description: "Automatically capture and track JavaScript errors to quickly identify and fix issues on your site.",
+    description: "Catch JavaScript errors as they happen with full context to fix them fast.",
   },
   {
     icon: <Globe className="w-5 h-5" />,
     title: "Globe views",
-    description:
-      "Visualize your global traffic in real-time with interactive 3D globe views showing visitor locations.",
+    description: "Watch traffic flow across the world with stunning 3D globe visualizations.",
   },
   {
     icon: <Search className="w-5 h-5" />,
     title: "Google Search Console",
-    description: "Integrate with Google Search Console to see search performance data alongside your analytics.",
+    description: "See how organic search drives traffic alongside your analytics data.",
   },
   {
     icon: <ShieldAlert className="w-5 h-5" />,
     title: "Bot blocking",
-    description: "Automatically filter out bot traffic to ensure your analytics reflect real human visitors.",
+    description: "Automatically filter out bots and crawlers to keep your data clean.",
   },
   {
     icon: <MousePointerClick className="w-5 h-5" />,
     title: "User sessions",
-    description: "Track individual user sessions to understand complete user journeys and engagement patterns.",
+    description: "Follow complete user journeys from first visit to conversion.",
   },
 ];
 
@@ -189,37 +175,60 @@ const insightsFeatures = [
   {
     icon: <ArrowLeftRight className="w-5 h-5" />,
     title: "Compare",
-    description: "See your metric performance compared against previous date ranges.",
+    description: "Benchmark metrics against previous periods to spot trends and measure growth.",
   },
   {
     icon: <Sparkles className="w-5 h-5" />,
     title: "Breakdown",
-    description: "Dive deeper into your data by using segments and filters.",
+    description: "Segment data by any dimension to reveal detailed user behavior patterns.",
   },
   {
     icon: <TrendingDown className="w-5 h-5" />,
     title: "Funnels",
-    description: "Understand the conversion and drop-off rate of users.",
+    description: "Visualize conversion paths and pinpoint exactly where visitors drop off.",
   },
   {
     icon: <UserCheck className="w-5 h-5" />,
     title: "Retention",
-    description: "Measure your website stickiness by tracking how often users return.",
+    description: "Track returning visitors to measure loyalty and engagement.",
   },
   {
     icon: <Tag className="w-5 h-5" />,
     title: "UTM",
-    description: "Track your campaigns through UTM parameters.",
+    description: "Analyze campaign performance with automatic UTM tracking and attribution.",
   },
   {
     icon: <Target className="w-5 h-5" />,
     title: "Goals",
-    description: "Track your goals for pageviews and events.",
+    description: "Set and monitor conversion goals to track business objectives.",
   },
   {
     icon: <Route className="w-5 h-5" />,
     title: "Journey",
-    description: "Look into your revenue data and how users are spending.",
+    description: "Map how users navigate your site from landing to conversion.",
+  },
+];
+
+const accessFeatures = [
+  {
+    icon: <Users className="w-5 h-5" />,
+    title: "Organizations",
+    description: "Organize websites and share access across your team seamlessly.",
+  },
+  {
+    icon: <Globe2 className="w-5 h-5" />,
+    title: "Public dashboards",
+    description: "Make your dashboards publicly accessible with a single click—no login required.",
+  },
+  {
+    icon: <Lock className="w-5 h-5" />,
+    title: "Private link sharing",
+    description: "Share password-protected dashboard links with granular control over what data is visible.",
+  },
+  {
+    icon: <UserCog className="w-5 h-5" />,
+    title: "RBAC",
+    description: "Role-based access control to define precise permissions for different team members.",
   },
 ];
 
@@ -227,24 +236,22 @@ const privacyFeatures = [
   {
     icon: <ShieldCheck className="w-5 h-5" />,
     title: "GDPR & CCPA",
-    description:
-      "Rybbit never collects any personal information from your visitors so it is fully compliant with GDPR and CCPA.",
+    description: "Privacy-first design means you're compliant out of the box. No personal data collected.",
   },
   {
     icon: <UserX className="w-5 h-5" />,
     title: "Data anonymization",
-    description: "All visitor data is anonymized to protect your visitors' privacy.",
+    description: "Every visitor is anonymous by default—privacy without compromising insights.",
   },
   {
     icon: <Cookie className="w-5 h-5" />,
     title: "No cookies",
-    description: "Rybbit does not use any cookies so no annoying cookie banner is required.",
+    description: "Zero cookies, zero cookie banners. Cleaner, faster experiences for visitors.",
   },
   {
     icon: <Database className="w-5 h-5" />,
     title: "Data ownership",
-    description:
-      "Data is always in your control with Rybbit. You can self-host on your own infrastructure or export your data from Rybbit Cloud.",
+    description: "Your data, your rules. Self-host or use our cloud—you're always in control.",
   },
 ];
 
@@ -252,31 +259,77 @@ const cloudFeatures = [
   {
     icon: <Settings className="w-5 h-5" />,
     title: "Fully managed",
-    description: "Leave the upgrades, backups and performance tuning to us while you focus on your results.",
+    description: "We handle infrastructure, updates, and scaling—you focus on growth.",
   },
   {
     icon: <Zap className="w-5 h-5" />,
     title: "High performance",
-    description:
-      "Whether you have millions or billions of records, our platform is designed for speed and will deliver fast results.",
+    description: "Handle millions of events effortlessly. Queries stay fast at any scale.",
+  },
+  {
+    icon: <MapPin className="w-5 h-5" />,
+    title: "Hosted in EU",
+    description: "GDPR-compliant infrastructure hosted in European data centers for data sovereignty.",
   },
   {
     icon: <Upload className="w-5 h-5" />,
     title: "Data import",
-    description: "Want to migrate your existing data to Rybbit? Just use our built-in import tool.",
+    description: "Migrate from other platforms seamlessly with built-in import tools.",
   },
   {
     icon: <Download className="w-5 h-5" />,
     title: "Data export",
-    description: "Don't settle for summarized data. Get a full data export of all your data.",
+    description: "Export complete raw data anytime. No lock-in, no summaries—just your data.",
   },
   {
     icon: <Mail className="w-5 h-5" />,
     title: "Email reports",
-    description:
-      "Send scheduled email reports to anyone. Send out website summaries in a compact and digestable email.",
+    description: "Automated email reports delivered daily, weekly, or monthly to your inbox.",
+  },
+  {
+    icon: <MailQuestion className="w-5 h-5" />,
+    title: "Email support",
+    description: "Get help when you need it with responsive email support from our team.",
   },
 ];
+
+interface FeatureGridProps {
+  title: string;
+  description: string;
+  features: Array<{
+    icon: React.ReactNode;
+    title: string;
+    description: string;
+  }>;
+  bgClassName?: string;
+}
+
+function FeatureGrid({ title, description, features, bgClassName = "" }: FeatureGridProps) {
+  return (
+    <section className={`py-12 md:py-16 w-full ${bgClassName}`}>
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">{title}</h2>
+          <p className="text-lg text-neutral-400">{description}</p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          {features.map((feature, index) => (
+            <div key={index} className="bg-neutral-800/20 rounded-lg p-5 transition-colors">
+              <div>
+                <h3 className="font-semibold mb-2 flex items-center gap-2">
+                  <div className="text-neutral-400">{feature.icon}</div>
+                  {feature.title}
+                </h3>
+                <p className="text-sm text-neutral-400 leading-relaxed">{feature.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
 
 export default function FeaturesPage() {
   return (
@@ -321,120 +374,38 @@ export default function FeaturesPage() {
         </div>
       </section>
 
-      {/* Analytics Features Grid */}
-      <section className="py-12 md:py-16 w-full">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">Analytics</h2>
-            <p className="text-lg text-neutral-400">
-              Rybbit collects all the metrics you care about to help you make better decisions.
-            </p>
-          </div>
+      <FeatureGrid
+        title="Analytics"
+        description="Track every metric that matters. Make data-driven decisions with comprehensive analytics designed for clarity."
+        features={analyticsFeatures}
+      />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-            {analyticsFeatures.map((feature, index) => (
-              <div
-                key={index}
-                className="bg-neutral-800/20 border border-neutral-800/50 rounded-lg p-5 hover:border-neutral-700 transition-colors"
-              >
-                <div className="flex items-start gap-3">
-                  <div className="text-neutral-400 mt-0.5">{feature.icon}</div>
-                  <div>
-                    <h3 className="font-semibold mb-2">{feature.title}</h3>
-                    <p className="text-sm text-neutral-400 leading-relaxed">{feature.description}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <FeatureGrid
+        title="Insights"
+        description="Go deeper with advanced analytics tools that transform raw data into actionable business intelligence."
+        features={insightsFeatures}
+        bgClassName="bg-neutral-900/50"
+      />
 
-      {/* Insights Section */}
-      <section className="py-12 md:py-16 w-full bg-neutral-900/50">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">Insights</h2>
-            <p className="text-lg text-neutral-400">
-              Rybbit comes with out of the box insights that enables you to gain deep understanding of all your website
-              data.
-            </p>
-          </div>
+      <FeatureGrid
+        title="Access"
+        description="Flexible sharing and collaboration tools to get insights into the right hands, securely."
+        features={accessFeatures}
+      />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-            {insightsFeatures.map((feature, index) => (
-              <div
-                key={index}
-                className="bg-neutral-800/20 border border-neutral-800/50 rounded-lg p-5 hover:border-neutral-700 transition-colors"
-              >
-                <div className="flex items-start gap-3">
-                  <div className="text-neutral-400 mt-0.5">{feature.icon}</div>
-                  <div>
-                    <h3 className="font-semibold mb-2">{feature.title}</h3>
-                    <p className="text-sm text-neutral-400 leading-relaxed">{feature.description}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <FeatureGrid
+        title="Privacy"
+        description="Privacy isn't a feature—it's the foundation. Analytics that respect your users and comply with regulations automatically."
+        features={privacyFeatures}
+        bgClassName="bg-neutral-900/50"
+      />
 
-      {/* Privacy Section */}
-      <section className="py-12 md:py-16 w-full">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">Privacy</h2>
-            <p className="text-lg text-neutral-400">
-              Rybbit is private by default and helps you stay compliant with data privacy laws.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-            {privacyFeatures.map((feature, index) => (
-              <div
-                key={index}
-                className="bg-neutral-800/20 border border-neutral-800/50 rounded-lg p-5 hover:border-neutral-700 transition-colors"
-              >
-                <div className="flex items-start gap-3">
-                  <div className="text-neutral-400 mt-0.5">{feature.icon}</div>
-                  <div>
-                    <h3 className="font-semibold mb-2">{feature.title}</h3>
-                    <p className="text-sm text-neutral-400 leading-relaxed">{feature.description}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Cloud Section */}
-      <section className="py-12 md:py-16 w-full bg-neutral-900/50">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">Cloud</h2>
-            <p className="text-lg text-neutral-400">Rybbit Cloud is a reliable, high-performance hosted solution.</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-            {cloudFeatures.map((feature, index) => (
-              <div
-                key={index}
-                className="bg-neutral-800/20 border border-neutral-800/50 rounded-lg p-5 hover:border-neutral-700 transition-colors"
-              >
-                <div className="flex items-start gap-3">
-                  <div className="text-neutral-400 mt-0.5">{feature.icon}</div>
-                  <div>
-                    <h3 className="font-semibold mb-2">{feature.title}</h3>
-                    <p className="text-sm text-neutral-400 leading-relaxed">{feature.description}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <FeatureGrid
+        title="Cloud"
+        description="Enterprise-grade infrastructure without the enterprise headache. Reliable, fast, and fully managed."
+        features={cloudFeatures}
+        bgClassName="bg-neutral-900/50"
+      />
 
       {/* Why Choose Rybbit Section */}
       <section className="py-14 md:py-20 w-full bg-neutral-900/50">
