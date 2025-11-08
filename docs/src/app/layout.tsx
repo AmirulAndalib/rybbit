@@ -151,6 +151,19 @@ export default function Layout({ children }: { children: ReactNode }) {
         });
       `}
       </Script>
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=G-JX2XCP00J1"
+        strategy="afterInteractive"
+        id="ga-script"
+      />
+      <Script id="ga-init" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-JX2XCP00J1');
+        `}
+      </Script>
       <body className={`flex flex-col min-h-screen ${inter.variable} font-sans`}>
         <RootProvider
           theme={{
