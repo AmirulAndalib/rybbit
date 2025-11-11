@@ -54,7 +54,7 @@ export async function getOrgEventCount(
       AND event_hour < if(
         toDate(${SqlString.escape(end_date)}) = toDate(now(), ${SqlString.escape(time_zone)}),
         now(),
-        toTimeZne(
+        toTimeZone(
           toStartOfDay(toDateTime(${SqlString.escape(end_date)}, ${SqlString.escape(time_zone)})) + INTERVAL 1 DAY,
           'UTC'
         )
