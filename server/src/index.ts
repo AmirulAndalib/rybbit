@@ -15,6 +15,7 @@ import { getOutboundLinks } from "./api/analytics/events/getOutboundLinks.js";
 import { createFunnel } from "./api/analytics/funnels/createFunnel.js";
 import { deleteFunnel } from "./api/analytics/funnels/deleteFunnel.js";
 import { getFunnel } from "./api/analytics/funnels/getFunnel.js";
+import { getFunnelStepSessions } from "./api/analytics/funnels/getFunnelStepSessions.js";
 import { getFunnels } from "./api/analytics/funnels/getFunnels.js";
 import { getErrorBucketed } from "./api/analytics/getErrorBucketed.js";
 import { getErrorEvents } from "./api/analytics/getErrorEvents.js";
@@ -236,6 +237,7 @@ const ANALYTICS_ROUTES = [
   "/api/session-locations/",
   "/api/funnels/",
   "/api/funnel/",
+  "/api/funnel/:stepNumber/sessions/",
   "/api/journeys/",
   "/api/goals/",
   "/api/goal/",
@@ -329,6 +331,7 @@ server.get("/api/session-locations/:site", getSessionLocations);
 server.get("/api/funnels/:site", getFunnels);
 server.get("/api/journeys/:site", getJourneys);
 server.post("/api/funnel/:site", getFunnel);
+server.post("/api/funnel/:stepNumber/sessions/:site", getFunnelStepSessions);
 server.post("/api/funnel/create/:site", createFunnel);
 server.delete("/api/funnel/:funnelId", deleteFunnel);
 server.get("/api/goals/:site", getGoals);
