@@ -1,13 +1,12 @@
 "use client";
 
 import { round } from "lodash";
-import { ChevronDown, ChevronLeft, ChevronRight, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronUp } from "lucide-react";
 import { useState } from "react";
 import { FunnelResponse, FunnelStep } from "../../../../api/analytics/funnels/useGetFunnel";
 import { useGetFunnelStepSessions } from "../../../../api/analytics/funnels/useGetFunnelStepSessions";
 import { EventIcon, PageviewIcon } from "../../../../components/EventIcons";
-import { SessionCard, SessionCardSkeleton } from "../../../../components/Sessions/SessionCard";
-import { Button } from "../../../../components/ui/button";
+import { SessionsList } from "../../../../components/Sessions/SessionsList";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../../../components/ui/tabs";
 import { useStore } from "../../../../lib/store";
 
@@ -28,71 +27,6 @@ interface FunnelProps {
 }
 
 const LIMIT = 25;
-
-interface SessionsTabContentProps {
-  sessions: any[];
-  isLoading: boolean;
-  page: number;
-  setPage: (updater: (prev: number) => number) => void;
-  hasNext: boolean;
-  hasPrev: boolean;
-  emptyMessage: string;
-}
-
-function SessionsTabContent({
-  sessions,
-  isLoading,
-  page,
-  setPage,
-  hasNext,
-  hasPrev,
-  emptyMessage,
-}: SessionsTabContentProps) {
-  return (
-    <>
-      {(hasPrev || hasNext) && (
-        <div className="flex items-center justify-end gap-2 mb-3 ">
-          <Button
-            variant="ghost"
-            size="smIcon"
-            onClick={e => {
-              e.stopPropagation();
-              setPage(p => p - 1);
-            }}
-            disabled={!hasPrev}
-          >
-            <ChevronLeft className="h-4 w-4" />
-          </Button>
-          <span className="text-sm text-neutral-400">Page {page}</span>
-          <Button
-            variant="ghost"
-            size="smIcon"
-            onClick={e => {
-              e.stopPropagation();
-              setPage(p => p + 1);
-            }}
-            disabled={!hasNext}
-          >
-            <ChevronRight className="h-4 w-4" />
-          </Button>
-        </div>
-      )}
-      {isLoading ? (
-        <div className="space-y-3">
-          <SessionCardSkeleton />
-        </div>
-      ) : sessions.length === 0 ? (
-        <div className="text-center py-8 text-neutral-400">{emptyMessage}</div>
-      ) : (
-        <div className="space-y-3">
-          {sessions.map(session => (
-            <SessionCard key={session.session_id} session={session} />
-          ))}
-        </div>
-      )}
-    </>
-  );
-}
 
 interface FunnelStepComponentProps {
   step: FunnelChartData;
@@ -233,26 +167,26 @@ function FunnelStepComponent({ step, index, steps, chartData, firstStep, siteId 
             </TabsList>
 
             <TabsContent value="reached">
-              <SessionsTabContent
+              <SessionsList
                 sessions={reachedSessions}
                 isLoading={isLoadingReached}
                 page={reachedPage}
-                setPage={setReachedPage}
-                hasNext={hasNextReached}
-                hasPrev={hasPrevReached}
+                onPageChange={setReachedPage}
+                hasNextPage={hasNextReached}
+                hasPrevPage={hasPrevReached}
                 emptyMessage="No sessions reached this step in the selected time period."
               />
             </TabsContent>
 
             {!isFirstStep && (
               <TabsContent value="dropped">
-                <SessionsTabContent
+                <SessionsList
                   sessions={droppedSessions}
                   isLoading={isLoadingDropped}
                   page={droppedPage}
-                  setPage={setDroppedPage}
-                  hasNext={hasNextDropped}
-                  hasPrev={hasPrevDropped}
+                  onPageChange={setDroppedPage}
+                  hasNextPage={hasNextDropped}
+                  hasPrevPage={hasPrevDropped}
                   emptyMessage="No sessions dropped off before reaching this step in the selected time period."
                 />
               </TabsContent>

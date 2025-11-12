@@ -1,12 +1,12 @@
 "use client";
 
-import { ChevronDown, ChevronLeft, ChevronRight, ChevronUp, Copy, Edit, Trash2 } from "lucide-react";
+import { ChevronDown, ChevronUp, Copy, Edit, Trash2 } from "lucide-react";
 import { useState } from "react";
 import { useDeleteGoal } from "../../../../api/analytics/goals/useDeleteGoal";
 import { Goal } from "../../../../api/analytics/goals/useGetGoals";
 import { useGetGoalSessions } from "../../../../api/analytics/goals/useGetGoalSessions";
 import { EventIcon, PageviewIcon } from "../../../../components/EventIcons";
-import { SessionCard, SessionCardSkeleton } from "../../../../components/Sessions/SessionCard";
+import { SessionsList } from "../../../../components/Sessions/SessionsList";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -211,51 +211,16 @@ export default function GoalCard({ goal, siteId }: GoalCardProps) {
         {/* Expanded Sessions Section */}
         {isExpanded && (
           <div className="border-t border-neutral-800 bg-neutral-900/50 p-4">
-            <div className="flex items-center justify-between mb-3 h-7">
-              <h4 className="text-sm font-medium text-neutral-200">Converted Sessions</h4>
-              {(hasPrevPage || hasNextPage) && (
-                <div className="flex items-center gap-2">
-                  <Button
-                    variant="ghost"
-                    size="smIcon"
-                    onClick={e => {
-                      e.stopPropagation();
-                      setPage(p => p - 1);
-                    }}
-                    disabled={!hasPrevPage}
-                  >
-                    <ChevronLeft className="h-4 w-4" />
-                  </Button>
-                  <span className="text-sm text-neutral-400">Page {page}</span>
-                  <Button
-                    variant="ghost"
-                    size="smIcon"
-                    onClick={e => {
-                      e.stopPropagation();
-                      setPage(p => p + 1);
-                    }}
-                    disabled={!hasNextPage}
-                  >
-                    <ChevronRight className="h-4 w-4" />
-                  </Button>
-                </div>
-              )}
-            </div>
-            {isLoadingSessions ? (
-              <div className="space-y-3">
-                <SessionCardSkeleton />
-              </div>
-            ) : sessions.length === 0 ? (
-              <div className="text-center py-8 text-neutral-400">
-                No sessions converted to this goal in the selected time period.
-              </div>
-            ) : (
-              <div className="space-y-3">
-                {sessions.map(session => (
-                  <SessionCard key={session.session_id} session={session} />
-                ))}
-              </div>
-            )}
+            <h4 className="text-sm font-medium text-neutral-200 mb-3">Converted Sessions</h4>
+            <SessionsList
+              sessions={sessions}
+              isLoading={isLoadingSessions}
+              page={page}
+              onPageChange={setPage}
+              hasNextPage={hasNextPage}
+              hasPrevPage={hasPrevPage}
+              emptyMessage="No sessions converted to this goal in the selected time period."
+            />
           </div>
         )}
       </div>
