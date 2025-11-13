@@ -123,8 +123,16 @@ export async function getUserHasAccessToSitePublic(req: FastifyRequest, siteId: 
     return true;
   }
 
-  // Check if a valid API key was provided in the header
-  const apiKey = req.headers["x-api-key"];
+  // Check if a valid API key was provided
+  // Priority: 1. Authorization: Bearer header (recommended), 2. Query parameter (testing only)
+  const authHeader = req.headers["authorization"];
+  const bearerToken = authHeader && typeof authHeader === "string" && authHeader.startsWith("Bearer ")
+    ? authHeader.substring(7)
+    : null;
+
+  const queryApiKey = (req.query as any)?.api_key;
+  const apiKey = bearerToken || queryApiKey;
+
   if (apiKey && typeof apiKey === "string") {
     try {
       // Verify the API key using Better Auth
