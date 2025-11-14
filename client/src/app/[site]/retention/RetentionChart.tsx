@@ -36,12 +36,12 @@ const cohortColors = [
 const RetentionChartSkeleton = () => (
   <div className="h-[400px] flex items-center justify-center">
     <div className="w-full space-y-3">
-      <Skeleton className="h-[300px] w-full bg-neutral-200 dark:bg-neutral-900 rounded-md animate-pulse" />
+      <Skeleton className="h-[300px] w-full bg-neutral-100 dark:bg-neutral-900 rounded-md animate-pulse" />
       <div className="flex items-center justify-between px-6">
         {Array.from({ length: 6 }).map((_, i) => (
           <Skeleton
             key={i}
-            className="h-4 w-12 bg-neutral-300/50 dark:bg-neutral-700/50 animate-pulse"
+            className="h-4 w-12 bg-neutral-150/50 dark:bg-neutral-700/50 animate-pulse"
             style={{
               animationDelay: `${i * 100}ms`,
               opacity: 0.3 + i * 0.1,
