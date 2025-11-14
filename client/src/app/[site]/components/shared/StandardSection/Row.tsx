@@ -55,7 +55,7 @@ const RowItem = ({
   return (
     <div
       key={getKey(item)}
-      className="relative h-6 flex items-center cursor-pointer hover:bg-neutral-150 dark:hover:bg-neutral-850 group"
+      className="relative h-6 flex items-center cursor-pointer hover:bg-neutral-150/50 dark:hover:bg-neutral-850 group"
       onClick={() => onFilterToggle(filterParameter, getValue(item))}
     >
       <div
@@ -76,7 +76,9 @@ const RowItem = ({
           )}
         </div>
         <div className="text-xs flex gap-2 flex-shrink-0">
-          <div className="hidden group-hover:block text-neutral-600 dark:text-neutral-400">{round(item.percentage, 1)}%</div>
+          <div className="hidden group-hover:block text-neutral-600 dark:text-neutral-400">
+            {round(item.percentage, 1)}%
+          </div>
           <NumberFlow respectMotionPreference={false} value={item.count} format={{ notation: "compact" }} />
         </div>
       </div>

@@ -22,7 +22,7 @@ function AppSidebarContent() {
   return (
     <div
       className={cn(
-        "flex flex-col items-start justify-between h-dvh p-2 py-3 bg-neutral-100 dark:bg-neutral-900 border-r border-neutral-200 dark:border-neutral-850 gap-3 transition-all duration-1s00",
+        "flex flex-col items-start justify-between h-dvh p-2 py-3 bg-neutral-50 dark:bg-neutral-900 border-r border-neutral-200 dark:border-neutral-850 gap-3 transition-all duration-1s00",
         isExpanded ? "w-44" : "w-[45px]"
       )}
       onMouseEnter={() => setIsExpanded(true)}

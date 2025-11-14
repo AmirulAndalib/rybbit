@@ -104,7 +104,7 @@ function FunnelStepComponent({ step, index, steps, chartData, firstStep, siteId 
         className="flex items-center cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-800/30 rounded-md p-2 -ml-2 transition-colors"
         onClick={toggleExpansion}
       >
-        <div className="flex-shrink-0 w-6 h-6 rounded-full bg-neutral-200 dark:bg-neutral-800 flex items-center justify-center text-xs mr-2">
+        <div className="flex-shrink-0 w-6 h-6 rounded-full bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center text-xs mr-2">
           {step.stepNumber}
         </div>
         <div className="font-medium text-sm flex items-center gap-2 flex-1">
@@ -132,7 +132,7 @@ function FunnelStepComponent({ step, index, steps, chartData, firstStep, siteId 
         </div>
 
         {/* Bar */}
-        <div className="flex-grow h-10 bg-neutral-200 dark:bg-neutral-800 rounded-md overflow-hidden relative mt-2">
+        <div className="flex-grow h-10 bg-neutral-100 dark:bg-neutral-800 rounded-md overflow-hidden relative mt-2">
           {/* Relative conversion bar (from previous step) */}
           {index > 0 && prevStep && (
             <div

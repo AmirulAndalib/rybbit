@@ -130,7 +130,7 @@ export function EventList({ events, isLoading, size = "small" }: EventListProps)
             {/* Event Row */}
             <div
               className={cn(
-                "relative flex items-center cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-850 group px-2 rounded-md",
+                "relative flex items-center cursor-pointer hover:bg-neutral-150/50  dark:hover:bg-neutral-850 group px-2 rounded-md",
                 size === "small" ? "h-6" : "h-9"
               )}
               onClick={() =>
@@ -159,15 +159,23 @@ export function EventList({ events, isLoading, size = "small" }: EventListProps)
                     }}
                   >
                     {isExpanded ? (
-                      <ChevronDown className="h-4 w-4 text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100" strokeWidth={3} />
+                      <ChevronDown
+                        className="h-4 w-4 text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100"
+                        strokeWidth={3}
+                      />
                     ) : (
-                      <ChevronRight className="h-4 w-4 text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100" strokeWidth={3} />
+                      <ChevronRight
+                        className="h-4 w-4 text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100"
+                        strokeWidth={3}
+                      />
                     )}
                   </div>
                   {event.eventName}
                 </div>
                 <div className={cn("text-sm flex gap-2", size === "small" ? "text-xs" : "text-sm")}>
-                  <div className="hidden group-hover:block text-neutral-500 dark:text-neutral-400">{Math.round(percentage * 10) / 10}%</div>
+                  <div className="hidden group-hover:block text-neutral-500 dark:text-neutral-400">
+                    {Math.round(percentage * 10) / 10}%
+                  </div>
                   <NumberFlow respectMotionPreference={false} value={event.count} format={{ notation: "compact" }} />
                 </div>
               </div>
