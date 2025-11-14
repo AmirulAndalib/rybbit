@@ -107,7 +107,7 @@ function SiteSelectorContent({ onSiteSelect }: { onSiteSelect: () => void }) {
                   }}
                   className={cn(
                     "flex items-center justify-between p-2 cursor-pointer hover:bg-neutral-150 dark:hover:bg-neutral-800/50 transition-colors rounded-md border-b border-neutral-300 dark:border-neutral-800 last:border-b-0",
-                    isSelected && "bg-neutral-200 dark:bg-neutral-800"
+                    isSelected && "bg-neutral-100 dark:bg-neutral-800"
                   )}
                 >
                   <div className="flex items-center gap-3 flex-1 min-w-0">
@@ -128,10 +128,10 @@ function SiteSelectorContent({ onSiteSelect }: { onSiteSelect: () => void }) {
                 className="flex items-center justify-between p-2 animate-pulse rounded-md border-b border-neutral-300 dark:border-neutral-800 last:border-b-0"
               >
                 <div className="flex items-center gap-3 flex-1">
-                  <div className="w-4 h-4 bg-neutral-300 dark:bg-neutral-700 rounded flex-shrink-0"></div>
-                  <div className="h-4 bg-neutral-300 dark:bg-neutral-700 rounded w-32"></div>
+                  <div className="w-4 h-4 bg-neutral-200 dark:bg-neutral-700 rounded flex-shrink-0"></div>
+                  <div className="h-4 bg-neutral-200 dark:bg-neutral-700 rounded w-32"></div>
                 </div>
-                <div className="h-3 bg-neutral-300 dark:bg-neutral-700 rounded w-20"></div>
+                <div className="h-3 bg-neutral-200 dark:bg-neutral-700 rounded w-20"></div>
               </div>
             ))}
       </div>
@@ -168,8 +168,8 @@ function SiteSelectorWrapper() {
           </button>
         ) : (
           <button className="flex gap-2 border border-neutral-200 dark:border-neutral-800 rounded-lg py-1.5 px-3 justify-start items-center h-[36px] w-full animate-pulse">
-            <div className="w-5 h-5 bg-neutral-300 dark:bg-neutral-800 rounded"></div>
-            <div className="h-4 bg-neutral-300 dark:bg-neutral-800 rounded w-24 flex-1"></div>
+            <div className="w-5 h-5 bg-neutral-200 dark:bg-neutral-800 rounded"></div>
+            <div className="h-4 bg-neutral-200 dark:bg-neutral-800 rounded w-24 flex-1"></div>
             {!embed && <ChevronDown className="w-4 h-4 text-neutral-600 dark:text-neutral-400" />}
           </button>
         )}
