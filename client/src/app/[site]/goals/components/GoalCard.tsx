@@ -132,47 +132,39 @@ export default function GoalCard({ goal, siteId }: GoalCardProps) {
 
           {/* Right section - Actions */}
           <div className="flex flex-shrink-0 gap-1 pl-4">
-            <GoalFormModal
-              siteId={siteId}
-              goal={goal}
-              trigger={
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button
-                      variant="ghost"
-                      size="smIcon"
-                      onClick={e => {
-                        e.stopPropagation(); // Prevent expanding when clicking edit
-                      }}
-                    >
-                      <Edit className="h-4 w-4" />
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent>Edit Goal</TooltipContent>
-                </Tooltip>
-              }
-            />
-            <GoalFormModal
-              siteId={siteId}
-              goal={goal}
-              isCloneMode={true}
-              trigger={
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button
-                      variant="ghost"
-                      size="smIcon"
-                      onClick={e => {
-                        e.stopPropagation(); // Prevent expanding when clicking clone
-                      }}
-                    >
-                      <Copy className="h-4 w-4" />
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent>Clone Goal</TooltipContent>
-                </Tooltip>
-              }
-            />
+            <div onClick={e => e.stopPropagation()}>
+              <GoalFormModal
+                siteId={siteId}
+                goal={goal}
+                trigger={
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button variant="ghost" size="smIcon">
+                        <Edit className="h-4 w-4" />
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>Edit Goal</TooltipContent>
+                  </Tooltip>
+                }
+              />
+            </div>
+            <div onClick={e => e.stopPropagation()}>
+              <GoalFormModal
+                siteId={siteId}
+                goal={goal}
+                isCloneMode={true}
+                trigger={
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button variant="ghost" size="smIcon">
+                        <Copy className="h-4 w-4" />
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>Clone Goal</TooltipContent>
+                  </Tooltip>
+                }
+              />
+            </div>
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button
