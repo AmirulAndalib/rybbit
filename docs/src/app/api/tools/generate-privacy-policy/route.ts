@@ -23,10 +23,7 @@ export async function POST(request: NextRequest) {
     });
 
     if (!rateLimitResult.success) {
-      return NextResponse.json(
-        { error: "Rate limit exceeded. Please try again later." },
-        { status: 429, headers }
-      );
+      return NextResponse.json({ error: "Rate limit exceeded. Please try again later." }, { status: 429, headers });
     }
 
     // Parse and validate request
@@ -64,16 +61,10 @@ Make it professional, legally sound, and tailored to their specific use case.`;
     return NextResponse.json({ policy: response }, { headers });
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return NextResponse.json(
-        { error: "Invalid request data", details: error.errors },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Invalid request data", details: z.treeifyError(error) }, { status: 400 });
     }
 
     console.error("Privacy policy generation error:", error);
-    return NextResponse.json(
-      { error: "Failed to generate privacy policy. Please try again." },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Failed to generate privacy policy. Please try again." }, { status: 500 });
   }
 }

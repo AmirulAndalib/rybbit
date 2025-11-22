@@ -20,10 +20,7 @@ export async function POST(request: NextRequest) {
     });
 
     if (!rateLimitResult.success) {
-      return NextResponse.json(
-        { error: "Rate limit exceeded. Please try again later." },
-        { status: 429, headers }
-      );
+      return NextResponse.json({ error: "Rate limit exceeded. Please try again later." }, { status: 429, headers });
     }
 
     // Parse and validate request
@@ -105,7 +102,7 @@ If no analytics platforms are detected, say so clearly.`;
     try {
       // Extract JSON from markdown code blocks if present
       const jsonMatch = response.match(/```json\s*([\s\S]*?)\s*```/) || response.match(/\{[\s\S]*\}/);
-      const jsonStr = jsonMatch ? (jsonMatch[1] || jsonMatch[0]) : response;
+      const jsonStr = jsonMatch ? jsonMatch[1] || jsonMatch[0] : response;
       result = JSON.parse(jsonStr);
     } catch {
       // If parsing fails, return the raw response
@@ -119,16 +116,10 @@ If no analytics platforms are detected, say so clearly.`;
     return NextResponse.json(result, { headers });
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return NextResponse.json(
-        { error: "Invalid request data", details: error.errors },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Invalid request data", details: z.treeifyError(error) }, { status: 400 });
     }
 
     console.error("Analytics detection error:", error);
-    return NextResponse.json(
-      { error: "Failed to detect analytics platforms. Please try again." },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Failed to detect analytics platforms. Please try again." }, { status: 500 });
   }
 }
