@@ -56,7 +56,7 @@ const structuredData = {
       author: {
         "@type": "Organization",
         name: "Rybbit",
-        url: "https://rybbit.io",
+        url: "https://rybbit.com",
       },
     },
     {
@@ -110,45 +110,43 @@ const structuredData = {
 
 const educationalContent = (
   <>
-    <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
-      What is CTR (Click-Through Rate)?
-    </h2>
+    <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4">What is CTR (Click-Through Rate)?</h2>
     <p className="text-neutral-700 dark:text-neutral-300 leading-relaxed mb-4">
-      Click-Through Rate (CTR) is a key digital marketing metric that measures the percentage of people who
-      click on your ad, email link, or search result after viewing it. It's one of the most important indicators
-      of how well your marketing content resonates with your audience.
+      Click-Through Rate (CTR) is a key digital marketing metric that measures the percentage of people who click on
+      your ad, email link, or search result after viewing it. It's one of the most important indicators of how well your
+      marketing content resonates with your audience.
     </p>
     <p className="text-neutral-700 dark:text-neutral-300 leading-relaxed mb-4">
-      CTR is calculated by dividing the total number of clicks by the total number of impressions (times your
-      content was shown) and multiplying by 100 to get a percentage. For example, if your ad was shown 10,000
-      times and received 300 clicks, your CTR would be 3%.
+      CTR is calculated by dividing the total number of clicks by the total number of impressions (times your content
+      was shown) and multiplying by 100 to get a percentage. For example, if your ad was shown 10,000 times and received
+      300 clicks, your CTR would be 3%.
     </p>
     <p className="text-neutral-700 dark:text-neutral-300 leading-relaxed mb-4">
-      Unlike vanity metrics that only measure visibility, CTR shows actual engagement—it tells you not just how
-      many people saw your content, but how many were interested enough to take action.
+      Unlike vanity metrics that only measure visibility, CTR shows actual engagement—it tells you not just how many
+      people saw your content, but how many were interested enough to take action.
     </p>
 
     <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4 mt-8">Why Does CTR Matter?</h2>
     <ul className="space-y-2 text-neutral-700 dark:text-neutral-300 mb-6">
       <li>
-        <strong>Measure Marketing Effectiveness:</strong> CTR is a direct indicator of how well your ad copy,
-        creative, and messaging are working. A higher CTR means your audience finds your message compelling and
-        relevant, which is the first step toward conversions.
+        <strong>Measure Marketing Effectiveness:</strong> CTR is a direct indicator of how well your ad copy, creative,
+        and messaging are working. A higher CTR means your audience finds your message compelling and relevant, which is
+        the first step toward conversions.
       </li>
       <li>
-        <strong>Improve Campaign ROI:</strong> Higher CTRs mean more qualified traffic to your website or
-        landing pages. More clicks lead to more conversion opportunities, which directly impacts your return on
-        investment (ROI) for paid campaigns.
+        <strong>Improve Campaign ROI:</strong> Higher CTRs mean more qualified traffic to your website or landing pages.
+        More clicks lead to more conversion opportunities, which directly impacts your return on investment (ROI) for
+        paid campaigns.
       </li>
       <li>
-        <strong>Quality Score Impact:</strong> In Google Ads, CTR significantly impacts your Quality Score,
-        which affects your ad rank and cost-per-click (CPC). Higher CTR can lead to better ad positions at lower
-        costs, creating a positive feedback loop.
+        <strong>Quality Score Impact:</strong> In Google Ads, CTR significantly impacts your Quality Score, which
+        affects your ad rank and cost-per-click (CPC). Higher CTR can lead to better ad positions at lower costs,
+        creating a positive feedback loop.
       </li>
       <li>
         <strong>Channel Performance Comparison:</strong> CTR allows you to compare performance across different
-        marketing channels—email, PPC, organic search, social media—on a level playing field. This helps you
-        identify which channels are most effective for your audience.
+        marketing channels—email, PPC, organic search, social media—on a level playing field. This helps you identify
+        which channels are most effective for your audience.
       </li>
     </ul>
 
@@ -157,8 +155,8 @@ const educationalContent = (
       <code className="text-sm font-mono">CTR = (Clicks / Impressions) × 100</code>
     </p>
     <p className="text-neutral-700 dark:text-neutral-300 mb-4 leading-relaxed">
-      To calculate your CTR manually, divide the number of clicks by your total number of impressions, then
-      multiply by 100 to express it as a percentage.
+      To calculate your CTR manually, divide the number of clicks by your total number of impressions, then multiply by
+      100 to express it as a percentage.
     </p>
     <p className="text-neutral-700 dark:text-neutral-300 mb-2">
       <strong>Example:</strong>
@@ -173,33 +171,32 @@ const educationalContent = (
       CTR Industry Benchmarks by Channel
     </h2>
     <p className="text-neutral-700 dark:text-neutral-300 mb-4 leading-relaxed">
-      CTR varies significantly by marketing channel, industry, and audience type. Here are typical CTR
-      benchmarks to help you understand what's good for your channel:
+      CTR varies significantly by marketing channel, industry, and audience type. Here are typical CTR benchmarks to
+      help you understand what's good for your channel:
     </p>
     <ul className="space-y-2 text-neutral-700 dark:text-neutral-300 mb-6">
       <li>
-        <strong>Search Ads (Google Ads) - 3.17%:</strong> Search ads have the highest average CTR because users
-        actively searched for keywords related to your business.
+        <strong>Search Ads (Google Ads) - 3.17%:</strong> Search ads have the highest average CTR because users actively
+        searched for keywords related to your business.
       </li>
       <li>
-        <strong>Email Marketing - 2.6%:</strong> Email marketing performs well because subscribers have opted in
-        and are receptive to your messages.
+        <strong>Email Marketing - 2.6%:</strong> Email marketing performs well because subscribers have opted in and are
+        receptive to your messages.
       </li>
       <li>
-        <strong>E-commerce - 2.69%:</strong> E-commerce sites typically see good CTRs, especially for
-        retargeting and product-specific campaigns.
+        <strong>E-commerce - 2.69%:</strong> E-commerce sites typically see good CTRs, especially for retargeting and
+        product-specific campaigns.
       </li>
       <li>
-        <strong>B2B - 2.41%:</strong> B2B campaigns see solid CTRs due to intent-based targeting and niche
-        audiences.
+        <strong>B2B - 2.41%:</strong> B2B campaigns see solid CTRs due to intent-based targeting and niche audiences.
       </li>
       <li>
-        <strong>Social Media Ads - 0.90%:</strong> Social media ads have lower CTRs due to less commercial
-        intent and higher audience distraction.
+        <strong>Social Media Ads - 0.90%:</strong> Social media ads have lower CTRs due to less commercial intent and
+        higher audience distraction.
       </li>
       <li>
-        <strong>Display Ads - 0.46%:</strong> Display ads have the lowest CTR because users didn't specifically
-        search for your product or service.
+        <strong>Display Ads - 0.46%:</strong> Display ads have the lowest CTR because users didn't specifically search
+        for your product or service.
       </li>
     </ul>
 
@@ -213,9 +210,7 @@ const educationalContent = (
       <li>Create urgency with words like "limited time," "exclusive," or "today"</li>
     </ul>
 
-    <h3 className="text-xl font-semibold text-neutral-900 dark:text-white mb-3 mt-6">
-      Strong Calls-to-Action (CTAs)
-    </h3>
+    <h3 className="text-xl font-semibold text-neutral-900 dark:text-white mb-3 mt-6">Strong Calls-to-Action (CTAs)</h3>
     <ul className="space-y-2 text-neutral-700 dark:text-neutral-300 mb-6">
       <li>Use action-oriented verbs: "Get," "Discover," "Learn," "Start"</li>
       <li>Make CTAs stand out visually with contrasting colors and clear buttons</li>
@@ -223,9 +218,7 @@ const educationalContent = (
       <li>Be specific about what happens when they click</li>
     </ul>
 
-    <h3 className="text-xl font-semibold text-neutral-900 dark:text-white mb-3 mt-6">
-      Improve Audience Targeting
-    </h3>
+    <h3 className="text-xl font-semibold text-neutral-900 dark:text-white mb-3 mt-6">Improve Audience Targeting</h3>
     <ul className="space-y-2 text-neutral-700 dark:text-neutral-300 mb-6">
       <li>Use detailed audience segmentation based on demographics, interests, and behavior</li>
       <li>Create separate ads for different audience segments</li>
@@ -241,9 +234,7 @@ const educationalContent = (
       <li>Document learnings to continuously improve performance</li>
     </ul>
 
-    <h3 className="text-xl font-semibold text-neutral-900 dark:text-white mb-3 mt-6">
-      Ad Extensions (Google Ads)
-    </h3>
+    <h3 className="text-xl font-semibold text-neutral-900 dark:text-white mb-3 mt-6">Ad Extensions (Google Ads)</h3>
     <ul className="space-y-2 text-neutral-700 dark:text-neutral-300 mb-6">
       <li>Add sitelink extensions to showcase multiple offers or pages</li>
       <li>Use callout extensions to highlight unique benefits</li>
@@ -251,9 +242,7 @@ const educationalContent = (
       <li>Add call extensions to encourage phone inquiries</li>
     </ul>
 
-    <h3 className="text-xl font-semibold text-neutral-900 dark:text-white mb-3 mt-6">
-      Landing Page Optimization
-    </h3>
+    <h3 className="text-xl font-semibold text-neutral-900 dark:text-white mb-3 mt-6">Landing Page Optimization</h3>
     <ul className="space-y-2 text-neutral-700 dark:text-neutral-300 mb-6">
       <li>Ensure landing pages match ad messaging and keywords (ad relevance)</li>
       <li>Load fast and display properly on mobile devices</li>
@@ -279,8 +268,8 @@ const faqs = [
     answer: (
       <>
         To improve CTR, focus on: writing compelling ad copy with clear value propositions, using strong
-        calls-to-action, targeting the right audience, testing different creatives and headlines, ensuring ad
-        relevance to search intent, and using ad extensions. Track your results with{" "}
+        calls-to-action, targeting the right audience, testing different creatives and headlines, ensuring ad relevance
+        to search intent, and using ad extensions. Track your results with{" "}
         <Link href="https://app.rybbit.io" className="text-emerald-600 dark:text-emerald-400 hover:underline">
           Rybbit Analytics
         </Link>{" "}

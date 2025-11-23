@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     description:
       "Visualize your conversion funnel step-by-step. Identify drop-off points and optimize conversion rates.",
     type: "website",
-    url: "https://rybbit.io/tools/funnel-visualizer",
+    url: "https://rybbit.com/tools/funnel-visualizer",
   },
   twitter: {
     card: "summary_large_image",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
       "Visualize your conversion funnel step-by-step. Identify drop-off points and optimize conversion rates.",
   },
   alternates: {
-    canonical: "https://rybbit.io/tools/funnel-visualizer",
+    canonical: "https://rybbit.com/tools/funnel-visualizer",
   },
 };
 
@@ -44,7 +44,7 @@ const structuredData = {
       "@type": "WebApplication",
       name: "Funnel Visualizer",
       description: "Free tool to visualize conversion funnels and analyze drop-off rates at each step",
-      url: "https://rybbit.io/tools/funnel-visualizer",
+      url: "https://rybbit.com/tools/funnel-visualizer",
       applicationCategory: "BusinessApplication",
       featureList: [
         "Step-by-step funnel visualization",
@@ -111,14 +111,14 @@ const educationalContent = (
   <>
     <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4">What is a Conversion Funnel?</h2>
     <p className="text-neutral-700 dark:text-neutral-300 leading-relaxed mb-4">
-      A conversion funnel visualizes the customer journey from initial awareness to final conversion. Just
-      like a physical funnel narrows toward the bottom, a conversion funnel shows how the number of users
-      decreases at each step of your sales or signup process.
+      A conversion funnel visualizes the customer journey from initial awareness to final conversion. Just like a
+      physical funnel narrows toward the bottom, a conversion funnel shows how the number of users decreases at each
+      step of your sales or signup process.
     </p>
     <p className="text-neutral-700 dark:text-neutral-300 leading-relaxed mb-4">
-      Understanding your conversion funnel is critical for business growth because it reveals where
-      potential customers are dropping off. By identifying and fixing these bottlenecks, you can
-      significantly improve your overall conversion rate without increasing marketing spend.
+      Understanding your conversion funnel is critical for business growth because it reveals where potential customers
+      are dropping off. By identifying and fixing these bottlenecks, you can significantly improve your overall
+      conversion rate without increasing marketing spend.
     </p>
 
     <h3 className="text-xl font-semibold text-neutral-900 dark:text-white mb-3 mt-6">Why Funnels Matter</h3>
@@ -132,72 +132,66 @@ const educationalContent = (
 
     <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4 mt-8">Understanding Funnel Stages</h2>
     <p className="text-neutral-700 dark:text-neutral-300 leading-relaxed mb-4">
-      While funnels vary by business model, most follow a similar progression from awareness to conversion.
-      Here are the common stages:
+      While funnels vary by business model, most follow a similar progression from awareness to conversion. Here are the
+      common stages:
     </p>
     <ul className="space-y-2 text-neutral-700 dark:text-neutral-300 mb-6">
       <li>
-        <strong>Awareness:</strong> Users discover your brand through ads, content, or word-of-mouth. This is
-        typically measured by landing page visits or impressions.
+        <strong>Awareness:</strong> Users discover your brand through ads, content, or word-of-mouth. This is typically
+        measured by landing page visits or impressions.
       </li>
       <li>
-        <strong>Consideration:</strong> Interested users explore your product or service by viewing product
-        pages, demos, or reading reviews.
+        <strong>Consideration:</strong> Interested users explore your product or service by viewing product pages,
+        demos, or reading reviews.
       </li>
       <li>
-        <strong>Evaluation:</strong> Users actively consider the purchase by adding items to cart, requesting
-        quotes, or starting free trials.
+        <strong>Evaluation:</strong> Users actively consider the purchase by adding items to cart, requesting quotes, or
+        starting free trials.
       </li>
       <li>
-        <strong>Decision:</strong> Users commit to action by starting checkout, completing signup forms, or
-        requesting more information.
+        <strong>Decision:</strong> Users commit to action by starting checkout, completing signup forms, or requesting
+        more information.
       </li>
       <li>
-        <strong>Conversion:</strong> Users complete the desired action—purchase, signup, trial activation, or
-        lead submission.
+        <strong>Conversion:</strong> Users complete the desired action—purchase, signup, trial activation, or lead
+        submission.
       </li>
       <li>
-        <strong>Retention:</strong> Users continue engaging (repeat purchases, retention rate, customer lifetime
-        value).
+        <strong>Retention:</strong> Users continue engaging (repeat purchases, retention rate, customer lifetime value).
       </li>
     </ul>
 
-    <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4 mt-8">
-      How to Analyze Funnel Drop-offs
-    </h2>
+    <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4 mt-8">How to Analyze Funnel Drop-offs</h2>
     <p className="text-neutral-700 dark:text-neutral-300 leading-relaxed mb-4">
-      Drop-offs occur when users don't progress to the next step. Analyzing where and why users drop off is
-      the key to optimization. Here's a systematic approach:
+      Drop-offs occur when users don't progress to the next step. Analyzing where and why users drop off is the key to
+      optimization. Here's a systematic approach:
     </p>
     <ol className="space-y-2 text-neutral-700 dark:text-neutral-300 mb-6">
       <li>
-        <strong>Calculate Drop-off Percentages:</strong> For each step, calculate what percentage of users from
-        the previous step dropped off. A 50% drop from step 1 to 2 is a major red flag.
+        <strong>Calculate Drop-off Percentages:</strong> For each step, calculate what percentage of users from the
+        previous step dropped off. A 50% drop from step 1 to 2 is a major red flag.
       </li>
       <li>
-        <strong>Identify the Biggest Bottleneck:</strong> Focus on the step with the largest absolute drop (most
-        users lost). This is usually your highest-impact optimization opportunity.
+        <strong>Identify the Biggest Bottleneck:</strong> Focus on the step with the largest absolute drop (most users
+        lost). This is usually your highest-impact optimization opportunity.
       </li>
       <li>
-        <strong>Consider External Factors:</strong> Evaluate traffic quality, targeting, seasonality, device
-        type, and traffic source. High drop-offs might indicate poor audience match, not a product issue.
+        <strong>Consider External Factors:</strong> Evaluate traffic quality, targeting, seasonality, device type, and
+        traffic source. High drop-offs might indicate poor audience match, not a product issue.
       </li>
       <li>
         <strong>Hypothesize Root Causes:</strong> Use analytics, user testing, surveys, and session recordings to
         understand why users drop off. Is it friction, unclear messaging, trust issues, or pricing?
       </li>
       <li>
-        <strong>Test Improvements:</strong> Implement targeted fixes (form simplification, page speed
-        improvements, clearer CTAs) and measure the impact on your funnel conversion rate.
+        <strong>Test Improvements:</strong> Implement targeted fixes (form simplification, page speed improvements,
+        clearer CTAs) and measure the impact on your funnel conversion rate.
       </li>
     </ol>
 
-    <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4 mt-8">
-      Funnel Optimization Strategies
-    </h2>
+    <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4 mt-8">Funnel Optimization Strategies</h2>
     <p className="text-neutral-700 dark:text-neutral-300 leading-relaxed mb-4">
-      Once you've identified drop-off points, here are proven strategies to improve each stage of your
-      funnel:
+      Once you've identified drop-off points, here are proven strategies to improve each stage of your funnel:
     </p>
 
     <h3 className="text-xl font-semibold text-neutral-900 dark:text-white mb-3 mt-6">Awareness Stage</h3>
@@ -259,10 +253,9 @@ const faqs = [
     question: "How can I improve my conversion funnel?",
     answer: (
       <>
-        Optimize high drop-off steps first by: simplifying forms and checkout processes, improving page load
-        speed, enhancing trust signals and social proof, clarifying value propositions, reducing friction
-        (fewer clicks), improving mobile experience, A/B testing changes, and removing distractions. Track
-        these improvements with{" "}
+        Optimize high drop-off steps first by: simplifying forms and checkout processes, improving page load speed,
+        enhancing trust signals and social proof, clarifying value propositions, reducing friction (fewer clicks),
+        improving mobile experience, A/B testing changes, and removing distractions. Track these improvements with{" "}
         <Link href="https://app.rybbit.io" className="text-emerald-600 dark:text-emerald-400 hover:underline">
           Rybbit Analytics
         </Link>{" "}

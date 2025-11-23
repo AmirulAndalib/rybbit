@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     title: "Free Marketing ROI Calculator | Calculate Return on Investment & ROAS",
     description: "Calculate your marketing ROI, ROAS, profit margins, and net profit instantly.",
     type: "website",
-    url: "https://rybbit.io/tools/marketing-roi-calculator",
+    url: "https://rybbit.com/tools/marketing-roi-calculator",
   },
   twitter: {
     card: "summary_large_image",
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     description: "Calculate your marketing ROI, ROAS, profit margins, and net profit instantly.",
   },
   alternates: {
-    canonical: "https://rybbit.io/tools/marketing-roi-calculator",
+    canonical: "https://rybbit.com/tools/marketing-roi-calculator",
   },
 };
 
@@ -40,7 +40,7 @@ const structuredData = {
       "@type": "WebApplication",
       name: "Marketing ROI Calculator",
       description: "Calculate ROI, ROAS, profit margins, and net profit for your marketing campaigns",
-      url: "https://rybbit.io/tools/marketing-roi-calculator",
+      url: "https://rybbit.com/tools/marketing-roi-calculator",
       applicationCategory: "BusinessApplication",
       featureList: [
         "ROI Calculation",
