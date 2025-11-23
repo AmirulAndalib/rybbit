@@ -140,248 +140,135 @@ export default function TrafficValueCalculatorPage() {
           {/* Interactive Form Component */}
           <TrafficValueForm />
 
-          {/* What is Traffic Value Section */}
-          <div className="mb-16 bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-900/50 rounded-lg p-8">
-            <h2 className="text-3xl font-bold text-neutral-900 dark:text-white mb-4">What is Traffic Value?</h2>
-            <p className="text-neutral-700 dark:text-neutral-300 mb-6 leading-relaxed">
+          {/* Educational Content */}
+          <div className="mb-16 prose prose-neutral dark:prose-invert max-w-none">
+            <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4">What is Traffic Value?</h2>
+            <p className="text-neutral-700 dark:text-neutral-300 leading-relaxed mb-4">
               Traffic value is the estimated monetary worth of each visitor to your website. It represents how much
               profit you generate from the average visitor based on your conversion rate, average order value, and
               profit margin. Understanding this metric is crucial for evaluating the effectiveness of your marketing
               efforts and optimizing your advertising budget allocation.
             </p>
-            <p className="text-neutral-700 dark:text-neutral-300 leading-relaxed">
+            <p className="text-neutral-700 dark:text-neutral-300 leading-relaxed mb-4">
               For example, if you have 50,000 monthly visitors, a 2.5% conversion rate, an average order value of $75,
               and a 30% profit margin, your traffic value would be approximately $2.81 per visitor in monthly profit.
               This means increasing your traffic by just 10% could add nearly $1,400 to your monthly profit.
             </p>
-          </div>
 
-          {/* How to Calculate Traffic Value Section */}
-          <div className="mb-16 bg-neutral-100 dark:bg-neutral-800 rounded-lg p-8">
-            <h2 className="text-3xl font-bold text-neutral-900 dark:text-white mb-6">How to Calculate Traffic Value</h2>
-            <div className="bg-neutral-900 dark:bg-neutral-950 rounded p-6 mb-6 overflow-x-auto">
-              <code className="text-emerald-400 font-mono text-sm">
-                Traffic Value = Monthly Visitors × Conversion Rate × Average Order Value × Profit Margin
-              </code>
-            </div>
-            <div className="space-y-4">
-              <div>
-                <h3 className="font-semibold text-neutral-900 dark:text-white mb-2">Step-by-Step Example:</h3>
-                <ol className="text-neutral-700 dark:text-neutral-300 space-y-2 list-decimal list-inside">
-                  <li>
-                    <strong>Monthly Visitors:</strong> 50,000 people visit your website each month
-                  </li>
-                  <li>
-                    <strong>Conversion Rate:</strong> 2.5% of visitors make a purchase (1,250 conversions)
-                  </li>
-                  <li>
-                    <strong>Average Order Value:</strong> Each customer spends $75 on average ($93,750 total revenue)
-                  </li>
-                  <li>
-                    <strong>Profit Margin:</strong> 30% of revenue is actual profit ($28,125 monthly profit)
-                  </li>
-                  <li>
-                    <strong>Traffic Value:</strong> $28,125 ÷ 50,000 visitors = $0.56 per visitor
-                  </li>
-                </ol>
-              </div>
-              <p className="text-neutral-700 dark:text-neutral-300 mt-4">
-                Our calculator automates this process and also shows you important insights like annual profit
-                potential, how traffic increases impact your bottom line, and what you can afford to spend per visitor
-                on acquisition.
-              </p>
-            </div>
-          </div>
+            <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4 mt-8">How to Calculate Traffic Value</h2>
+            <p className="text-neutral-700 dark:text-neutral-300 mb-2">
+              <code className="text-sm font-mono">Traffic Value = Monthly Visitors × Conversion Rate × Average Order Value × Profit Margin</code>
+            </p>
+            <p className="text-neutral-700 dark:text-neutral-300 mb-2">
+              <strong>Step-by-Step Example:</strong>
+            </p>
+            <ol className="space-y-2 text-neutral-700 dark:text-neutral-300 mb-6">
+              <li>Monthly Visitors: 50,000 people visit your website each month</li>
+              <li>Conversion Rate: 2.5% of visitors make a purchase (1,250 conversions)</li>
+              <li>Average Order Value: Each customer spends $75 on average ($93,750 total revenue)</li>
+              <li>Profit Margin: 30% of revenue is actual profit ($28,125 monthly profit)</li>
+              <li>Traffic Value: $28,125 ÷ 50,000 visitors = $0.56 per visitor</li>
+            </ol>
+            <p className="text-neutral-700 dark:text-neutral-300 mb-6">
+              Our calculator automates this process and also shows you important insights like annual profit
+              potential, how traffic increases impact your bottom line, and what you can afford to spend per visitor
+              on acquisition.
+            </p>
 
-          {/* Factors Affecting Traffic Value Section */}
-          <div className="mb-16">
-            <h2 className="text-3xl font-bold text-neutral-900 dark:text-white mb-6">
+            <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4 mt-8">
               Factors Affecting Traffic Value
             </h2>
-            <div className="space-y-6">
-              <div className="border-l-4 border-emerald-500 pl-6 py-2">
-                <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-2">Conversion Rate</h3>
-                <p className="text-neutral-700 dark:text-neutral-300">
-                  The percentage of visitors who complete a desired action (purchase, signup, etc.). Higher conversion
-                  rates dramatically increase traffic value. Even a 1% increase from 2% to 3% conversion boosts value by
-                  50%. Focus on improving UX, page load speed, compelling copy, and clear calls-to-action.
-                </p>
-              </div>
+            <ul className="space-y-2 text-neutral-700 dark:text-neutral-300 mb-6">
+              <li>
+                <strong>Conversion Rate:</strong> The percentage of visitors who complete a desired action (purchase, signup, etc.). Higher conversion
+                rates dramatically increase traffic value. Even a 1% increase from 2% to 3% conversion boosts value by
+                50%. Focus on improving UX, page load speed, compelling copy, and clear calls-to-action.
+              </li>
+              <li>
+                <strong>Average Order Value (AOV):</strong> The average amount each customer spends per transaction. Increasing AOV through upsells, cross-sells,
+                product bundles, and premium tiers directly increases your traffic value. Strategies include
+                recommending complementary products, offering volume discounts, and tiered pricing.
+              </li>
+              <li>
+                <strong>Profit Margin:</strong> Your actual profit after all costs (COGS, wages, overhead, taxes). A 30% margin means 30 cents of
+                every dollar is profit. Improve margins by optimizing supply chains, reducing operational costs,
+                improving pricing strategy, or shifting to higher-margin products.
+              </li>
+              <li>
+                <strong>Traffic Quality:</strong> Not all visitors have equal value. High-intent traffic (people actively searching for your solution)
+                converts better than cold traffic. Attract better traffic through targeted SEO, buyer-intent keyword
+                campaigns, detailed audience targeting, and strategic partnerships.
+              </li>
+              <li>
+                <strong>Customer Lifetime Value (LTV):</strong> For businesses with repeat customers, true traffic value is much higher than single-purchase value.
+                Include repeat purchases, subscriptions, and long-term customer value in your calculations. Use
+                analytics tools to track actual LTV rather than assuming single purchases.
+              </li>
+            </ul>
 
-              <div className="border-l-4 border-emerald-500 pl-6 py-2">
-                <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-2">
-                  Average Order Value (AOV)
-                </h3>
-                <p className="text-neutral-700 dark:text-neutral-300">
-                  The average amount each customer spends per transaction. Increasing AOV through upsells, cross-sells,
-                  product bundles, and premium tiers directly increases your traffic value. Strategies include
-                  recommending complementary products, offering volume discounts, and tiered pricing.
-                </p>
-              </div>
-
-              <div className="border-l-4 border-emerald-500 pl-6 py-2">
-                <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-2">Profit Margin</h3>
-                <p className="text-neutral-700 dark:text-neutral-300">
-                  Your actual profit after all costs (COGS, wages, overhead, taxes). A 30% margin means 30 cents of
-                  every dollar is profit. Improve margins by optimizing supply chains, reducing operational costs,
-                  improving pricing strategy, or shifting to higher-margin products.
-                </p>
-              </div>
-
-              <div className="border-l-4 border-emerald-500 pl-6 py-2">
-                <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-2">Traffic Quality</h3>
-                <p className="text-neutral-700 dark:text-neutral-300">
-                  Not all visitors have equal value. High-intent traffic (people actively searching for your solution)
-                  converts better than cold traffic. Attract better traffic through targeted SEO, buyer-intent keyword
-                  campaigns, detailed audience targeting, and strategic partnerships.
-                </p>
-              </div>
-
-              <div className="border-l-4 border-emerald-500 pl-6 py-2">
-                <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-2">
-                  Customer Lifetime Value (LTV)
-                </h3>
-                <p className="text-neutral-700 dark:text-neutral-300">
-                  For businesses with repeat customers, true traffic value is much higher than single-purchase value.
-                  Include repeat purchases, subscriptions, and long-term customer value in your calculations. Use
-                  analytics tools to track actual LTV rather than assuming single purchases.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Monetization Strategies Section */}
-          <div className="mb-16 bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-900/50 rounded-lg p-8">
-            <h2 className="text-3xl font-bold text-neutral-900 dark:text-white mb-6">
+            <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4 mt-8">
               Strategies to Maximize Traffic Value
             </h2>
-            <div className="space-y-4">
-              <div>
-                <h3 className="font-semibold text-neutral-900 dark:text-white mb-2">1. Optimize Conversion Funnel</h3>
-                <p className="text-neutral-700 dark:text-neutral-300 text-sm">
-                  Reduce friction in your checkout process, improve page load speed (aim for under 3 seconds), use
-                  compelling headlines and CTAs, add trust signals (reviews, guarantees), and implement exit-intent
-                  popups with discounts to recover abandoning visitors.
-                </p>
-              </div>
+            <ol className="space-y-2 text-neutral-700 dark:text-neutral-300 mb-6">
+              <li>
+                <strong>Optimize Conversion Funnel:</strong> Reduce friction in your checkout process, improve page load speed (aim for under 3 seconds), use
+                compelling headlines and CTAs, add trust signals (reviews, guarantees), and implement exit-intent
+                popups with discounts to recover abandoning visitors.
+              </li>
+              <li>
+                <strong>Increase Average Order Value:</strong> Implement product recommendations, offer bundle deals, use tiered pricing, suggest upgrades at
+                checkout, and create loyalty programs. Even a $5 increase in AOV significantly boosts your traffic
+                value when applied to thousands of monthly visitors.
+              </li>
+              <li>
+                <strong>Improve Profit Margins:</strong> Negotiate better supplier rates, optimize inventory management, reduce operational waste, automate
+                manual processes, and raise prices strategically. Higher margins on the same revenue directly increase
+                your traffic value.
+              </li>
+              <li>
+                <strong>Attract Higher-Quality Traffic:</strong> Focus on buyer-intent keywords in SEO, use detailed audience targeting in ads, build partnerships with
+                complementary brands, and create educational content that attracts serious prospects rather than
+                casual browsers.
+              </li>
+              <li>
+                <strong>Build Customer Retention:</strong> Implement email marketing, create loyalty programs, offer excellent customer support, and track repeat
+                purchase rates. Customers who return multiple times have significantly higher lifetime value.
+              </li>
+            </ol>
 
-              <div>
-                <h3 className="font-semibold text-neutral-900 dark:text-white mb-2">2. Increase Average Order Value</h3>
-                <p className="text-neutral-700 dark:text-neutral-300 text-sm">
-                  Implement product recommendations, offer bundle deals, use tiered pricing, suggest upgrades at
-                  checkout, and create loyalty programs. Even a $5 increase in AOV significantly boosts your traffic
-                  value when applied to thousands of monthly visitors.
-                </p>
-              </div>
-
-              <div>
-                <h3 className="font-semibold text-neutral-900 dark:text-white mb-2">3. Improve Profit Margins</h3>
-                <p className="text-neutral-700 dark:text-neutral-300 text-sm">
-                  Negotiate better supplier rates, optimize inventory management, reduce operational waste, automate
-                  manual processes, and raise prices strategically. Higher margins on the same revenue directly increase
-                  your traffic value.
-                </p>
-              </div>
-
-              <div>
-                <h3 className="font-semibold text-neutral-900 dark:text-white mb-2">
-                  4. Attract Higher-Quality Traffic
-                </h3>
-                <p className="text-neutral-700 dark:text-neutral-300 text-sm">
-                  Focus on buyer-intent keywords in SEO, use detailed audience targeting in ads, build partnerships with
-                  complementary brands, and create educational content that attracts serious prospects rather than
-                  casual browsers.
-                </p>
-              </div>
-
-              <div>
-                <h3 className="font-semibold text-neutral-900 dark:text-white mb-2">5. Build Customer Retention</h3>
-                <p className="text-neutral-700 dark:text-neutral-300 text-sm">
-                  Implement email marketing, create loyalty programs, offer excellent customer support, and track repeat
-                  purchase rates. Customers who return multiple times have significantly higher lifetime value.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Industry Benchmarks Section */}
-          <div className="mb-16">
-            <h2 className="text-3xl font-bold text-neutral-900 dark:text-white mb-6">
+            <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4 mt-8">
               Industry Benchmarks & Typical Values
             </h2>
-            <p className="text-neutral-700 dark:text-neutral-300 mb-8 leading-relaxed">
+            <p className="text-neutral-700 dark:text-neutral-300 mb-4 leading-relaxed">
               Traffic value varies significantly by industry, business model, and traffic quality. Here are approximate
               benchmarks to help you understand if your traffic value is competitive:
             </p>
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="bg-neutral-100 dark:bg-neutral-800 rounded-lg p-6">
-                <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-4">E-commerce</h3>
-                <p className="text-neutral-700 dark:text-neutral-300 mb-3">
-                  <strong>Typical Range:</strong> $0.50 - $3.00 per visitor
-                </p>
-                <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                  Higher values if selling premium products with high margins. Lower conversion rates but good AOV
-                  drives value. Direct traffic and email often have higher value than social media.
-                </p>
-              </div>
-
-              <div className="bg-neutral-100 dark:bg-neutral-800 rounded-lg p-6">
-                <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-4">SaaS / Subscriptions</h3>
-                <p className="text-neutral-700 dark:text-neutral-300 mb-3">
-                  <strong>Typical Range:</strong> $2.00 - $10.00+ per visitor
-                </p>
-                <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                  High profit margins and customer lifetime value. Lower initial conversion rates but recurring revenue
-                  compounds value over time. Free trials increase conversion rates.
-                </p>
-              </div>
-
-              <div className="bg-neutral-100 dark:bg-neutral-800 rounded-lg p-6">
-                <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-4">Lead Generation</h3>
-                <p className="text-neutral-700 dark:text-neutral-300 mb-3">
-                  <strong>Typical Range:</strong> $1.00 - $5.00 per visitor
-                </p>
-                <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                  Value depends on lead quality, cost per lead, and conversion rate to paying customer. B2B often higher
-                  than B2C. Your sales team's close rate significantly impacts actual value.
-                </p>
-              </div>
-
-              <div className="bg-neutral-100 dark:bg-neutral-800 rounded-lg p-6">
-                <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-4">Affiliate / AdSense</h3>
-                <p className="text-neutral-700 dark:text-neutral-300 mb-3">
-                  <strong>Typical Range:</strong> $0.01 - $0.25 per visitor
-                </p>
-                <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                  Low CPM (cost per thousand impressions) from ad networks. High traffic volume needed. Value depends on
-                  content niche and audience quality. Finance/SaaS topics have higher CPM.
-                </p>
-              </div>
-
-              <div className="bg-neutral-100 dark:bg-neutral-800 rounded-lg p-6">
-                <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-4">Content / Publishing</h3>
-                <p className="text-neutral-700 dark:text-neutral-300 mb-3">
-                  <strong>Typical Range:</strong> $0.05 - $1.00 per visitor
-                </p>
-                <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                  Highly dependent on monetization model (ads, subscriptions, sponsorships). Niche audiences with high
-                  engagement earn more. Consistent, high-quality content builds value.
-                </p>
-              </div>
-
-              <div className="bg-neutral-100 dark:bg-neutral-800 rounded-lg p-6">
-                <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-4">
-                  Marketplace / Classifieds
-                </h3>
-                <p className="text-neutral-700 dark:text-neutral-300 mb-3">
-                  <strong>Typical Range:</strong> $0.10 - $2.00 per visitor
-                </p>
-                <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                  Value from transaction fees or listing fees. Higher traffic volume needed due to lower per-visitor
-                  monetization. Network effects increase value over time.
-                </p>
-              </div>
-            </div>
+            <ul className="space-y-2 text-neutral-700 dark:text-neutral-300 mb-6">
+              <li>
+                <strong>E-commerce - $0.50 - $3.00 per visitor:</strong> Higher values if selling premium products with high margins. Lower conversion rates but good AOV
+                drives value. Direct traffic and email often have higher value than social media.
+              </li>
+              <li>
+                <strong>SaaS / Subscriptions - $2.00 - $10.00+ per visitor:</strong> High profit margins and customer lifetime value. Lower initial conversion rates but recurring revenue
+                compounds value over time. Free trials increase conversion rates.
+              </li>
+              <li>
+                <strong>Lead Generation - $1.00 - $5.00 per visitor:</strong> Value depends on lead quality, cost per lead, and conversion rate to paying customer. B2B often higher
+                than B2C. Your sales team's close rate significantly impacts actual value.
+              </li>
+              <li>
+                <strong>Affiliate / AdSense - $0.01 - $0.25 per visitor:</strong> Low CPM (cost per thousand impressions) from ad networks. High traffic volume needed. Value depends on
+                content niche and audience quality. Finance/SaaS topics have higher CPM.
+              </li>
+              <li>
+                <strong>Content / Publishing - $0.05 - $1.00 per visitor:</strong> Highly dependent on monetization model (ads, subscriptions, sponsorships). Niche audiences with high
+                engagement earn more. Consistent, high-quality content builds value.
+              </li>
+              <li>
+                <strong>Marketplace / Classifieds - $0.10 - $2.00 per visitor:</strong> Value from transaction fees or listing fees. Higher traffic volume needed due to lower per-visitor
+                monetization. Network effects increase value over time.
+              </li>
+            </ul>
           </div>
 
           <RelatedTools currentToolHref="/tools/traffic-value-calculator" category="analytics" />

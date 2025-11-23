@@ -87,14 +87,6 @@ const tools = [
     category: "Analytics",
   },
   {
-    href: "/tools/ai-privacy-policy-generator",
-    icon: Sparkles,
-    title: "AI Privacy Policy Generator",
-    description:
-      "Generate a comprehensive, GDPR-compliant privacy policy using AI. Just describe your site and get a tailored policy instantly.",
-    category: "AI-Powered",
-  },
-  {
     href: "/tools/analytics-detector",
     icon: Search,
     title: "Analytics Platform Detector",

@@ -134,73 +134,51 @@ export default function PageSpeedCalculatorPage() {
         </div>
 
         {/* Educational Content */}
-        <div className="mb-16 prose prose-sm max-w-none dark:prose-invert">
-          <section className="mb-12">
-            <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4">Why Page Speed Matters</h2>
-            <p className="text-neutral-700 dark:text-neutral-300 mb-4">
-              Page speed is one of the most critical factors affecting user experience and business metrics. Every
-              millisecond counts—slow-loading pages lead to higher bounce rates, reduced engagement, and ultimately lost
-              revenue.
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-              <div className="p-4 bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700">
-                <h3 className="font-semibold text-neutral-900 dark:text-white mb-2">Impact on Conversions</h3>
-                <p className="text-sm text-neutral-700 dark:text-neutral-300">
-                  Research shows a direct correlation: every 1-second delay in page load time results in approximately
-                  7% loss in conversions. For e-commerce sites, this translates to thousands of dollars in lost revenue
-                  monthly.
-                </p>
-              </div>
-              <div className="p-4 bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700">
-                <h3 className="font-semibold text-neutral-900 dark:text-white mb-2">Google Core Web Vitals</h3>
-                <p className="text-sm text-neutral-700 dark:text-neutral-300">
-                  Google uses Core Web Vitals as ranking factors. Sites with poor page speed are penalized in search
-                  results, reducing organic visibility. LCP, FID, and CLS are critical metrics to monitor and optimize.
-                </p>
-              </div>
-            </div>
-          </section>
+        <div className="mb-16 prose prose-neutral dark:prose-invert max-w-none">
+          <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4">Why Page Speed Matters</h2>
+          <p className="text-neutral-700 dark:text-neutral-300 leading-relaxed mb-4">
+            Page speed is one of the most critical factors affecting user experience and business metrics. Every
+            millisecond counts—slow-loading pages lead to higher bounce rates, reduced engagement, and ultimately lost
+            revenue.
+          </p>
+          <ul className="space-y-2 text-neutral-700 dark:text-neutral-300 mb-6">
+            <li>
+              <strong>Impact on Conversions:</strong> Research shows a direct correlation: every 1-second delay in page
+              load time results in approximately 7% loss in conversions. For e-commerce sites, this translates to
+              thousands of dollars in lost revenue monthly.
+            </li>
+            <li>
+              <strong>Google Core Web Vitals:</strong> Google uses Core Web Vitals as ranking factors. Sites with poor
+              page speed are penalized in search results, reducing organic visibility. LCP, FID, and CLS are critical
+              metrics to monitor and optimize.
+            </li>
+          </ul>
 
-          <section className="mb-12">
-            <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
-              Page Speed Optimization Techniques
-            </h2>
-            <div className="space-y-3 text-neutral-700 dark:text-neutral-300">
-              <div className="flex gap-3">
-                <span className="font-semibold text-emerald-600 dark:text-emerald-400 min-w-fit">
-                  Image Optimization:
-                </span>
-                <span>
-                  Compress images, use modern formats (WebP), and implement lazy loading for below-the-fold content.
-                </span>
-              </div>
-              <div className="flex gap-3">
-                <span className="font-semibold text-emerald-600 dark:text-emerald-400 min-w-fit">
-                  Asset Minification:
-                </span>
-                <span>Minify CSS and JavaScript files to reduce file sizes and improve load times.</span>
-              </div>
-              <div className="flex gap-3">
-                <span className="font-semibold text-emerald-600 dark:text-emerald-400 min-w-fit">
-                  Caching Strategy:
-                </span>
-                <span>Enable browser caching and implement server-side caching to serve content faster.</span>
-              </div>
-              <div className="flex gap-3">
-                <span className="font-semibold text-emerald-600 dark:text-emerald-400 min-w-fit">
-                  Content Delivery:
-                </span>
-                <span>Use a CDN to serve content from servers geographically closer to your users.</span>
-              </div>
-              <div className="flex gap-3">
-                <span className="font-semibold text-emerald-600 dark:text-emerald-400 min-w-fit">Tool Selection:</span>
-                <span>
-                  Choose lightweight tools like Rybbit (3KB) instead of heavyweight analytics solutions that slow down
-                  your site.
-                </span>
-              </div>
-            </div>
-          </section>
+          <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4 mt-8">
+            Page Speed Optimization Techniques
+          </h2>
+          <ul className="space-y-2 text-neutral-700 dark:text-neutral-300 mb-6">
+            <li>
+              <strong>Image Optimization:</strong> Compress images, use modern formats (WebP), and implement lazy
+              loading for below-the-fold content.
+            </li>
+            <li>
+              <strong>Asset Minification:</strong> Minify CSS and JavaScript files to reduce file sizes and improve load
+              times.
+            </li>
+            <li>
+              <strong>Caching Strategy:</strong> Enable browser caching and implement server-side caching to serve
+              content faster.
+            </li>
+            <li>
+              <strong>Content Delivery:</strong> Use a CDN to serve content from servers geographically closer to your
+              users.
+            </li>
+            <li>
+              <strong>Tool Selection:</strong> Choose lightweight tools like Rybbit (3KB) instead of heavyweight
+              analytics solutions that slow down your site.
+            </li>
+          </ul>
         </div>
 
         {/* Interactive Calculator Component */}

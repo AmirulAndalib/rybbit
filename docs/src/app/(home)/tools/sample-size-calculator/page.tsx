@@ -126,7 +126,13 @@ export default function SampleSizeCalculatorPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       <div className="min-h-screen">
         <div className="max-w-4xl mx-auto px-6 py-20">
-          <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Tools", href: "/tools" }, { label: "Sample Size Calculator" }]} />
+          <Breadcrumbs
+            items={[
+              { label: "Home", href: "/" },
+              { label: "Tools", href: "/tools" },
+              { label: "Sample Size Calculator" },
+            ]}
+          />
           {/* Header */}
           <div className="mb-16">
             <div className="inline-block mb-4 px-4 py-1.5 bg-emerald-100 dark:bg-emerald-900/30 border border-emerald-200 dark:border-emerald-800 rounded-full">
@@ -147,287 +153,163 @@ export default function SampleSizeCalculatorPage() {
           </div>
 
           {/* Educational Content */}
-          <div className="mb-16 space-y-12">
-            <section>
-              <h2 className="text-3xl font-bold text-neutral-900 dark:text-white mb-4">What Is Sample Size?</h2>
-              <p className="text-lg text-neutral-700 dark:text-neutral-300 leading-relaxed mb-4">
-                Sample size is the number of visitors or observations needed in each variant (control and treatment) of
-                your A/B test to achieve statistical significance. It's a critical calculation that determines whether
-                your test results are reliable or just due to random chance.
-              </p>
-              <p className="text-lg text-neutral-700 dark:text-neutral-300 leading-relaxed">
-                Without proper sample size, you risk two costly mistakes: (1) declaring a "winning" variant that's
-                actually just lucky variation (Type I error), or (2) missing a real improvement because you didn't
-                collect enough data (Type II error). The correct sample size balances these risks based on your specific
-                test parameters.
-              </p>
-            </section>
+          <div className="mb-16 prose prose-neutral dark:prose-invert max-w-none">
+            <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4">What Is Sample Size?</h2>
+            <p className="text-neutral-700 dark:text-neutral-300 leading-relaxed mb-4">
+              Sample size is the number of visitors or observations needed in each variant (control and treatment) of
+              your A/B test to achieve statistical significance. It's a critical calculation that determines whether
+              your test results are reliable or just due to random chance.
+            </p>
+            <p className="text-neutral-700 dark:text-neutral-300 leading-relaxed mb-4">
+              Without proper sample size, you risk two costly mistakes: (1) declaring a "winning" variant that's
+              actually just lucky variation (Type I error), or (2) missing a real improvement because you didn't collect
+              enough data (Type II error). The correct sample size balances these risks based on your specific test
+              parameters.
+            </p>
 
-            <section>
-              <h2 className="text-3xl font-bold text-neutral-900 dark:text-white mb-4">
-                Why Sample Size Matters for A/B Tests
-              </h2>
-              <div className="space-y-3">
-                <div className="p-4 bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-900 rounded-lg">
-                  <h3 className="font-semibold text-emerald-900 dark:text-emerald-300 mb-2">Avoid False Positives</h3>
-                  <p className="text-emerald-800 dark:text-emerald-200">
-                    Adequate sample size reduces the risk of declaring a winner when the difference is just random
-                    fluctuation. At 95% confidence, you accept only a 5% chance of being wrong.
-                  </p>
-                </div>
-                <div className="p-4 bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-900 rounded-lg">
-                  <h3 className="font-semibold text-blue-900 dark:text-blue-300 mb-2">Detect Real Improvements</h3>
-                  <p className="text-blue-800 dark:text-blue-200">
-                    Proper power (typically 80%) ensures you have a high probability of catching real improvements when
-                    they exist, avoiding missed opportunities.
-                  </p>
-                </div>
-                <div className="p-4 bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-900 rounded-lg">
-                  <h3 className="font-semibold text-purple-900 dark:text-purple-300 mb-2">Business Confidence</h3>
-                  <p className="text-purple-800 dark:text-purple-200">
-                    Statistically significant results give you confidence to implement changes with real revenue impact,
-                    rather than relying on gut feeling.
-                  </p>
-                </div>
-                <div className="p-4 bg-orange-50 dark:bg-orange-950/20 border border-orange-200 dark:border-orange-900 rounded-lg">
-                  <h3 className="font-semibold text-orange-900 dark:text-orange-300 mb-2">
-                    Efficient Resource Allocation
-                  </h3>
-                  <p className="text-orange-800 dark:text-orange-200">
-                    Knowing your sample size upfront prevents wasting time and resources running tests longer than
-                    needed or stopping early out of impatience.
-                  </p>
-                </div>
-              </div>
-            </section>
+            <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4 mt-8">
+              Why Sample Size Matters for A/B Tests
+            </h2>
+            <ul className="space-y-2 text-neutral-700 dark:text-neutral-300 mb-6">
+              <li>
+                <strong>Avoid False Positives:</strong> Adequate sample size reduces the risk of declaring a winner when
+                the difference is just random fluctuation. At 95% confidence, you accept only a 5% chance of being
+                wrong.
+              </li>
+              <li>
+                <strong>Detect Real Improvements:</strong> Proper power (typically 80%) ensures you have a high
+                probability of catching real improvements when they exist, avoiding missed opportunities.
+              </li>
+              <li>
+                <strong>Business Confidence:</strong> Statistically significant results give you confidence to implement
+                changes with real revenue impact, rather than relying on gut feeling.
+              </li>
+              <li>
+                <strong>Efficient Resource Allocation:</strong> Knowing your sample size upfront prevents wasting time
+                and resources running tests longer than needed or stopping early out of impatience.
+              </li>
+            </ul>
 
-            <section>
-              <h2 className="text-3xl font-bold text-neutral-900 dark:text-white mb-4">
-                Understanding Statistical Significance
-              </h2>
-              <p className="text-lg text-neutral-700 dark:text-neutral-300 leading-relaxed mb-4">
-                Statistical significance answers the question: "Is this result real, or just random chance?" A result is
-                statistically significant when the probability of observing it by chance alone (if there were truly no
-                difference) is very small - typically less than 5%.
-              </p>
-              <div className="p-6 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-lg space-y-4">
-                <div>
-                  <h3 className="font-semibold text-neutral-900 dark:text-white mb-2">P-Value</h3>
-                  <p className="text-neutral-700 dark:text-neutral-300">
-                    The p-value is the probability of seeing your results if there's actually no difference. A p-value
-                    of 0.03 (3%) means there's only a 3% chance this difference occurred randomly. With 95% confidence,
-                    you need p &lt; 0.05.
-                  </p>
-                </div>
-                <div>
-                  <h3 className="font-semibold text-neutral-900 dark:text-white mb-2">Confidence Interval</h3>
-                  <p className="text-neutral-700 dark:text-neutral-300">
-                    A 95% confidence interval around your observed effect means if you repeated the test 100 times, the
-                    true effect would fall within this range 95 times. Wider intervals indicate less certainty; narrower
-                    ones indicate more precision.
-                  </p>
-                </div>
-                <div>
-                  <h3 className="font-semibold text-neutral-900 dark:text-white mb-2">
-                    Statistical vs. Practical Significance
-                  </h3>
-                  <p className="text-neutral-700 dark:text-neutral-300">
-                    A result can be statistically significant (real difference exists) but practically insignificant
-                    (too small to matter). Conversely, a practically significant result might not reach statistical
-                    significance without enough data. Both matter for good business decisions.
-                  </p>
-                </div>
-              </div>
-            </section>
+            <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4 mt-8">
+              Understanding Statistical Significance
+            </h2>
+            <p className="text-neutral-700 dark:text-neutral-300 leading-relaxed mb-4">
+              Statistical significance answers the question: "Is this result real, or just random chance?" A result is
+              statistically significant when the probability of observing it by chance alone (if there were truly no
+              difference) is very small - typically less than 5%.
+            </p>
+            <ul className="space-y-2 text-neutral-700 dark:text-neutral-300 mb-6">
+              <li>
+                <strong>P-Value:</strong> The p-value is the probability of seeing your results if there's actually no
+                difference. A p-value of 0.03 (3%) means there's only a 3% chance this difference occurred randomly.
+                With 95% confidence, you need p &lt; 0.05.
+              </li>
+              <li>
+                <strong>Confidence Interval:</strong> A 95% confidence interval around your observed effect means if you
+                repeated the test 100 times, the true effect would fall within this range 95 times. Wider intervals
+                indicate less certainty; narrower ones indicate more precision.
+              </li>
+              <li>
+                <strong>Statistical vs. Practical Significance:</strong> A result can be statistically significant (real
+                difference exists) but practically insignificant (too small to matter). Conversely, a practically
+                significant result might not reach statistical significance without enough data. Both matter for good
+                business decisions.
+              </li>
+            </ul>
 
-            <section>
-              <h2 className="text-3xl font-bold text-neutral-900 dark:text-white mb-4">
-                Confidence Levels and Statistical Power
-              </h2>
-              <div className="space-y-6">
-                <div>
-                  <h3 className="text-xl font-semibold text-neutral-900 dark:text-white mb-4">
-                    Confidence Level (Type I Error Protection)
-                  </h3>
-                  <div className="space-y-3">
-                    <div className="p-4 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-lg">
-                      <div className="flex items-start gap-3">
-                        <div className="text-emerald-600 dark:text-emerald-400 font-bold text-lg">90%</div>
-                        <div>
-                          <p className="text-neutral-700 dark:text-neutral-300">
-                            <strong>10% false positive risk:</strong> More lenient, detects effects with fewer visitors.
-                            Use when speed matters and you can tolerate higher false positive risk.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="p-4 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-lg">
-                      <div className="flex items-start gap-3">
-                        <div className="text-emerald-600 dark:text-emerald-400 font-bold text-lg">95%</div>
-                        <div>
-                          <p className="text-neutral-700 dark:text-neutral-300">
-                            <strong>5% false positive risk:</strong> Industry standard. Recommended for most A/B tests.
-                            Provides good balance between safety and efficiency.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="p-4 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-lg">
-                      <div className="flex items-start gap-3">
-                        <div className="text-emerald-600 dark:text-emerald-400 font-bold text-lg">99%</div>
-                        <div>
-                          <p className="text-neutral-700 dark:text-neutral-300">
-                            <strong>1% false positive risk:</strong> Very strict, requires more visitors. Use only when
-                            false positives are extremely costly.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4 mt-8">
+              Confidence Levels and Statistical Power
+            </h2>
 
-                <div>
-                  <h3 className="text-xl font-semibold text-neutral-900 dark:text-white mb-4">
-                    Statistical Power (Type II Error Protection)
-                  </h3>
-                  <div className="space-y-3">
-                    <div className="p-4 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-lg">
-                      <div className="flex items-start gap-3">
-                        <div className="text-blue-600 dark:text-blue-400 font-bold text-lg">80%</div>
-                        <div>
-                          <p className="text-neutral-700 dark:text-neutral-300">
-                            <strong>20% false negative risk:</strong> Standard in A/B testing. Recommended for most
-                            tests. Good balance of detecting real effects while managing sample size.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="p-4 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-lg">
-                      <div className="flex items-start gap-3">
-                        <div className="text-blue-600 dark:text-blue-400 font-bold text-lg">90%</div>
-                        <div>
-                          <p className="text-neutral-700 dark:text-neutral-300">
-                            <strong>10% false negative risk:</strong> More strict, requires more visitors. Use when
-                            missing improvements is very costly.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
+            <h3 className="text-xl font-semibold text-neutral-900 dark:text-white mb-3 mt-6">
+              Confidence Level (Type I Error Protection)
+            </h3>
+            <ul className="space-y-2 text-neutral-700 dark:text-neutral-300 mb-6">
+              <li>
+                <strong>90% - 10% false positive risk:</strong> More lenient, detects effects with fewer visitors. Use
+                when speed matters and you can tolerate higher false positive risk.
+              </li>
+              <li>
+                <strong>95% - 5% false positive risk:</strong> Industry standard. Recommended for most A/B tests.
+                Provides good balance between safety and efficiency.
+              </li>
+              <li>
+                <strong>99% - 1% false positive risk:</strong> Very strict, requires more visitors. Use only when false
+                positives are extremely costly.
+              </li>
+            </ul>
 
-            <section>
-              <h2 className="text-3xl font-bold text-neutral-900 dark:text-white mb-4">
-                Minimum Detectable Effect (MDE)
-              </h2>
-              <p className="text-lg text-neutral-700 dark:text-neutral-300 leading-relaxed mb-4">
-                Minimum detectable effect is the smallest change in conversion rate (or other metric) that your test is
-                powered to detect reliably. It's expressed as an absolute percentage point change.
-              </p>
-              <div className="overflow-x-auto">
-                <table className="w-full text-sm">
-                  <thead>
-                    <tr className="border-b border-neutral-300 dark:border-neutral-700 bg-neutral-100 dark:bg-neutral-800">
-                      <th className="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-white">MDE</th>
-                      <th className="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-white">
-                        Baseline Example
-                      </th>
-                      <th className="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-white">
-                        Sample Size Impact
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr className="border-b border-neutral-200 dark:border-neutral-700">
-                      <td className="px-4 py-3 text-neutral-700 dark:text-neutral-300">0.1%</td>
-                      <td className="px-4 py-3 text-neutral-700 dark:text-neutral-300">2.5% → 2.6% conversion</td>
-                      <td className="px-4 py-3 text-neutral-700 dark:text-neutral-300">
-                        Very large (hundreds of thousands)
-                      </td>
-                    </tr>
-                    <tr className="border-b border-neutral-200 dark:border-neutral-700">
-                      <td className="px-4 py-3 text-neutral-700 dark:text-neutral-300">0.5%</td>
-                      <td className="px-4 py-3 text-neutral-700 dark:text-neutral-300">2.5% → 3.0% conversion</td>
-                      <td className="px-4 py-3 text-neutral-700 dark:text-neutral-300">Large (tens of thousands)</td>
-                    </tr>
-                    <tr className="border-b border-neutral-200 dark:border-neutral-700">
-                      <td className="px-4 py-3 text-neutral-700 dark:text-neutral-300">1.0%</td>
-                      <td className="px-4 py-3 text-neutral-700 dark:text-neutral-300">2.5% → 3.5% conversion</td>
-                      <td className="px-4 py-3 text-neutral-700 dark:text-neutral-300">Moderate (thousands)</td>
-                    </tr>
-                    <tr>
-                      <td className="px-4 py-3 text-neutral-700 dark:text-neutral-300">5.0%</td>
-                      <td className="px-4 py-3 text-neutral-700 dark:text-neutral-300">2.5% → 7.5% conversion</td>
-                      <td className="px-4 py-3 text-neutral-700 dark:text-neutral-300">Small (hundreds)</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-4">
-                Smaller MDEs require exponentially larger sample sizes. Define your MDE based on business impact: what's
-                the smallest improvement worth implementing? If a 0.5% improvement would save $100K/year, that's worth
-                detecting; if a 0.1% improvement would only save $5K, you might not need to detect it.
-              </p>
-            </section>
+            <h3 className="text-xl font-semibold text-neutral-900 dark:text-white mb-3 mt-6">
+              Statistical Power (Type II Error Protection)
+            </h3>
+            <ul className="space-y-2 text-neutral-700 dark:text-neutral-300 mb-6">
+              <li>
+                <strong>80% - 20% false negative risk:</strong> Standard in A/B testing. Recommended for most tests.
+                Good balance of detecting real effects while managing sample size.
+              </li>
+              <li>
+                <strong>90% - 10% false negative risk:</strong> More strict, requires more visitors. Use when missing
+                improvements is very costly.
+              </li>
+            </ul>
 
-            <section>
-              <h2 className="text-3xl font-bold text-neutral-900 dark:text-white mb-4">How to Use This Calculator</h2>
-              <div className="space-y-4">
-                <div className="p-6 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-lg">
-                  <h3 className="font-semibold text-lg text-neutral-900 dark:text-white mb-2">
-                    1. Enter Your Baseline Conversion Rate
-                  </h3>
-                  <p className="text-neutral-700 dark:text-neutral-300">
-                    Get this from your analytics (Google Analytics, Rybbit, etc.). If 100 visitors and 3 convert, your
-                    baseline is 3%. Use your most recent representative data.
-                  </p>
-                </div>
+            <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4 mt-8">
+              Minimum Detectable Effect (MDE)
+            </h2>
+            <p className="text-neutral-700 dark:text-neutral-300 leading-relaxed mb-4">
+              Minimum detectable effect is the smallest change in conversion rate (or other metric) that your test is
+              powered to detect reliably. It's expressed as an absolute percentage point change.
+            </p>
+            <ul className="space-y-2 text-neutral-700 dark:text-neutral-300 mb-6">
+              <li>
+                <strong>0.1% MDE:</strong> 2.5% → 2.6% conversion - Very large sample size (hundreds of thousands)
+              </li>
+              <li>
+                <strong>0.5% MDE:</strong> 2.5% → 3.0% conversion - Large sample size (tens of thousands)
+              </li>
+              <li>
+                <strong>1.0% MDE:</strong> 2.5% → 3.5% conversion - Moderate sample size (thousands)
+              </li>
+              <li>
+                <strong>5.0% MDE:</strong> 2.5% → 7.5% conversion - Small sample size (hundreds)
+              </li>
+            </ul>
+            <p className="text-neutral-700 dark:text-neutral-300 mb-6">
+              Smaller MDEs require exponentially larger sample sizes. Define your MDE based on business impact: what's
+              the smallest improvement worth implementing? If a 0.5% improvement would save $100K/year, that's worth
+              detecting; if a 0.1% improvement would only save $5K, you might not need to detect it.
+            </p>
 
-                <div className="p-6 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-lg">
-                  <h3 className="font-semibold text-lg text-neutral-900 dark:text-white mb-2">
-                    2. Define Your Minimum Detectable Effect
-                  </h3>
-                  <p className="text-neutral-700 dark:text-neutral-300">
-                    What's the smallest improvement worth detecting? If your baseline is 2%, a 0.5% MDE means you want
-                    to reliably detect moving to 2.5% or higher. Think about business impact, not just percentage
-                    points.
-                  </p>
-                </div>
-
-                <div className="p-6 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-lg">
-                  <h3 className="font-semibold text-lg text-neutral-900 dark:text-white mb-2">
-                    3. Choose Your Confidence Level (Default: 95%)
-                  </h3>
-                  <p className="text-neutral-700 dark:text-neutral-300">
-                    95% is standard and recommended. This means you accept a 5% chance that your result is a false
-                    positive. Only use 90% if time is critical, or 99% if false positives are extremely costly.
-                  </p>
-                </div>
-
-                <div className="p-6 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-lg">
-                  <h3 className="font-semibold text-lg text-neutral-900 dark:text-white mb-2">
-                    4. Select Your Statistical Power (Default: 80%)
-                  </h3>
-                  <p className="text-neutral-700 dark:text-neutral-300">
-                    80% power is standard, meaning you accept a 20% chance of missing a real improvement. Use 90% if
-                    missing improvements is very costly (requires larger sample size).
-                  </p>
-                </div>
-
-                <div className="p-6 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-lg">
-                  <h3 className="font-semibold text-lg text-neutral-900 dark:text-white mb-2">
-                    5. Calculate and Plan Your Test
-                  </h3>
-                  <p className="text-neutral-700 dark:text-neutral-300">
-                    The calculator shows the required sample size per variant, total visitors needed, and estimated test
-                    duration. Use Rybbit Analytics to monitor progress and track when you reach statistical
-                    significance.
-                  </p>
-                </div>
-              </div>
-            </section>
+            <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4 mt-8">
+              How to Use This Calculator
+            </h2>
+            <ol className="space-y-2 text-neutral-700 dark:text-neutral-300 mb-6">
+              <li>
+                <strong>Enter Your Baseline Conversion Rate:</strong> Get this from your analytics (Google Analytics,
+                Rybbit, etc.). If 100 visitors and 3 convert, your baseline is 3%. Use your most recent representative
+                data.
+              </li>
+              <li>
+                <strong>Define Your Minimum Detectable Effect:</strong> What's the smallest improvement worth detecting?
+                If your baseline is 2%, a 0.5% MDE means you want to reliably detect moving to 2.5% or higher. Think
+                about business impact, not just percentage points.
+              </li>
+              <li>
+                <strong>Choose Your Confidence Level (Default: 95%):</strong> 95% is standard and recommended. This
+                means you accept a 5% chance that your result is a false positive. Only use 90% if time is critical, or
+                99% if false positives are extremely costly.
+              </li>
+              <li>
+                <strong>Select Your Statistical Power (Default: 80%):</strong> 80% power is standard, meaning you accept
+                a 20% chance of missing a real improvement. Use 90% if missing improvements is very costly (requires
+                larger sample size).
+              </li>
+              <li>
+                <strong>Calculate and Plan Your Test:</strong> The calculator shows the required sample size per
+                variant, total visitors needed, and estimated test duration. Use Rybbit Analytics to monitor progress
+                and track when you reach statistical significance.
+              </li>
+            </ol>
           </div>
 
           {/* FAQ Section */}

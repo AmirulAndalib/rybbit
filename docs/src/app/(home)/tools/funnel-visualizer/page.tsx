@@ -137,193 +137,129 @@ export default function FunnelVisualizerPage() {
           </div>
 
           {/* Educational Content Section */}
-          <div className="mb-16 space-y-12">
-            {/* What is a Conversion Funnel */}
-            <section>
-              <h2 className="text-3xl font-bold text-neutral-900 dark:text-white mb-4">What is a Conversion Funnel?</h2>
-              <div className="space-y-4 text-neutral-700 dark:text-neutral-300">
-                <p>
-                  A conversion funnel visualizes the customer journey from initial awareness to final conversion. Just
-                  like a physical funnel narrows toward the bottom, a conversion funnel shows how the number of users
-                  decreases at each step of your sales or signup process.
-                </p>
-                <p>
-                  Understanding your conversion funnel is critical for business growth because it reveals where
-                  potential customers are dropping off. By identifying and fixing these bottlenecks, you can
-                  significantly improve your overall conversion rate without increasing marketing spend.
-                </p>
-                <div className="bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800 rounded-lg p-6 mt-6">
-                  <h3 className="font-semibold text-emerald-900 dark:text-emerald-200 mb-3">Why Funnels Matter</h3>
-                  <ul className="space-y-2 text-sm">
-                    <li>• Reveal exactly where customers are leaving</li>
-                    <li>• Help prioritize optimization efforts on high-impact areas</li>
-                    <li>• Enable data-driven decision making about your funnel</li>
-                    <li>• Track progress as you implement improvements</li>
-                    <li>• Support ROI calculations for marketing initiatives</li>
-                  </ul>
-                </div>
-              </div>
-            </section>
+          <div className="mb-16 prose prose-neutral dark:prose-invert max-w-none">
+            <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4">What is a Conversion Funnel?</h2>
+            <p className="text-neutral-700 dark:text-neutral-300 leading-relaxed mb-4">
+              A conversion funnel visualizes the customer journey from initial awareness to final conversion. Just
+              like a physical funnel narrows toward the bottom, a conversion funnel shows how the number of users
+              decreases at each step of your sales or signup process.
+            </p>
+            <p className="text-neutral-700 dark:text-neutral-300 leading-relaxed mb-4">
+              Understanding your conversion funnel is critical for business growth because it reveals where
+              potential customers are dropping off. By identifying and fixing these bottlenecks, you can
+              significantly improve your overall conversion rate without increasing marketing spend.
+            </p>
 
-            {/* Funnel Stages */}
-            <section>
-              <h2 className="text-3xl font-bold text-neutral-900 dark:text-white mb-4">Understanding Funnel Stages</h2>
-              <div className="space-y-4 text-neutral-700 dark:text-neutral-300">
-                <p>
-                  While funnels vary by business model, most follow a similar progression from awareness to conversion.
-                  Here are the common stages:
-                </p>
-                <div className="grid md:grid-cols-2 gap-4 mt-6">
-                  <div className="bg-neutral-100/50 dark:bg-neutral-800/30 rounded-lg p-4">
-                    <h3 className="font-semibold text-neutral-900 dark:text-white mb-2">Awareness</h3>
-                    <p className="text-sm">
-                      Users discover your brand through ads, content, or word-of-mouth. This is typically measured by
-                      landing page visits or impressions.
-                    </p>
-                  </div>
-                  <div className="bg-neutral-100/50 dark:bg-neutral-800/30 rounded-lg p-4">
-                    <h3 className="font-semibold text-neutral-900 dark:text-white mb-2">Consideration</h3>
-                    <p className="text-sm">
-                      Interested users explore your product or service by viewing product pages, demos, or reading
-                      reviews.
-                    </p>
-                  </div>
-                  <div className="bg-neutral-100/50 dark:bg-neutral-800/30 rounded-lg p-4">
-                    <h3 className="font-semibold text-neutral-900 dark:text-white mb-2">Evaluation</h3>
-                    <p className="text-sm">
-                      Users actively consider the purchase by adding items to cart, requesting quotes, or starting free
-                      trials.
-                    </p>
-                  </div>
-                  <div className="bg-neutral-100/50 dark:bg-neutral-800/30 rounded-lg p-4">
-                    <h3 className="font-semibold text-neutral-900 dark:text-white mb-2">Decision</h3>
-                    <p className="text-sm">
-                      Users commit to action by starting checkout, completing signup forms, or requesting more
-                      information.
-                    </p>
-                  </div>
-                  <div className="bg-neutral-100/50 dark:bg-neutral-800/30 rounded-lg p-4">
-                    <h3 className="font-semibold text-neutral-900 dark:text-white mb-2">Conversion</h3>
-                    <p className="text-sm">
-                      Users complete the desired action—purchase, signup, trial activation, or lead submission.
-                    </p>
-                  </div>
-                  <div className="bg-neutral-100/50 dark:bg-neutral-800/30 rounded-lg p-4">
-                    <h3 className="font-semibold text-neutral-900 dark:text-white mb-2">Retention</h3>
-                    <p className="text-sm">
-                      Users continue engaging (repeat purchases, retention rate, customer lifetime value).
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </section>
+            <h3 className="text-xl font-semibold text-neutral-900 dark:text-white mb-3 mt-6">Why Funnels Matter</h3>
+            <ul className="space-y-2 text-neutral-700 dark:text-neutral-300 mb-6">
+              <li>Reveal exactly where customers are leaving</li>
+              <li>Help prioritize optimization efforts on high-impact areas</li>
+              <li>Enable data-driven decision making about your funnel</li>
+              <li>Track progress as you implement improvements</li>
+              <li>Support ROI calculations for marketing initiatives</li>
+            </ul>
 
-            {/* Analyzing Drop-offs */}
-            <section>
-              <h2 className="text-3xl font-bold text-neutral-900 dark:text-white mb-4">
-                How to Analyze Funnel Drop-offs
-              </h2>
-              <div className="space-y-4 text-neutral-700 dark:text-neutral-300">
-                <p>
-                  Drop-offs occur when users don't progress to the next step. Analyzing where and why users drop off is
-                  the key to optimization. Here's a systematic approach:
-                </p>
-                <div className="space-y-3 mt-6">
-                  <div className="bg-neutral-100/50 dark:bg-neutral-800/30 rounded-lg p-4">
-                    <h3 className="font-semibold text-neutral-900 dark:text-white mb-2">
-                      1. Calculate Drop-off Percentages
-                    </h3>
-                    <p className="text-sm">
-                      For each step, calculate what percentage of users from the previous step dropped off. A 50% drop
-                      from step 1 to 2 is a major red flag.
-                    </p>
-                  </div>
-                  <div className="bg-neutral-100/50 dark:bg-neutral-800/30 rounded-lg p-4">
-                    <h3 className="font-semibold text-neutral-900 dark:text-white mb-2">
-                      2. Identify the Biggest Bottleneck
-                    </h3>
-                    <p className="text-sm">
-                      Focus on the step with the largest absolute drop (most users lost). This is usually your
-                      highest-impact optimization opportunity.
-                    </p>
-                  </div>
-                  <div className="bg-neutral-100/50 dark:bg-neutral-800/30 rounded-lg p-4">
-                    <h3 className="font-semibold text-neutral-900 dark:text-white mb-2">
-                      3. Consider External Factors
-                    </h3>
-                    <p className="text-sm">
-                      Evaluate traffic quality, targeting, seasonality, device type, and traffic source. High drop-offs
-                      might indicate poor audience match, not a product issue.
-                    </p>
-                  </div>
-                  <div className="bg-neutral-100/50 dark:bg-neutral-800/30 rounded-lg p-4">
-                    <h3 className="font-semibold text-neutral-900 dark:text-white mb-2">4. Hypothesize Root Causes</h3>
-                    <p className="text-sm">
-                      Use analytics, user testing, surveys, and session recordings to understand why users drop off. Is
-                      it friction, unclear messaging, trust issues, or pricing?
-                    </p>
-                  </div>
-                  <div className="bg-neutral-100/50 dark:bg-neutral-800/30 rounded-lg p-4">
-                    <h3 className="font-semibold text-neutral-900 dark:text-white mb-2">5. Test Improvements</h3>
-                    <p className="text-sm">
-                      Implement targeted fixes (form simplification, page speed improvements, clearer CTAs) and measure
-                      the impact on your funnel conversion rate.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </section>
+            <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4 mt-8">Understanding Funnel Stages</h2>
+            <p className="text-neutral-700 dark:text-neutral-300 leading-relaxed mb-4">
+              While funnels vary by business model, most follow a similar progression from awareness to conversion.
+              Here are the common stages:
+            </p>
+            <ul className="space-y-2 text-neutral-700 dark:text-neutral-300 mb-6">
+              <li>
+                <strong>Awareness:</strong> Users discover your brand through ads, content, or word-of-mouth. This is
+                typically measured by landing page visits or impressions.
+              </li>
+              <li>
+                <strong>Consideration:</strong> Interested users explore your product or service by viewing product
+                pages, demos, or reading reviews.
+              </li>
+              <li>
+                <strong>Evaluation:</strong> Users actively consider the purchase by adding items to cart, requesting
+                quotes, or starting free trials.
+              </li>
+              <li>
+                <strong>Decision:</strong> Users commit to action by starting checkout, completing signup forms, or
+                requesting more information.
+              </li>
+              <li>
+                <strong>Conversion:</strong> Users complete the desired action—purchase, signup, trial activation, or
+                lead submission.
+              </li>
+              <li>
+                <strong>Retention:</strong> Users continue engaging (repeat purchases, retention rate, customer lifetime
+                value).
+              </li>
+            </ul>
 
-            {/* Optimization Strategies */}
-            <section>
-              <h2 className="text-3xl font-bold text-neutral-900 dark:text-white mb-4">
-                Funnel Optimization Strategies
-              </h2>
-              <div className="space-y-4 text-neutral-700 dark:text-neutral-300">
-                <p>
-                  Once you've identified drop-off points, here are proven strategies to improve each stage of your
-                  funnel:
-                </p>
-                <div className="grid md:grid-cols-2 gap-4 mt-6">
-                  <div className="bg-neutral-100/50 dark:bg-neutral-800/30 rounded-lg p-4">
-                    <h3 className="font-semibold text-neutral-900 dark:text-white mb-2">Awareness Stage</h3>
-                    <ul className="text-sm space-y-1">
-                      <li>• Target high-intent keywords and audiences</li>
-                      <li>• Improve ad creative and messaging relevance</li>
-                      <li>• Ensure traffic sources align with audience quality</li>
-                      <li>• Test different channel mix</li>
-                    </ul>
-                  </div>
-                  <div className="bg-neutral-100/50 dark:bg-neutral-800/30 rounded-lg p-4">
-                    <h3 className="font-semibold text-neutral-900 dark:text-white mb-2">Consideration Stage</h3>
-                    <ul className="text-sm space-y-1">
-                      <li>• Improve page load speed</li>
-                      <li>• Clarify value proposition above the fold</li>
-                      <li>• Add product images, videos, and demos</li>
-                      <li>• Include social proof and testimonials</li>
-                    </ul>
-                  </div>
-                  <div className="bg-neutral-100/50 dark:bg-neutral-800/30 rounded-lg p-4">
-                    <h3 className="font-semibold text-neutral-900 dark:text-white mb-2">Evaluation Stage</h3>
-                    <ul className="text-sm space-y-1">
-                      <li>• Make pricing transparent and competitive</li>
-                      <li>• Add comparison tables and ROI calculators</li>
-                      <li>• Offer risk-free trials or guarantees</li>
-                      <li>• Provide detailed feature documentation</li>
-                    </ul>
-                  </div>
-                  <div className="bg-neutral-100/50 dark:bg-neutral-800/30 rounded-lg p-4">
-                    <h3 className="font-semibold text-neutral-900 dark:text-white mb-2">Decision Stage</h3>
-                    <ul className="text-sm space-y-1">
-                      <li>• Simplify checkout (fewer form fields)</li>
-                      <li>• Show security badges and trust signals</li>
-                      <li>• Offer multiple payment options</li>
-                      <li>• Reduce required steps to purchase</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </section>
+            <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4 mt-8">
+              How to Analyze Funnel Drop-offs
+            </h2>
+            <p className="text-neutral-700 dark:text-neutral-300 leading-relaxed mb-4">
+              Drop-offs occur when users don't progress to the next step. Analyzing where and why users drop off is
+              the key to optimization. Here's a systematic approach:
+            </p>
+            <ol className="space-y-2 text-neutral-700 dark:text-neutral-300 mb-6">
+              <li>
+                <strong>Calculate Drop-off Percentages:</strong> For each step, calculate what percentage of users from
+                the previous step dropped off. A 50% drop from step 1 to 2 is a major red flag.
+              </li>
+              <li>
+                <strong>Identify the Biggest Bottleneck:</strong> Focus on the step with the largest absolute drop (most
+                users lost). This is usually your highest-impact optimization opportunity.
+              </li>
+              <li>
+                <strong>Consider External Factors:</strong> Evaluate traffic quality, targeting, seasonality, device
+                type, and traffic source. High drop-offs might indicate poor audience match, not a product issue.
+              </li>
+              <li>
+                <strong>Hypothesize Root Causes:</strong> Use analytics, user testing, surveys, and session recordings to
+                understand why users drop off. Is it friction, unclear messaging, trust issues, or pricing?
+              </li>
+              <li>
+                <strong>Test Improvements:</strong> Implement targeted fixes (form simplification, page speed
+                improvements, clearer CTAs) and measure the impact on your funnel conversion rate.
+              </li>
+            </ol>
+
+            <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4 mt-8">
+              Funnel Optimization Strategies
+            </h2>
+            <p className="text-neutral-700 dark:text-neutral-300 leading-relaxed mb-4">
+              Once you've identified drop-off points, here are proven strategies to improve each stage of your
+              funnel:
+            </p>
+
+            <h3 className="text-xl font-semibold text-neutral-900 dark:text-white mb-3 mt-6">Awareness Stage</h3>
+            <ul className="space-y-2 text-neutral-700 dark:text-neutral-300 mb-6">
+              <li>Target high-intent keywords and audiences</li>
+              <li>Improve ad creative and messaging relevance</li>
+              <li>Ensure traffic sources align with audience quality</li>
+              <li>Test different channel mix</li>
+            </ul>
+
+            <h3 className="text-xl font-semibold text-neutral-900 dark:text-white mb-3 mt-6">Consideration Stage</h3>
+            <ul className="space-y-2 text-neutral-700 dark:text-neutral-300 mb-6">
+              <li>Improve page load speed</li>
+              <li>Clarify value proposition above the fold</li>
+              <li>Add product images, videos, and demos</li>
+              <li>Include social proof and testimonials</li>
+            </ul>
+
+            <h3 className="text-xl font-semibold text-neutral-900 dark:text-white mb-3 mt-6">Evaluation Stage</h3>
+            <ul className="space-y-2 text-neutral-700 dark:text-neutral-300 mb-6">
+              <li>Make pricing transparent and competitive</li>
+              <li>Add comparison tables and ROI calculators</li>
+              <li>Offer risk-free trials or guarantees</li>
+              <li>Provide detailed feature documentation</li>
+            </ul>
+
+            <h3 className="text-xl font-semibold text-neutral-900 dark:text-white mb-3 mt-6">Decision Stage</h3>
+            <ul className="space-y-2 text-neutral-700 dark:text-neutral-300 mb-6">
+              <li>Simplify checkout (fewer form fields)</li>
+              <li>Show security badges and trust signals</li>
+              <li>Offer multiple payment options</li>
+              <li>Reduce required steps to purchase</li>
+            </ul>
           </div>
 
           {/* FAQ Section */}

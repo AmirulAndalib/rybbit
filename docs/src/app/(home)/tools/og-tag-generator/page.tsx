@@ -140,257 +140,144 @@ export default function OGTagGeneratorPage() {
           </div>
 
           {/* Educational Content */}
-          <div className="mb-16 space-y-12">
-            <section>
-              <h2 className="text-3xl font-bold text-neutral-900 dark:text-white mb-4">What Are Open Graph Tags?</h2>
-              <p className="text-lg text-neutral-700 dark:text-neutral-300 leading-relaxed mb-4">
-                Open Graph (OG) tags are meta tags placed in the HTML head of your web pages that control how your
-                content appears when shared on social media platforms. Developed by Facebook, the Open Graph protocol
-                works across Facebook, LinkedIn, Twitter, Pinterest, and many other social networks.
-              </p>
-              <p className="text-lg text-neutral-700 dark:text-neutral-300 leading-relaxed">
-                When someone shares your link on social media, the platform's crawler reads your OG tags to determine
-                what preview to display: the title, description, image, and content type. Without proper OG tags, social
-                platforms make their best guess by extracting text and images from your page, often resulting in
-                unattractive or irrelevant previews that discourage clicks.
-              </p>
-            </section>
+          <div className="mb-16 prose prose-neutral dark:prose-invert max-w-none">
+            <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4">What Are Open Graph Tags?</h2>
+            <p className="text-neutral-700 dark:text-neutral-300 leading-relaxed mb-4">
+              Open Graph (OG) tags are meta tags placed in the HTML head of your web pages that control how your
+              content appears when shared on social media platforms. Developed by Facebook, the Open Graph protocol
+              works across Facebook, LinkedIn, Twitter, Pinterest, and many other social networks.
+            </p>
+            <p className="text-neutral-700 dark:text-neutral-300 leading-relaxed mb-4">
+              When someone shares your link on social media, the platform's crawler reads your OG tags to determine
+              what preview to display: the title, description, image, and content type. Without proper OG tags, social
+              platforms make their best guess by extracting text and images from your page, often resulting in
+              unattractive or irrelevant previews that discourage clicks.
+            </p>
 
-            <section>
-              <h2 className="text-3xl font-bold text-neutral-900 dark:text-white mb-4">
-                Why Open Graph Tags Matter for Social Sharing
-              </h2>
-              <div className="space-y-3">
-                <div className="p-4 bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-900 rounded-lg">
-                  <h3 className="font-semibold text-emerald-900 dark:text-emerald-300 mb-2">
-                    Increased Click-Through Rates
-                  </h3>
-                  <p className="text-emerald-800 dark:text-emerald-200">
-                    Optimized OG images and descriptions increase clicks on social shares by 2-3x compared to default
-                    previews.
-                  </p>
-                </div>
-                <div className="p-4 bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-900 rounded-lg">
-                  <h3 className="font-semibold text-blue-900 dark:text-blue-300 mb-2">Brand Consistency</h3>
-                  <p className="text-blue-800 dark:text-blue-200">
-                    Control exactly how your brand appears across social platforms, ensuring consistent messaging and
-                    visual branding.
-                  </p>
-                </div>
-                <div className="p-4 bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-900 rounded-lg">
-                  <h3 className="font-semibold text-purple-900 dark:text-purple-300 mb-2">Better Social Engagement</h3>
-                  <p className="text-purple-800 dark:text-purple-200">
-                    Professional, well-designed previews encourage sharing and comments, leading to increased organic
-                    reach.
-                  </p>
-                </div>
-                <div className="p-4 bg-orange-50 dark:bg-orange-950/20 border border-orange-200 dark:border-orange-900 rounded-lg">
-                  <h3 className="font-semibold text-orange-900 dark:text-orange-300 mb-2">SEO and Discoverability</h3>
-                  <p className="text-orange-800 dark:text-orange-200">
-                    Better social engagement signals can indirectly improve search rankings and overall content
-                    discoverability.
-                  </p>
-                </div>
-              </div>
-            </section>
+            <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4 mt-8">
+              Why Open Graph Tags Matter for Social Sharing
+            </h2>
+            <ul className="space-y-2 text-neutral-700 dark:text-neutral-300 mb-6">
+              <li>
+                <strong>Increased Click-Through Rates:</strong> Optimized OG images and descriptions increase clicks on
+                social shares by 2-3x compared to default previews.
+              </li>
+              <li>
+                <strong>Brand Consistency:</strong> Control exactly how your brand appears across social platforms,
+                ensuring consistent messaging and visual branding.
+              </li>
+              <li>
+                <strong>Better Social Engagement:</strong> Professional, well-designed previews encourage sharing and
+                comments, leading to increased organic reach.
+              </li>
+              <li>
+                <strong>SEO and Discoverability:</strong> Better social engagement signals can indirectly improve search
+                rankings and overall content discoverability.
+              </li>
+            </ul>
 
-            <section>
-              <h2 className="text-3xl font-bold text-neutral-900 dark:text-white mb-4">Required vs Optional OG Tags</h2>
-              <div className="space-y-6">
-                <div>
-                  <h3 className="text-xl font-semibold text-neutral-900 dark:text-white mb-4">
-                    Required Tags (Minimum)
-                  </h3>
-                  <div className="space-y-3">
-                    <div className="p-4 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-lg">
-                      <code className="text-sm font-mono text-emerald-600 dark:text-emerald-400">og:title</code>
-                      <p className="text-sm text-neutral-700 dark:text-neutral-300 mt-1">
-                        The title of your page or content (50-60 characters recommended)
-                      </p>
-                    </div>
-                    <div className="p-4 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-lg">
-                      <code className="text-sm font-mono text-emerald-600 dark:text-emerald-400">og:type</code>
-                      <p className="text-sm text-neutral-700 dark:text-neutral-300 mt-1">
-                        The type of content: website, article, product, video.movie, music.song, etc.
-                      </p>
-                    </div>
-                    <div className="p-4 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-lg">
-                      <code className="text-sm font-mono text-emerald-600 dark:text-emerald-400">og:image</code>
-                      <p className="text-sm text-neutral-700 dark:text-neutral-300 mt-1">
-                        URL of the image to display (1200x630px recommended)
-                      </p>
-                    </div>
-                    <div className="p-4 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-lg">
-                      <code className="text-sm font-mono text-emerald-600 dark:text-emerald-400">og:url</code>
-                      <p className="text-sm text-neutral-700 dark:text-neutral-300 mt-1">
-                        The canonical URL of the page being shared
-                      </p>
-                    </div>
-                  </div>
-                </div>
+            <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4 mt-8">Required vs Optional OG Tags</h2>
 
-                <div>
-                  <h3 className="text-xl font-semibold text-neutral-900 dark:text-white mb-4">Recommended Tags</h3>
-                  <div className="space-y-3">
-                    <div className="p-4 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-lg">
-                      <code className="text-sm font-mono text-blue-600 dark:text-blue-400">og:description</code>
-                      <p className="text-sm text-neutral-700 dark:text-neutral-300 mt-1">
-                        A brief description of the content (150-160 characters)
-                      </p>
-                    </div>
-                    <div className="p-4 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-lg">
-                      <code className="text-sm font-mono text-blue-600 dark:text-blue-400">
-                        og:image:width & og:image:height
-                      </code>
-                      <p className="text-sm text-neutral-700 dark:text-neutral-300 mt-1">
-                        Actual dimensions of the og:image
-                      </p>
-                    </div>
-                    <div className="p-4 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-lg">
-                      <code className="text-sm font-mono text-blue-600 dark:text-blue-400">og:site_name</code>
-                      <p className="text-sm text-neutral-700 dark:text-neutral-300 mt-1">Your website or brand name</p>
-                    </div>
-                    <div className="p-4 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-lg">
-                      <code className="text-sm font-mono text-blue-600 dark:text-blue-400">twitter:card</code>
-                      <p className="text-sm text-neutral-700 dark:text-neutral-300 mt-1">
-                        Twitter Card type: summary, summary_large_image, app, or player
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
+            <h3 className="text-xl font-semibold text-neutral-900 dark:text-white mb-3 mt-6">
+              Required Tags (Minimum)
+            </h3>
+            <ul className="space-y-2 text-neutral-700 dark:text-neutral-300 mb-6">
+              <li>
+                <code className="text-sm font-mono text-emerald-600 dark:text-emerald-400">og:title</code> - The title
+                of your page or content (50-60 characters recommended)
+              </li>
+              <li>
+                <code className="text-sm font-mono text-emerald-600 dark:text-emerald-400">og:type</code> - The type of
+                content: website, article, product, video.movie, music.song, etc.
+              </li>
+              <li>
+                <code className="text-sm font-mono text-emerald-600 dark:text-emerald-400">og:image</code> - URL of the
+                image to display (1200x630px recommended)
+              </li>
+              <li>
+                <code className="text-sm font-mono text-emerald-600 dark:text-emerald-400">og:url</code> - The canonical
+                URL of the page being shared
+              </li>
+            </ul>
 
-            <section>
-              <h2 className="text-3xl font-bold text-neutral-900 dark:text-white mb-4">
-                Open Graph Image Specifications
-              </h2>
-              <div className="overflow-x-auto">
-                <table className="w-full text-sm">
-                  <thead>
-                    <tr className="border-b border-neutral-300 dark:border-neutral-700 bg-neutral-100 dark:bg-neutral-800">
-                      <th className="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-white">Platform</th>
-                      <th className="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-white">
-                        Recommended Size
-                      </th>
-                      <th className="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-white">
-                        Aspect Ratio
-                      </th>
-                      <th className="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-white">Format</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr className="border-b border-neutral-200 dark:border-neutral-700">
-                      <td className="px-4 py-3 text-neutral-700 dark:text-neutral-300">Facebook / General</td>
-                      <td className="px-4 py-3 text-neutral-700 dark:text-neutral-300">1200 x 630 px</td>
-                      <td className="px-4 py-3 text-neutral-700 dark:text-neutral-300">1.91:1</td>
-                      <td className="px-4 py-3 text-neutral-700 dark:text-neutral-300">JPG / PNG</td>
-                    </tr>
-                    <tr className="border-b border-neutral-200 dark:border-neutral-700">
-                      <td className="px-4 py-3 text-neutral-700 dark:text-neutral-300">
-                        Twitter (summary_large_image)
-                      </td>
-                      <td className="px-4 py-3 text-neutral-700 dark:text-neutral-300">1024 x 512 px</td>
-                      <td className="px-4 py-3 text-neutral-700 dark:text-neutral-300">2:1</td>
-                      <td className="px-4 py-3 text-neutral-700 dark:text-neutral-300">JPG / PNG</td>
-                    </tr>
-                    <tr className="border-b border-neutral-200 dark:border-neutral-700">
-                      <td className="px-4 py-3 text-neutral-700 dark:text-neutral-300">LinkedIn</td>
-                      <td className="px-4 py-3 text-neutral-700 dark:text-neutral-300">1200 x 630 px</td>
-                      <td className="px-4 py-3 text-neutral-700 dark:text-neutral-300">1.91:1</td>
-                      <td className="px-4 py-3 text-neutral-700 dark:text-neutral-300">JPG / PNG</td>
-                    </tr>
-                    <tr>
-                      <td className="px-4 py-3 text-neutral-700 dark:text-neutral-300">Minimum</td>
-                      <td className="px-4 py-3 text-neutral-700 dark:text-neutral-300">200 x 200 px</td>
-                      <td className="px-4 py-3 text-neutral-700 dark:text-neutral-300">1:1</td>
-                      <td className="px-4 py-3 text-neutral-700 dark:text-neutral-300">JPG / PNG</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-4">
-                Use 1200x630px for most platforms (Facebook, LinkedIn, Pinterest). Keep file size under 8MB. Use
-                high-quality JPG or PNG. Avoid text in critical image areas as it may be cropped.
-              </p>
-            </section>
+            <h3 className="text-xl font-semibold text-neutral-900 dark:text-white mb-3 mt-6">Recommended Tags</h3>
+            <ul className="space-y-2 text-neutral-700 dark:text-neutral-300 mb-6">
+              <li>
+                <code className="text-sm font-mono text-emerald-600 dark:text-emerald-400">og:description</code> - A
+                brief description of the content (150-160 characters)
+              </li>
+              <li>
+                <code className="text-sm font-mono text-emerald-600 dark:text-emerald-400">
+                  og:image:width & og:image:height
+                </code>{" "}
+                - Actual dimensions of the og:image
+              </li>
+              <li>
+                <code className="text-sm font-mono text-emerald-600 dark:text-emerald-400">og:site_name</code> - Your
+                website or brand name
+              </li>
+              <li>
+                <code className="text-sm font-mono text-emerald-600 dark:text-emerald-400">twitter:card</code> - Twitter
+                Card type: summary, summary_large_image, app, or player
+              </li>
+            </ul>
 
-            <section>
-              <h2 className="text-3xl font-bold text-neutral-900 dark:text-white mb-4">How to Test Your OG Tags</h2>
-              <div className="space-y-4">
-                <div className="p-6 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-lg">
-                  <h3 className="font-semibold text-lg text-neutral-900 dark:text-white mb-2">
-                    1. Facebook Sharing Debugger
-                  </h3>
-                  <p className="text-neutral-700 dark:text-neutral-300 mb-3">
-                    Visit facebook.com/developers/tools/debug/ and enter your URL. This shows exactly how your page will
-                    appear in Facebook feeds and reveals any parsing errors.
-                  </p>
-                  <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                    Pro tip: Click "Scrape Again" to refresh the cache after making changes.
-                  </p>
-                </div>
+            <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4 mt-8">
+              Open Graph Image Specifications
+            </h2>
+            <ul className="space-y-2 text-neutral-700 dark:text-neutral-300 mb-6">
+              <li>
+                <strong>Facebook / General:</strong> 1200 x 630 px (1.91:1 aspect ratio), JPG or PNG
+              </li>
+              <li>
+                <strong>Twitter (summary_large_image):</strong> 1024 x 512 px (2:1 aspect ratio), JPG or PNG
+              </li>
+              <li>
+                <strong>LinkedIn:</strong> 1200 x 630 px (1.91:1 aspect ratio), JPG or PNG
+              </li>
+              <li>
+                <strong>Minimum:</strong> 200 x 200 px (1:1 aspect ratio), JPG or PNG
+              </li>
+            </ul>
+            <p className="text-neutral-700 dark:text-neutral-300">
+              Use 1200x630px for most platforms (Facebook, LinkedIn, Pinterest). Keep file size under 8MB. Use
+              high-quality JPG or PNG. Avoid text in critical image areas as it may be cropped.
+            </p>
 
-                <div className="p-6 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-lg">
-                  <h3 className="font-semibold text-lg text-neutral-900 dark:text-white mb-2">
-                    2. LinkedIn Post Inspector
-                  </h3>
-                  <p className="text-neutral-700 dark:text-neutral-300 mb-3">
-                    Visit linkedin.com/feed/update and paste your URL in the status box. This preview shows how your
-                    content will appear on LinkedIn feeds.
-                  </p>
-                  <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                    Pro tip: LinkedIn sometimes takes time to update. Wait a few hours if changes don't appear
-                    immediately.
-                  </p>
-                </div>
-
-                <div className="p-6 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-lg">
-                  <h3 className="font-semibold text-lg text-neutral-900 dark:text-white mb-2">
-                    3. Twitter Card Validator
-                  </h3>
-                  <p className="text-neutral-700 dark:text-neutral-300 mb-3">
-                    Visit cards-dev.twitter.com/validator and enter your URL to preview how your page will appear in
-                    tweets and Twitter feeds.
-                  </p>
-                  <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                    Pro tip: Check the "Tag" tab to see which tags Twitter detected from your page.
-                  </p>
-                </div>
-
-                <div className="p-6 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-lg">
-                  <h3 className="font-semibold text-lg text-neutral-900 dark:text-white mb-2">
-                    4. Test on Actual Social Platforms
-                  </h3>
-                  <p className="text-neutral-700 dark:text-neutral-300">
-                    Paste your URL directly into Facebook, LinkedIn, Twitter, and Pinterest status boxes to see
-                    real-time previews. This is the most authentic test.
-                  </p>
-                  <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                    Pro tip: Use incognito/private browsing mode to avoid cached versions.
-                  </p>
-                </div>
-
-                <div className="p-6 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-lg">
-                  <h3 className="font-semibold text-lg text-neutral-900 dark:text-white mb-2">
-                    5. Track Performance with Analytics
-                  </h3>
-                  <p className="text-neutral-700 dark:text-neutral-300 mb-3">
-                    Use{" "}
-                    <Link
-                      href="https://app.rybbit.io"
-                      className="text-emerald-600 dark:text-emerald-400 hover:underline font-medium"
-                    >
-                      Rybbit Analytics
-                    </Link>{" "}
-                    to track which social platforms drive the most traffic to your pages.
-                  </p>
-                  <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                    Measure CTR by platform to see which OG tags perform best and optimize accordingly.
-                  </p>
-                </div>
-              </div>
-            </section>
+            <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4 mt-8">How to Test Your OG Tags</h2>
+            <ol className="space-y-2 text-neutral-700 dark:text-neutral-300 mb-6">
+              <li>
+                <strong>Facebook Sharing Debugger:</strong> Visit facebook.com/developers/tools/debug/ and enter your
+                URL. This shows exactly how your page will appear in Facebook feeds and reveals any parsing errors. Pro
+                tip: Click "Scrape Again" to refresh the cache after making changes.
+              </li>
+              <li>
+                <strong>LinkedIn Post Inspector:</strong> Visit linkedin.com/feed/update and paste your URL in the status
+                box. This preview shows how your content will appear on LinkedIn feeds. Pro tip: LinkedIn sometimes takes
+                time to update. Wait a few hours if changes don't appear immediately.
+              </li>
+              <li>
+                <strong>Twitter Card Validator:</strong> Visit cards-dev.twitter.com/validator and enter your URL to
+                preview how your page will appear in tweets and Twitter feeds. Pro tip: Check the "Tag" tab to see which
+                tags Twitter detected from your page.
+              </li>
+              <li>
+                <strong>Test on Actual Social Platforms:</strong> Paste your URL directly into Facebook, LinkedIn,
+                Twitter, and Pinterest status boxes to see real-time previews. This is the most authentic test. Pro tip:
+                Use incognito/private browsing mode to avoid cached versions.
+              </li>
+              <li>
+                <strong>Track Performance with Analytics:</strong> Use{" "}
+                <Link
+                  href="https://app.rybbit.io"
+                  className="text-emerald-600 dark:text-emerald-400 hover:underline font-medium"
+                >
+                  Rybbit Analytics
+                </Link>{" "}
+                to track which social platforms drive the most traffic to your pages. Measure CTR by platform to see
+                which OG tags perform best and optimize accordingly.
+              </li>
+            </ol>
           </div>
 
           {/* FAQ Section */}
