@@ -14,12 +14,14 @@ import { OrganizationInitializer } from "../components/OrganizationInitializer";
 import { AuthenticationGuard } from "../components/AuthenticationGuard";
 import { ThemeProvider } from "next-themes";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
+import { useTrack } from "../hooks/useTrack";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   // Use the hook to expose stopImpersonating globally
   useStopImpersonation();
+  useTrack();
 
   const appEnv = useAppEnv();
 
