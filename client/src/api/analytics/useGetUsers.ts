@@ -10,6 +10,7 @@ export type UsersResponse = {
   user_id: string;
   anonymous_id: string;
   is_identified: boolean;
+  traits: Record<string, unknown> | null;
   country: string;
   region: string;
   city: string;

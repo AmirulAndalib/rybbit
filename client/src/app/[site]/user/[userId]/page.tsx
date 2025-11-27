@@ -60,10 +60,13 @@ export default function UserPage() {
   };
 
   // Get display name from traits if available, otherwise generate from ID
+  // Priority: username > name > userId (for identified) or generated name (for anonymous)
+  const traitsUsername = data?.traits?.username as string | undefined;
   const traitsName = data?.traits?.name as string | undefined;
   const traitsEmail = data?.traits?.email as string | undefined;
   const isIdentified = data?.is_identified ?? false;
-  const displayName = traitsName || (isIdentified ? (userId as string) : generateName(userId as string));
+  const displayName =
+    traitsUsername || traitsName || (isIdentified ? (userId as string) : generateName(userId as string));
 
   return (
     <div className="p-2 md:p-4 max-w-[1300px] mx-auto space-y-3">
@@ -244,12 +247,12 @@ export default function UserPage() {
         {isIdentified && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
             {/* Custom Traits */}
-            {data?.traits && Object.keys(data.traits).filter(k => k !== 'name' && k !== 'email').length > 0 && (
+            {data?.traits && Object.keys(data.traits).filter(k => k !== 'username' && k !== 'name' && k !== 'email').length > 0 && (
               <div className="bg-white dark:bg-neutral-900 p-3 rounded-lg border border-neutral-100 dark:border-neutral-750">
                 <h3 className="text-sm font-semibold mb-2 text-neutral-700 dark:text-neutral-200">User Traits</h3>
                 <div className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 text-sm">
                   {Object.entries(data.traits)
-                    .filter(([key]) => key !== 'name' && key !== 'email')
+                    .filter(([key]) => key !== 'username' && key !== 'name' && key !== 'email')
                     .map(([key, value]) => (
                       <>
                         <span key={`key-${key}`} className="text-neutral-500 dark:text-neutral-400 capitalize">

@@ -401,7 +401,11 @@ export function SessionDetails({ session, userId }: SessionDetailsProps) {
                       <div>
                         <div className="text-sm text-neutral-500 dark:text-neutral-400 flex items-center gap-2">
                           <span className="font-medium text-neutral-600 dark:text-neutral-300">
-                            {session.is_identified ? sessionDetails.user_id : generateName(sessionDetails.user_id)}
+                            {session.is_identified
+                              ? (session.traits?.username as string) ||
+                                (session.traits?.name as string) ||
+                                sessionDetails.user_id
+                              : generateName(sessionDetails.user_id)}
                           </span>
                           {session.is_identified && <IdentifiedBadge />}
                         </div>

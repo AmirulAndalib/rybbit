@@ -1,5 +1,8 @@
 import { FastifyReply, FastifyRequest } from "fastify";
+import { inArray, and, eq } from "drizzle-orm";
 import { clickhouse } from "../../db/clickhouse/clickhouse.js";
+import { db } from "../../db/postgres/postgres.js";
+import { userProfiles } from "../../db/postgres/schema.js";
 import { getFilterStatement, getTimeStatement, processResults } from "./utils.js";
 import { FilterParams } from "@rybbit/shared";
 
@@ -8,6 +11,7 @@ export type GetSessionsResponse = {
   user_id: string;
   anonymous_id: string;
   is_identified: boolean;
+  traits: Record<string, unknown> | null;
   country: string;
   region: string;
   city: string;
@@ -137,8 +141,31 @@ export async function getSessions(req: FastifyRequest<GetSessionsRequest>, res: 
       },
     });
 
-    const data = await processResults<GetSessionsResponse[number]>(result);
-    return res.send({ data });
+    const data = await processResults<Omit<GetSessionsResponse[number], "traits">>(result);
+
+    // Get traits for identified users from Postgres
+    const identifiedUserIds = [...new Set(data.filter((s) => s.is_identified).map((s) => s.user_id))];
+
+    let traitsMap: Map<string, Record<string, unknown>> = new Map();
+    if (identifiedUserIds.length > 0) {
+      const profiles = await db
+        .select({
+          userId: userProfiles.userId,
+          traits: userProfiles.traits,
+        })
+        .from(userProfiles)
+        .where(and(eq(userProfiles.siteId, Number(site)), inArray(userProfiles.userId, identifiedUserIds)));
+
+      traitsMap = new Map(profiles.map((p) => [p.userId, (p.traits as Record<string, unknown>) || {}]));
+    }
+
+    // Merge traits into session data
+    const dataWithTraits = data.map((session) => ({
+      ...session,
+      traits: traitsMap.get(session.user_id) || null,
+    }));
+
+    return res.send({ data: dataWithTraits });
   } catch (error) {
     console.error("Generated Query:", query);
     console.error("Error fetching sessions:", error);
