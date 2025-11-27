@@ -109,9 +109,9 @@ export default function UsersPage() {
         const displayName = isIdentified ? userId : generateName(userId);
 
         return (
-          <Link href={`/${site}/user/${userId}`} className="flex items-center gap-2 hover:underline">
+          <Link href={`/${site}/user/${userId}`} className="flex items-center gap-2">
             <Avatar size={20} id={userId as string} />
-            <span className="max-w-32 truncate" title={displayName}>
+            <span className="max-w-32 truncate hover:underline" title={displayName}>
               {displayName}
             </span>
             {isIdentified && <IdentifiedBadge />}
@@ -321,7 +321,10 @@ export default function UsersPage() {
                   ))
                 ) : table.getRowModel().rows.length === 0 ? (
                   <tr>
-                    <td colSpan={columns.length} className="px-3 py-8 text-center text-neutral-500 dark:text-neutral-400">
+                    <td
+                      colSpan={columns.length}
+                      className="px-3 py-8 text-center text-neutral-500 dark:text-neutral-400"
+                    >
                       No users found
                     </td>
                   </tr>
