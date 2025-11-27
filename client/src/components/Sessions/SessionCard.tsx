@@ -52,7 +52,11 @@ export function SessionCard({ session, onClick, userId, expandedByDefault }: Ses
   };
 
   const isIdentified = session.is_identified;
-  const displayName = isIdentified ? session.user_id : generateName(session.user_id);
+  const traits = session.traits;
+  // Priority: username > name > userId (for identified) or generated name (for anonymous)
+  const displayName = isIdentified
+    ? (traits?.username as string) || (traits?.name as string) || session.user_id
+    : generateName(session.user_id);
 
   return (
     <div className="rounded-lg bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 overflow-hidden">

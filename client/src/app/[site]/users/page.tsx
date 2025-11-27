@@ -105,8 +105,11 @@ export default function UsersPage() {
       cell: info => {
         const userId = info.getValue();
         const isIdentified = info.row.original.is_identified;
-        // For identified users, show the actual user_id; for anonymous, generate a name
-        const displayName = isIdentified ? userId : generateName(userId);
+        const traits = info.row.original.traits;
+        // Priority: username > name > userId (for identified) or generated name (for anonymous)
+        const displayName = isIdentified
+          ? (traits?.username as string) || (traits?.name as string) || userId
+          : generateName(userId);
 
         return (
           <Link href={`/${site}/user/${userId}`} className="flex items-center gap-2">
