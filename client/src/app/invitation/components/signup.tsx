@@ -71,14 +71,6 @@ export function Signup({ inviterEmail, organization }: SignupProps) {
   return (
     <form onSubmit={handleSignup}>
       <div className="flex flex-col gap-4">
-        <AuthButton
-          isLoading={isLoading}
-          loadingText="Creating account..."
-          disabled={IS_CLOUD ? !turnstileToken || isLoading : isLoading}
-        >
-          Sign Up to Accept Invitation
-        </AuthButton>
-
         <SocialButtons onError={setError} />
 
         <AuthInput
@@ -100,6 +92,14 @@ export function Signup({ inviterEmail, organization }: SignupProps) {
           value={password}
           onChange={e => setPassword(e.target.value)}
         />
+
+        <AuthButton
+          isLoading={isLoading}
+          loadingText="Creating account..."
+          disabled={IS_CLOUD ? !turnstileToken || isLoading : isLoading}
+        >
+          Sign Up to Accept Invitation
+        </AuthButton>
 
         {IS_CLOUD && (
           <Turnstile
