@@ -109,7 +109,7 @@ export default function UsersPage() {
       cell: info => {
         const deviceId = info.getValue(); // user_id is always device fingerprint
         const identifiedUserId = info.row.original.identified_user_id;
-        const isIdentified = info.row.original.is_identified;
+        const isIdentified = !!info.row.original.identified_user_id;
         const traits = info.row.original.traits;
         // For links: use identified_user_id for identified users, device ID for anonymous
         const linkId = isIdentified ? identifiedUserId : deviceId;
@@ -351,7 +351,7 @@ export default function UsersPage() {
                 ) : (
                   table.getRowModel().rows.map(row => {
                     // Use identified_user_id for identified users, device ID (user_id) for anonymous
-                    const linkId = row.original.is_identified ? row.original.identified_user_id : row.original.user_id;
+                    const linkId = row.original.identified_user_id || row.original.user_id;
                     const href = `/${site}/user/${linkId}`;
 
                     return (

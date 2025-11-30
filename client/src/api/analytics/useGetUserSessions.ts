@@ -9,7 +9,6 @@ export type GetSessionsResponse = {
   session_id: string;
   user_id: string; // Device fingerprint
   identified_user_id: string; // Custom user ID when identified, empty string otherwise
-  is_identified: boolean;
   traits: Record<string, unknown> | null;
   country: string;
   region: string;

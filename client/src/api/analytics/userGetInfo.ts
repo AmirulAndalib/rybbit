@@ -11,7 +11,6 @@ export type UserInfo = {
   sessions: number;
   user_id: string; // Device fingerprint
   identified_user_id: string; // Custom user ID when identified, empty string otherwise
-  is_identified: boolean;
   country: string;
   region: string;
   city: string;

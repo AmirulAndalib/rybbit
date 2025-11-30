@@ -65,7 +65,6 @@ export interface SessionReplayListItem {
   sessionId: string;
   userId: string;
   identifiedUserId?: string;
-  isIdentified?: boolean;
   startTime: Date;
   endTime?: Date;
   durationMs?: number;

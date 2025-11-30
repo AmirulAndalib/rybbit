@@ -6,7 +6,6 @@ import { FilterParams } from "@rybbit/shared";
 export type GetUsersResponse = {
   user_id: string; // Device fingerprint
   identified_user_id: string; // Custom user ID when identified, empty string otherwise
-  is_identified: boolean;
   traits: Record<string, unknown> | null;
   country: string;
   region: string;
@@ -95,8 +94,7 @@ WITH AggregatedUsers AS (
         effective_user_id
 )
 SELECT
-    *,
-    if(identified_user_id != '', true, false) AS is_identified
+    *
 FROM AggregatedUsers
 WHERE 1 = 1 ${filterStatement}
 ${filterIdentified ? "AND identified_user_id != ''" : ""}

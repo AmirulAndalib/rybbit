@@ -35,7 +35,7 @@ export async function getSessionReplays(
 
     // The replays from ClickHouse use snake_case and enrichWithTraits expects that format
     const replaysWithTraits = await enrichWithTraits(
-      replays as unknown as Array<{ identified_user_id: string; is_identified: boolean }>,
+      replays as unknown as Array<{ identified_user_id: string }>,
       siteId
     );
 

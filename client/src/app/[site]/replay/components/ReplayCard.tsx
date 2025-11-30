@@ -32,7 +32,6 @@ interface SessionReplayListItem {
   session_id: string;
   user_id: string;
   identified_user_id: string;
-  is_identified: boolean;
   traits: Record<string, unknown> | null;
   start_time: string;
   end_time?: string;
@@ -61,7 +60,7 @@ export function ReplayCard({ replay }: { replay: SessionReplayListItem }) {
   const duration = replay.duration_ms ? Math.ceil(replay.duration_ms / 1000) : null;
 
   // Calculate display name based on identification status
-  const isIdentified = replay.is_identified;
+  const isIdentified = !!replay.identified_user_id;
   const traits = replay.traits;
   const displayName = isIdentified
     ? (traits?.username as string) || (traits?.name as string) || replay.identified_user_id

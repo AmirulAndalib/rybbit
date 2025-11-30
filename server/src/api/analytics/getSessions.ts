@@ -7,7 +7,6 @@ export type GetSessionsResponse = {
   session_id: string;
   user_id: string; // Device fingerprint
   identified_user_id: string; // Custom user ID when identified, empty string otherwise
-  is_identified: boolean;
   traits: Record<string, unknown> | null;
   country: string;
   region: string;
@@ -120,8 +119,7 @@ export async function getSessions(req: FastifyRequest<GetSessionsRequest>, res: 
       ORDER BY session_end DESC
   )
   SELECT
-      *,
-      if(identified_user_id != '', true, false) AS is_identified
+      *
   FROM AggregatedSessions
   WHERE 1 = 1 ${filterStatement}
   ${filterIdentified ? "AND identified_user_id != ''" : ""}

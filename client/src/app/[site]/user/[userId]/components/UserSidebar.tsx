@@ -82,7 +82,7 @@ function StatCard({
 }
 
 export function UserSidebar({ data, isLoading, sessionCount, getRegionName }: UserSidebarProps) {
-  const isIdentified = data?.is_identified ?? false;
+  const isIdentified = !!data?.identified_user_id;
 
   // Filter custom traits (exclude username, name, email)
   const customTraits = data?.traits

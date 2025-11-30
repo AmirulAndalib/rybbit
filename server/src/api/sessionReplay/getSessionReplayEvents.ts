@@ -22,7 +22,6 @@ export async function getSessionReplayEvents(
     const metadataWithIdentification = {
       ...metadata,
       identified_user_id: metadata.identified_user_id || "",
-      is_identified: !!(metadata.identified_user_id && metadata.identified_user_id !== ""),
     };
     const [enrichedMetadata] = await enrichWithTraits([metadataWithIdentification], siteId);
 

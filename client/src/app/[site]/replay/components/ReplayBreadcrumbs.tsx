@@ -255,7 +255,7 @@ export function ReplayBreadcrumbs() {
   };
 
   // Calculate display name based on identification status
-  const isIdentified = data.metadata.is_identified;
+  const isIdentified = !!data.metadata.identified_user_id;
   const traits = data.metadata.traits;
   const displayName = isIdentified
     ? (traits?.username as string) || (traits?.name as string) || data.metadata.identified_user_id

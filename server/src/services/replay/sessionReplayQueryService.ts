@@ -74,7 +74,6 @@ export class SessionReplayQueryService {
         session_id,
         user_id,
         identified_user_id,
-        if(identified_user_id != '', true, false) AS is_identified,
         start_time,
         end_time,
         duration_ms,

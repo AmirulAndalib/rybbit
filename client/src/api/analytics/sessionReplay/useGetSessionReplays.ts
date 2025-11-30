@@ -6,7 +6,6 @@ export interface SessionReplayListItem {
   session_id: string;
   user_id: string;
   identified_user_id: string;
-  is_identified: boolean;
   traits: Record<string, unknown> | null;
   start_time: string;
   end_time?: string;

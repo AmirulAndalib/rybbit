@@ -154,13 +154,9 @@ export async function getUserInfo(
       created_at: alias.created_at,
     }));
 
-    // User is identified if identified_user_id is set
-    const is_identified = data[0].identified_user_id !== "";
-
     return res.send({
       data: {
         ...data[0],
-        is_identified,
         traits,
         linked_devices,
       },

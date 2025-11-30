@@ -46,7 +46,7 @@ export default function UserPage() {
   const traitsUsername = data?.traits?.username as string | undefined;
   const traitsName = data?.traits?.name as string | undefined;
   const traitsEmail = data?.traits?.email as string | undefined;
-  const isIdentified = data?.is_identified ?? false;
+  const isIdentified = !!data?.identified_user_id;
   const displayName =
     traitsUsername || traitsName || (isIdentified ? (userId as string) : generateName(userId as string));
 

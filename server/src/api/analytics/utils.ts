@@ -348,12 +348,12 @@ export const bucketIntervalMap = {
  * This is a shared utility to avoid duplicating the traits fetching logic.
  * Uses identified_user_id to look up traits since that's the custom user ID.
  */
-export async function enrichWithTraits<T extends { identified_user_id: string; is_identified: boolean }>(
+export async function enrichWithTraits<T extends { identified_user_id: string }>(
   data: T[],
   siteId: number
 ): Promise<Array<T & { traits: Record<string, unknown> | null }>> {
   const identifiedUserIds = [
-    ...new Set(data.filter((item) => item.is_identified && item.identified_user_id).map((item) => item.identified_user_id)),
+    ...new Set(data.filter((item) => item.identified_user_id).map((item) => item.identified_user_id)),
   ];
 
   let traitsMap: Map<string, Record<string, unknown>> = new Map();
