@@ -216,7 +216,7 @@ const PUBLIC_ROUTES: string[] = [
   "/api/as/webhook",
   "/api/session-replay/record",
   "/api/admin/telemetry",
-  "/api/site/:siteId/tracking-config",
+  "/api/site/tracking-config",
 ];
 
 // Define analytics routes that can be public
@@ -365,7 +365,7 @@ server.get("/api/get-sites-from-org/:organizationId", getSitesFromOrg);
 server.get("/api/get-site/:id", getSite);
 server.get("/api/site/:siteId/private-link-config", getSitePrivateLinkConfig);
 server.post("/api/site/:siteId/private-link-config", updateSitePrivateLinkConfig);
-server.get("/api/site/:siteId/tracking-config", getTrackingConfig);
+server.get("/api/site/tracking-config/:siteId", getTrackingConfig);
 server.get("/api/site/:siteId/excluded-ips", getSiteExcludedIPs);
 server.get("/api/site/:siteId/excluded-countries", getSiteExcludedCountries);
 server.get("/api/list-organization-members/:organizationId", listOrganizationMembers);
