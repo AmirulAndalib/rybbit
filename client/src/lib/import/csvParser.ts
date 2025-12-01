@@ -1,6 +1,7 @@
 import Papa from "papaparse";
 import { DateTime } from "luxon";
 import { authedFetch } from "@/api/utils";
+import { ImportPlatform } from "@/types/import";
 
 interface UmamiEvent {
   session_id: string;
@@ -42,19 +43,27 @@ interface SimpleAnalyticsEvent {
 }
 
 export class CsvParser {
-  private cancelled = false;
-  private siteId: number = 0;
-  private importId: string = "";
-  private platform: "umami" | "simple_analytics" = "umami";
+  private cancelled: boolean;
+  private siteId: number;
+  private importId: string;
+  private platform: ImportPlatform;
+  private earliestAllowedDate: DateTime | null;
+  private latestAllowedDate: DateTime | null;
 
-  private earliestAllowedDate: DateTime | null = null;
-  private latestAllowedDate: DateTime | null = null;
+  constructor() {
+    this.cancelled = false;
+    this.siteId = 0;
+    this.importId = "";
+    this.platform = "umami";
+    this.earliestAllowedDate = null;
+    this.latestAllowedDate = null;
+  }
 
   startImport(
     file: File,
     siteId: number,
     importId: string,
-    platform: "umami" | "simple_analytics",
+    platform: ImportPlatform,
     earliestAllowedDate: string,
     latestAllowedDate: string
   ): void {
@@ -87,19 +96,28 @@ export class CsvParser {
         }
 
         try {
-          const validEvents: (UmamiEvent | SimpleAnalyticsEvent)[] = [];
-          for (const row of results.data) {
-            const event = this.transformRow(row);
-            if (event) {
-              const dateField = this.platform === "umami" ? (event as UmamiEvent).created_at : (event as SimpleAnalyticsEvent).added_iso;
-              if (this.isDateInRange(dateField)) {
-                validEvents.push(event);
+          if (this.platform === "umami") {
+            const validEvents: UmamiEvent[] = [];
+            for (const row of results.data) {
+              const event = this.transformRow(row);
+              if (event && this.isDateInRange((event as UmamiEvent).created_at)) {
+                validEvents.push(event as UmamiEvent);
               }
             }
-          }
-
-          if (validEvents.length > 0) {
-            await this.uploadChunk(validEvents, false);
+            if (validEvents.length > 0) {
+              await this.uploadChunk(validEvents, false);
+            }
+          } else {
+            const validEvents: SimpleAnalyticsEvent[] = [];
+            for (const row of results.data) {
+              const event = this.transformRow(row);
+              if (event && this.isDateInRange((event as SimpleAnalyticsEvent).added_iso)) {
+                validEvents.push(event as SimpleAnalyticsEvent);
+              }
+            }
+            if (validEvents.length > 0) {
+              await this.uploadChunk(validEvents, false);
+            }
           }
         } catch (error) {
           console.error("Error uploading chunk:", error);
@@ -202,7 +220,7 @@ export class CsvParser {
     }
   }
 
-  private async uploadChunk(events: (UmamiEvent | SimpleAnalyticsEvent)[], isLastBatch: boolean): Promise<void> {
+  private async uploadChunk(events: UmamiEvent[] | SimpleAnalyticsEvent[], isLastBatch: boolean): Promise<void> {
     // Skip empty chunks unless it's the last one (needed for finalization)
     if (events.length === 0 && !isLastBatch) {
       return;
