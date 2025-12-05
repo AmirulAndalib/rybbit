@@ -3,6 +3,8 @@ import { Input } from "@/components/ui/input";
 import { TableSortIndicator } from "@/components/ui/table";
 import { FilterParameter } from "@rybbit/shared";
 import {
+  ColumnDef,
+  ColumnHelper,
   createColumnHelper,
   flexRender,
   getCoreRowModel,
@@ -125,7 +127,7 @@ export function StandardSectionDialog({
             cell: info => (
               <div className="flex flex-row gap-1 items-center sm:justify-end">{info.getValue()?.toLocaleString()}</div>
             ),
-          }) as any
+          }) satisfies ColumnDef<MetricResponse, number>
         );
         cols.push(
           columnHelper.accessor("pageviews_percentage", {
@@ -133,7 +135,7 @@ export function StandardSectionDialog({
             cell: info => (
               <div className="flex flex-row gap-1 items-center sm:justify-end">{info.getValue()?.toFixed(1)}%</div>
             ),
-          }) as any
+          }) satisfies ColumnDef<MetricResponse, number>
         );
       }
 
@@ -145,7 +147,7 @@ export function StandardSectionDialog({
             cell: info => (
               <div className="text-right">{formatSecondsAsMinutesAndSeconds(Math.round(info.getValue() ?? 0))}</div>
             ),
-          }) as any
+          }) satisfies ColumnDef<MetricResponse, number>
         );
       }
 
@@ -157,7 +159,7 @@ export function StandardSectionDialog({
             cell: info => (
               <div className="flex flex-row gap-1 items-center sm:justify-end">{info.getValue()?.toFixed(1)}%</div>
             ),
-          }) as any
+          }) satisfies ColumnDef<MetricResponse, number>
         );
       }
     }
