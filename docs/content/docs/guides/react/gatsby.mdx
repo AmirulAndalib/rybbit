@@ -33,7 +33,6 @@ export const onRenderBody = ({ setHeadComponents }) => {
       key="rybbit-analytics-script" // A unique key for React
       src="https://app.rybbit.io/api/script.js"
       data-site-id={rybbitSiteId}
-      async
       defer
     />,
   ]);
@@ -61,7 +60,6 @@ module.exports = {
       resolve: `gatsby-plugin-script`,
       options: {
         src: `https://app.rybbit.io/api/script.js`,
-        async: true,
         defer: true,
         ['data-site-id']: `YOUR_SITE_ID`, // Replace with your Site ID
         // strategy: 'post-hydrate', // Or 'idle', 'off-main-thread'
