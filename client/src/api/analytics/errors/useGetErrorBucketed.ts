@@ -3,9 +3,6 @@ import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { getStartAndEndDate, timeZone } from "../../utils";
 import { fetchErrorBucketed, GetErrorBucketedResponse } from "../standalone";
 
-// Re-export type from standalone
-export type { GetErrorBucketedResponse } from "../standalone";
-
 type UseGetErrorBucketedOptions = {
   errorMessage: string;
   enabled?: boolean;

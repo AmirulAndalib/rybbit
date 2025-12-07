@@ -1,35 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { fetchUserInfo } from "./standalone";
-
-export type LinkedDevice = {
-  anonymous_id: string;
-  created_at: string;
-};
-
-export type UserInfo = {
-  duration: number;
-  sessions: number;
-  user_id: string; // Device fingerprint
-  identified_user_id: string; // Custom user ID when identified, empty string otherwise
-  country: string;
-  region: string;
-  city: string;
-  language: string;
-  device_type: string;
-  browser: string;
-  browser_version: string;
-  operating_system: string;
-  operating_system_version: string;
-  screen_height: number;
-  screen_width: number;
-  last_seen: string;
-  first_seen: string;
-  pageviews: number;
-  events: number;
-  ip?: string;
-  traits: Record<string, unknown> | null;
-  linked_devices: LinkedDevice[];
-};
+import { fetchUserInfo, UserInfo } from "./standalone";
 
 export function useUserInfo(siteId: number, userId: string) {
   return useQuery<UserInfo>({

@@ -3,9 +3,6 @@ import { useStore } from "../../../lib/store";
 import { getStartAndEndDate, timeZone } from "../../utils";
 import { fetchSessionReplays, SessionReplayListItem, SessionReplayListResponse } from "../standalone";
 
-// Re-export types from standalone
-export type { SessionReplayListItem, SessionReplayListResponse } from "../standalone";
-
 type UseGetSessionReplaysOptions = {
   limit?: number;
   minDuration?: number;

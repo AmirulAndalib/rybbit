@@ -6,7 +6,7 @@ import { useDebounce, useIntersectionObserver } from "@uidotdev/usehooks";
 import { DateTime } from "luxon";
 import { ChevronDown, ChevronUp, Loader2, Search, SquareArrowOutUpRight } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
-import { OutboundLink } from "../../../../../api/analytics/events/useGetOutboundLinks";
+import { OutboundLink } from "../../../../../api/analytics/standalone";
 import { cn } from "../../../../../lib/utils";
 
 interface OutboundLinksDialogProps {

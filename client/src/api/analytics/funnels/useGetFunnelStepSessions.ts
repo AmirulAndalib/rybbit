@@ -5,9 +5,6 @@ import { getFilteredFilters } from "../../../lib/store";
 import { getStartAndEndDate, timeZone } from "../../utils";
 import { fetchFunnelStepSessions, FunnelStep, GetSessionsResponse } from "../standalone";
 
-// Re-export types from standalone
-export type { FunnelStep, GetSessionsResponse } from "../standalone";
-
 export function useGetFunnelStepSessions({
   steps,
   stepNumber,

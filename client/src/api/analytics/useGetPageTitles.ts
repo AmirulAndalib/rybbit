@@ -8,9 +8,6 @@ import {
   PageTitlesStandardResponse,
 } from "./standalone";
 
-// Re-export types from standalone
-export type { PageTitleItem, PageTitlesPaginatedResponse, PageTitlesStandardResponse } from "./standalone";
-
 type UseGetPageTitlesOptions = {
   limit?: number;
   page?: number;

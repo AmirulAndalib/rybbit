@@ -1,16 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useStore } from "../../lib/store";
 import { getStartAndEndDate, timeZone } from "../utils";
-import { fetchOverview } from "./standalone";
-
-export type GetOverviewResponse = {
-  sessions: number;
-  pageviews: number;
-  users: number;
-  pages_per_session: number;
-  bounce_rate: number;
-  session_duration: number;
-};
+import { fetchOverview, GetOverviewResponse } from "./standalone";
 
 type PeriodTime = "current" | "previous";
 

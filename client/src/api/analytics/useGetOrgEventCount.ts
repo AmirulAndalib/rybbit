@@ -1,9 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchOrgEventCount, OrgEventCountResponse, GetOrgEventCountResponse } from "./standalone";
 
-// Re-export types from standalone
-export type { OrgEventCountResponse, GetOrgEventCountResponse } from "./standalone";
-
 export function useGetOrgEventCount({
   organizationId,
   startDate,

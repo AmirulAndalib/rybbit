@@ -5,9 +5,6 @@ import { getFilteredFilters } from "../../lib/store";
 import { getStartAndEndDate, timeZone } from "../utils";
 import { fetchJourneys, Journey, JourneysResponse } from "./standalone";
 
-// Re-export types from standalone
-export type { Journey, JourneysResponse } from "./standalone";
-
 export interface JourneyParams {
   siteId?: number;
   steps?: number;

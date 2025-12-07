@@ -3,9 +3,6 @@ import { Time } from "../../../components/DateSelector/types";
 import { getStartAndEndDate, timeZone } from "../../utils";
 import { fetchGoalSessions, GetSessionsResponse } from "../standalone";
 
-// Re-export type from standalone
-export type { GetSessionsResponse } from "../standalone";
-
 export function useGetGoalSessions({
   goalId,
   siteId,

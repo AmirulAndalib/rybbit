@@ -18,10 +18,8 @@ import {
 } from "lucide-react";
 import { useMemo, useState, useCallback } from "react";
 import { useGetSite } from "../../../../api/admin/sites";
-import {
-  PerformanceByDimensionItem,
-  useGetPerformanceByDimension,
-} from "../../../../api/analytics/performance/useGetPerformanceByDimension";
+import { useGetPerformanceByDimension } from "../../../../api/analytics/performance/useGetPerformanceByDimension";
+import { PerformanceByDimensionItem } from "../../../../api/analytics/standalone";
 import { Pagination } from "../../../../components/pagination";
 import { FilterParameter } from "@rybbit/shared";
 import { useStore, addFilter, removeFilter } from "../../../../lib/store";

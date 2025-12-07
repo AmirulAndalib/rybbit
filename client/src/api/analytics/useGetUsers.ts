@@ -4,27 +4,7 @@ import { getFilteredFilters, useStore } from "../../lib/store";
 import { USER_PAGE_FILTERS } from "../../lib/filterGroups";
 import { APIResponse } from "../types";
 import { getStartAndEndDate, timeZone } from "../utils";
-import { fetchUsers } from "./standalone";
-
-export type UsersResponse = {
-  user_id: string; // Device fingerprint
-  identified_user_id: string; // Custom user ID when identified, empty string otherwise
-  traits: Record<string, unknown> | null;
-  country: string;
-  region: string;
-  city: string;
-  language: string;
-  browser: string;
-  operating_system: string;
-  device_type: string;
-  referrer: string;
-  channel: string;
-  pageviews: number;
-  events: number;
-  sessions: number;
-  last_seen: string;
-  first_seen: string;
-};
+import { fetchUsers, UsersResponse } from "./standalone";
 
 export interface GetUsersOptions {
   page: number;

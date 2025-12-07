@@ -8,16 +8,43 @@ import {
   toMetricQueryParams,
 } from "./types";
 
-// Re-export types from hooks for convenience
-export type { GetOverviewResponse } from "../useGetOverview";
-export type { GetOverviewBucketedResponse } from "../useGetOverviewBucketed";
-export type { MetricResponse } from "../useGetMetric";
-export type { LiveUserCountResponse } from "../useGetLiveUserCount";
+// Overview response type
+export type GetOverviewResponse = {
+  sessions: number;
+  pageviews: number;
+  users: number;
+  pages_per_session: number;
+  bounce_rate: number;
+  session_duration: number;
+};
 
-import type { GetOverviewResponse } from "../useGetOverview";
-import type { GetOverviewBucketedResponse } from "../useGetOverviewBucketed";
-import type { MetricResponse } from "../useGetMetric";
-import type { LiveUserCountResponse } from "../useGetLiveUserCount";
+// Overview bucketed response type
+export type GetOverviewBucketedResponse = {
+  time: string;
+  pageviews: number;
+  sessions: number;
+  pages_per_session: number;
+  bounce_rate: number;
+  session_duration: number;
+  users: number;
+}[];
+
+// Metric response type
+export type MetricResponse = {
+  value: string;
+  title?: string;
+  count: number;
+  percentage: number;
+  pageviews?: number;
+  pageviews_percentage?: number;
+  time_on_page_seconds?: number;
+  bounce_rate?: number;
+};
+
+// Live user count response type
+export interface LiveUserCountResponse {
+  count: number;
+}
 
 /**
  * Fetch overview metrics for a site

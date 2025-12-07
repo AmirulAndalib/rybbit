@@ -8,9 +8,6 @@ import {
   ErrorNamesStandardResponse,
 } from "../standalone";
 
-// Re-export types from standalone
-export type { ErrorNameItem, ErrorNamesPaginatedResponse, ErrorNamesStandardResponse } from "../standalone";
-
 type UseGetErrorNamesOptions = {
   limit?: number;
   page?: number;

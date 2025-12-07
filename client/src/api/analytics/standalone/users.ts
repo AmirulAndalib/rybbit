@@ -2,12 +2,58 @@ import { authedFetch } from "../../utils";
 import { CommonApiParams, PaginationParams, SortParams, toQueryParams } from "./types";
 import type { GetSessionsResponse } from "./sessions";
 
-// Re-export types from hooks
-export type { UsersResponse } from "../useGetUsers";
-export type { UserInfo, LinkedDevice } from "../userGetInfo";
+// User response type
+export type UsersResponse = {
+  user_id: string; // Device fingerprint
+  identified_user_id: string; // Custom user ID when identified, empty string otherwise
+  traits: Record<string, unknown> | null;
+  country: string;
+  region: string;
+  city: string;
+  language: string;
+  browser: string;
+  operating_system: string;
+  device_type: string;
+  referrer: string;
+  channel: string;
+  pageviews: number;
+  events: number;
+  sessions: number;
+  last_seen: string;
+  first_seen: string;
+};
 
-import type { UsersResponse } from "../useGetUsers";
-import type { UserInfo } from "../userGetInfo";
+// Linked device type
+export type LinkedDevice = {
+  anonymous_id: string;
+  created_at: string;
+};
+
+// User info type
+export type UserInfo = {
+  duration: number;
+  sessions: number;
+  user_id: string; // Device fingerprint
+  identified_user_id: string; // Custom user ID when identified, empty string otherwise
+  country: string;
+  region: string;
+  city: string;
+  language: string;
+  device_type: string;
+  browser: string;
+  browser_version: string;
+  operating_system: string;
+  operating_system_version: string;
+  screen_height: number;
+  screen_width: number;
+  last_seen: string;
+  first_seen: string;
+  pageviews: number;
+  events: number;
+  ip?: string;
+  traits: Record<string, unknown> | null;
+  linked_devices: LinkedDevice[];
+};
 
 // User session count response type
 export interface UserSessionCountResponse {

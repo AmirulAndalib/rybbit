@@ -4,9 +4,6 @@ import { useStore } from "../../../lib/store";
 import { getStartAndEndDate, timeZone } from "../../utils";
 import { fetchEvents, Event, EventsResponse } from "../standalone";
 
-// Re-export types from standalone
-export type { Event, EventsResponse } from "../standalone";
-
 export interface GetEventsOptions {
   time?: Time;
   page?: number;

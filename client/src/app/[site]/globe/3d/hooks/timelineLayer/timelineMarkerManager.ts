@@ -1,5 +1,5 @@
 import mapboxgl from "mapbox-gl";
-import type { GetSessionsResponse } from "../../../../../../api/analytics/useGetUserSessions";
+import type { GetSessionsResponse } from "../../../../../../api/analytics/standalone";
 import { generateAvatarSVG } from "./timelineMarkerHelpers";
 import { getUnclusteredFeatures } from "./timelineClusterUtils";
 import { buildTooltipHTML } from "../../../utils/timelineTooltipBuilder";

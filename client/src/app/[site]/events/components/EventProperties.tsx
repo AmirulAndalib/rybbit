@@ -3,7 +3,7 @@
 import NumberFlow from "@number-flow/react";
 import { Info } from "lucide-react";
 import { memo } from "react";
-import { EventProperty } from "../../../../api/analytics/events/useGetEventProperties";
+import { EventProperty } from "../../../../api/analytics/standalone";
 import { cn } from "../../../../lib/utils";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 

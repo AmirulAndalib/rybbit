@@ -6,9 +6,6 @@ import { APIResponse } from "../../types";
 import { getStartAndEndDate, timeZone } from "../../utils";
 import { fetchPerformanceTimeSeries, GetPerformanceTimeSeriesResponse } from "../standalone";
 
-// Re-export type from standalone
-export type { GetPerformanceTimeSeriesResponse } from "../standalone";
-
 type PeriodTime = "current" | "previous";
 
 export function useGetPerformanceTimeSeries({

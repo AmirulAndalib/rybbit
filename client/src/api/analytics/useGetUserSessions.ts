@@ -15,16 +15,6 @@ import {
   UserSessionCountResponse,
 } from "./standalone";
 
-// Re-export types from standalone
-export type {
-  GetSessionsResponse,
-  SessionDetails,
-  SessionEventProps,
-  SessionEvent,
-  SessionPageviewsAndEvents,
-} from "./standalone";
-export type { UserSessionCountResponse } from "./standalone";
-
 export function useGetSessions(
   userId?: string,
   page: number = 1,

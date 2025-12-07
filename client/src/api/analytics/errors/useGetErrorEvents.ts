@@ -8,9 +8,6 @@ import {
   ErrorEventsStandardResponse,
 } from "../standalone";
 
-// Re-export types from standalone
-export type { ErrorEvent, ErrorEventsPaginatedResponse, ErrorEventsStandardResponse } from "../standalone";
-
 // Hook for infinite scrolling
 export function useGetErrorEventsInfinite(errorMessage: string, enabled: boolean = true) {
   const { time, site, filters } = useStore();

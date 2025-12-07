@@ -4,9 +4,6 @@ import { getFilteredFilters, useStore } from "../../../lib/store";
 import { getStartAndEndDate, timeZone } from "../../utils";
 import { fetchEventNames, EventName } from "../standalone";
 
-// Re-export type from standalone
-export type { EventName } from "../standalone";
-
 export function useGetEventNames() {
   const { site, time } = useStore();
 

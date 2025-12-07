@@ -5,9 +5,6 @@ import { useStore } from "../../../lib/store";
 import { getStartAndEndDate, timeZone } from "../../utils";
 import { fetchPerformanceByDimension, PaginatedPerformanceResponse, PerformanceByDimensionItem } from "../standalone";
 
-// Re-export types from standalone
-export type { PerformanceByDimensionItem, PaginatedPerformanceResponse } from "../standalone";
-
 // Keep the old type for backward compatibility
 export type PerformanceByPathItem = PerformanceByDimensionItem & {
   pathname: string;

@@ -4,9 +4,6 @@ import { useStore } from "../../../lib/store";
 import { getStartAndEndDate, timeZone } from "../../utils";
 import { fetchPerformanceOverview, GetPerformanceOverviewResponse } from "../standalone";
 
-// Re-export type from standalone
-export type { GetPerformanceOverviewResponse } from "../standalone";
-
 type PeriodTime = "current" | "previous";
 
 export function useGetPerformanceOverview({ periodTime, site }: { periodTime?: PeriodTime; site?: number | string }) {

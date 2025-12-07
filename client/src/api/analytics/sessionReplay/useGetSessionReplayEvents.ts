@@ -6,9 +6,6 @@ import {
   GetSessionReplayEventsResponse,
 } from "../standalone";
 
-// Re-export types from standalone
-export type { SessionReplayEvent, SessionReplayMetadata, GetSessionReplayEventsResponse } from "../standalone";
-
 export function useGetSessionReplayEvents(siteId: number, sessionId: string) {
   return useQuery({
     queryKey: ["session-replay-events", siteId, sessionId],

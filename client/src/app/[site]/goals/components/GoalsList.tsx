@@ -1,7 +1,7 @@
 "use client";
 
 import GoalCard from "./GoalCard";
-import { Goal } from "../../../../api/analytics/goals/useGetGoals";
+import { Goal } from "../../../../api/analytics/standalone";
 
 interface GoalsListProps {
   goals: Goal[];

@@ -12,9 +12,6 @@ import {
   FunnelResponse,
 } from "../standalone";
 
-// Re-export types from standalone
-export type { FunnelStep, FunnelRequest, SaveFunnelRequest, FunnelResponse } from "../standalone";
-
 /**
  * Hook for analyzing conversion funnels through a series of steps
  */

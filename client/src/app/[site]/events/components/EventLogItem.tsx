@@ -7,7 +7,7 @@ import { DateTime } from "luxon";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { memo } from "react";
-import { Event } from "../../../../api/analytics/events/useGetEvents";
+import { Event } from "../../../../api/analytics/standalone";
 import { getCountryName } from "../../../../lib/utils";
 import { Browser } from "../../components/shared/icons/Browser";
 import { CountryFlag } from "../../components/shared/icons/CountryFlag";

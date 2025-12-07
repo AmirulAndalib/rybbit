@@ -4,9 +4,6 @@ import { EVENT_FILTERS } from "../../../lib/filterGroups";
 import { getStartAndEndDate, timeZone } from "../../utils";
 import { fetchEventProperties, EventProperty } from "../standalone";
 
-// Re-export type from standalone
-export type { EventProperty } from "../standalone";
-
 export function useGetEventProperties(eventName: string | null) {
   const { site, time } = useStore();
 

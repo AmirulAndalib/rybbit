@@ -4,9 +4,6 @@ import { GOALS_PAGE_FILTERS } from "../../../lib/filterGroups";
 import { getStartAndEndDate, timeZone } from "../../utils";
 import { fetchGoals, Goal, PaginationMeta, GoalsResponse } from "../standalone";
 
-// Re-export types from standalone
-export type { Goal, PaginationMeta, GoalsResponse } from "../standalone";
-
 export function useGetGoals({
   page = 1,
   pageSize = 10,

@@ -4,9 +4,6 @@ import { getFilteredFilters, useStore } from "../../../lib/store";
 import { getStartAndEndDate, timeZone } from "../../utils";
 import { fetchOutboundLinks, OutboundLink } from "../standalone";
 
-// Re-export type from standalone
-export type { OutboundLink } from "../standalone";
-
 export function useGetOutboundLinks() {
   const { site, time } = useStore();
 

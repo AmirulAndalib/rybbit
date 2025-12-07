@@ -3,9 +3,6 @@ import { useStore } from "../../lib/store";
 import { getStartAndEndDate, timeZone } from "../utils";
 import { fetchSessionLocations, LiveSessionLocation } from "./standalone";
 
-// Re-export type from standalone
-export type { LiveSessionLocation } from "./standalone";
-
 export function useGetSessionLocations() {
   const { time, site, filters } = useStore();
 

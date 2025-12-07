@@ -10,20 +10,9 @@ import { useStore } from "../../lib/store";
 import { APIResponse } from "../types";
 import { getStartAndEndDate, timeZone } from "../utils";
 import { Time } from "../../components/DateSelector/types";
-import { fetchMetric } from "./standalone";
+import { fetchMetric, MetricResponse } from "./standalone";
 
 type PeriodTime = "current" | "previous";
-
-export type MetricResponse = {
-  value: string;
-  title?: string;
-  count: number;
-  percentage: number;
-  pageviews?: number;
-  pageviews_percentage?: number;
-  time_on_page_seconds?: number;
-  bounce_rate?: number;
-};
 
 export function useMetric({
   parameter,

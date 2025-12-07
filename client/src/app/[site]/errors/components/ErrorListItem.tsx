@@ -6,7 +6,7 @@ import { useState } from "react";
 import { ErrorDetails } from "./ErrorDetails";
 import { ErrorSparklineChart } from "./ErrorSparklineChart";
 import { useGetErrorBucketed } from "@/api/analytics/errors/useGetErrorBucketed";
-import { ErrorNameItem } from "../../../../api/analytics/errors/useGetErrorNames";
+import { ErrorNameItem } from "../../../../api/analytics/standalone";
 
 // Maximum length for error messages
 const MAX_ERROR_MESSAGE_LENGTH = 150;

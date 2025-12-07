@@ -3,19 +3,9 @@ import { UseQueryOptions, UseQueryResult, useQuery } from "@tanstack/react-query
 import { useStore } from "../../lib/store";
 import { APIResponse } from "../types";
 import { getStartAndEndDate, timeZone } from "../utils";
-import { fetchOverviewBucketed } from "./standalone";
+import { fetchOverviewBucketed, GetOverviewBucketedResponse } from "./standalone";
 
 type PeriodTime = "current" | "previous";
-
-export type GetOverviewBucketedResponse = {
-  time: string;
-  pageviews: number;
-  sessions: number;
-  pages_per_session: number;
-  bounce_rate: number;
-  session_duration: number;
-  users: number;
-}[];
 
 export function useGetOverviewBucketed({
   periodTime,

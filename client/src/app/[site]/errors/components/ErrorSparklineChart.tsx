@@ -1,6 +1,6 @@
 "use client";
 
-import { GetErrorBucketedResponse } from "@/api/analytics/errors/useGetErrorBucketed";
+import { GetErrorBucketedResponse } from "@/api/analytics/standalone";
 import { hour12, userLocale } from "@/lib/dateTimeUtils";
 import { useNivoTheme } from "@/lib/nivo";
 import { ResponsiveBar } from "@nivo/bar";
