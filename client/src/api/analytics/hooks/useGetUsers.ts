@@ -53,5 +53,6 @@ export function useGetUsers(options: GetUsersOptions) {
     staleTime: 0,
     // Enable refetching when the window regains focus
     refetchOnWindowFocus: true,
+    enabled: !!site,
   });
 }

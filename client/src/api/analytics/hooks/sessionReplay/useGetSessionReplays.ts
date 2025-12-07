@@ -1,7 +1,7 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useStore } from "../../../../lib/store";
 import { getStartAndEndDate, timeZone } from "../../../utils";
-import { fetchSessionReplays, SessionReplayListItem, SessionReplayListResponse } from "../../endpoints";
+import { fetchSessionReplays } from "../../endpoints";
 
 type UseGetSessionReplaysOptions = {
   limit?: number;
@@ -32,5 +32,6 @@ export function useGetSessionReplays({ limit = 20, minDuration = 30 }: UseGetSes
     },
     staleTime: 1000 * 60 * 5, // 5 minutes
     refetchOnWindowFocus: false,
+    enabled: !!site,
   });
 }

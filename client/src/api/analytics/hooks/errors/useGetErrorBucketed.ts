@@ -5,12 +5,10 @@ import { fetchErrorBucketed, GetErrorBucketedResponse } from "../../endpoints";
 
 type UseGetErrorBucketedOptions = {
   errorMessage: string;
-  enabled?: boolean;
 };
 
 export function useGetErrorBucketed({
   errorMessage,
-  enabled = true,
 }: UseGetErrorBucketedOptions): UseQueryResult<GetErrorBucketedResponse> {
   const { time, site, filters, bucket } = useStore();
 
@@ -28,7 +26,7 @@ export function useGetErrorBucketed({
         bucket,
       });
     },
-    enabled: enabled && !!errorMessage && !!site,
+    enabled: !!errorMessage && !!site,
     staleTime: Infinity,
   });
 }

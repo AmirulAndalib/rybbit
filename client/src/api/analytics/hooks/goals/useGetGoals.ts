@@ -1,21 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
-import { getFilteredFilters, useStore } from "../../../../lib/store";
 import { GOALS_PAGE_FILTERS } from "../../../../lib/filterGroups";
+import { getFilteredFilters, useStore } from "../../../../lib/store";
 import { getStartAndEndDate, timeZone } from "../../../utils";
-import { fetchGoals, Goal, PaginationMeta, GoalsResponse } from "../../endpoints";
+import { fetchGoals } from "../../endpoints";
 
 export function useGetGoals({
   page = 1,
   pageSize = 10,
   sort = "createdAt",
   order = "desc",
-  enabled = true,
 }: {
   page?: number;
   pageSize?: number;
   sort?: "goalId" | "name" | "goalType" | "createdAt";
   order?: "asc" | "desc";
-  enabled?: boolean;
 }) {
   const { site, time } = useStore();
   const filteredFilters = getFilteredFilters(GOALS_PAGE_FILTERS);
@@ -36,6 +34,6 @@ export function useGetGoals({
         order,
       });
     },
-    enabled: !!site && enabled,
+    enabled: !!site,
   });
 }

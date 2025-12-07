@@ -33,13 +33,27 @@ export function useGetPerformanceTimeSeries({
   return useQuery({
     queryKey: ["performance-time-series", timeToUse, bucketToUse, site, combinedFilters, selectedPerformanceMetric],
     queryFn: () => {
-      return fetchPerformanceTimeSeries(site, {
-        startDate: startDate ?? "",
-        endDate: endDate ?? "",
-        timeZone,
-        bucket: bucketToUse,
-        filters: combinedFilters,
-      }).then(data => ({ data }));
+      // Build params based on time mode
+      const params =
+        timeToUse.mode === "past-minutes"
+          ? {
+              startDate: "",
+              endDate: "",
+              timeZone,
+              bucket: bucketToUse,
+              filters: combinedFilters,
+              pastMinutesStart: timeToUse.pastMinutesStart,
+              pastMinutesEnd: timeToUse.pastMinutesEnd,
+            }
+          : {
+              startDate: startDate ?? "",
+              endDate: endDate ?? "",
+              timeZone,
+              bucket: bucketToUse,
+              filters: combinedFilters,
+            };
+
+      return fetchPerformanceTimeSeries(site, params).then(data => ({ data }));
     },
     placeholderData: (_, query: any) => {
       if (!query?.queryKey) return undefined;

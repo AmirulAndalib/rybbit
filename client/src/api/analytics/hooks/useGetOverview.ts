@@ -57,5 +57,6 @@ export function useGetOverview({ periodTime, site, overrideTime }: UseGetOvervie
       }
       return undefined;
     },
+    enabled: !!site,
   });
 }

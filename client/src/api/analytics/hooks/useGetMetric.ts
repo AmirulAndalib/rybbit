@@ -66,6 +66,7 @@ export function useMetric({
       }
       return undefined;
     },
+    enabled: !!site,
   });
 }
 
@@ -79,7 +80,6 @@ export function usePaginatedMetric({
   limit = 10,
   page = 1,
   useFilters = true,
-  enabled = true,
   additionalFilters = [],
   customFilters = [],
   customTime,
@@ -126,7 +126,7 @@ export function usePaginatedMetric({
       }
       return undefined;
     },
-    enabled,
+    enabled: !!site,
   });
 }
 
@@ -168,5 +168,6 @@ export function useInfiniteMetric({
       return allPages.length + 1;
     },
     staleTime: 60_000,
+    enabled: !!site,
   });
 }

@@ -5,5 +5,6 @@ export function useUserInfo(siteId: number, userId: string) {
   return useQuery<UserInfo>({
     queryKey: ["user-info", userId, siteId],
     queryFn: () => fetchUserInfo(siteId, userId),
+    enabled: !!siteId && !!userId,
   });
 }

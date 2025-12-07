@@ -86,6 +86,7 @@ export function useGetOverviewBucketed({
       return undefined;
     },
     staleTime: 60_000,
+    enabled: !!site,
     ...props,
   });
 }

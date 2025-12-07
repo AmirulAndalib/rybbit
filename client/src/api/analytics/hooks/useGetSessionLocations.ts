@@ -28,5 +28,6 @@ export function useGetSessionLocations() {
         filters: locationExcludedFilters,
       });
     },
+    enabled: !!site,
   });
 }

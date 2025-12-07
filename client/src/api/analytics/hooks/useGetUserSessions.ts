@@ -128,5 +128,6 @@ export function useGetUserSessionCount(userId: string) {
       });
     },
     staleTime: Infinity,
+    enabled: !!site && !!userId,
   });
 }

@@ -33,5 +33,6 @@ export function useGetPageTitlesPaginated({
       return { data };
     },
     staleTime: Infinity,
+    enabled: !!site,
   });
 }

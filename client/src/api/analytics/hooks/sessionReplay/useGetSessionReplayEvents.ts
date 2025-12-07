@@ -1,10 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import {
-  fetchSessionReplayEvents,
-  SessionReplayEvent,
-  SessionReplayMetadata,
-  GetSessionReplayEventsResponse,
-} from "../../endpoints";
+import { fetchSessionReplayEvents } from "../../endpoints";
 
 export function useGetSessionReplayEvents(siteId: number, sessionId: string) {
   return useQuery({

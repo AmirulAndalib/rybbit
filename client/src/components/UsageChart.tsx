@@ -26,7 +26,6 @@ export function UsageChart({ organizationId, startDate, endDate, timeZone = "UTC
     startDate,
     endDate,
     timeZone,
-    enabled: !!organizationId,
   });
 
   const maxTicks = Math.round((width ?? Infinity) / 200);

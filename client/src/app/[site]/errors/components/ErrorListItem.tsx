@@ -26,7 +26,6 @@ export function ErrorListItem({ errorData }: ErrorListItemProps) {
   // Get error bucketed data for sparkline
   const { data: errorBucketedData, isLoading: isLoadingBucketed } = useGetErrorBucketed({
     errorMessage: errorData.value,
-    enabled: true,
   });
 
   return (

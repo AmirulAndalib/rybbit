@@ -16,7 +16,6 @@ type UseGetPerformanceByDimensionOptions = {
   limit?: number;
   page?: number;
   useFilters?: boolean;
-  enabled?: boolean;
   additionalFilters?: Filter[];
   sortBy?: string;
   sortOrder?: "asc" | "desc";
@@ -28,7 +27,6 @@ export function useGetPerformanceByDimension({
   limit = 10,
   page = 1,
   useFilters = true,
-  enabled = true,
   additionalFilters = [],
   sortBy,
   sortOrder,
@@ -78,6 +76,6 @@ export function useGetPerformanceByDimension({
       }
       return undefined;
     },
-    enabled,
+    enabled: !!site,
   });
 }

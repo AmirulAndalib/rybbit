@@ -8,5 +8,6 @@ export function useGetLiveUsercount(minutes = 5) {
     queryKey: ["live-user-count", site, minutes],
     refetchInterval: 5000,
     queryFn: () => fetchLiveUserCount(site, minutes),
+    enabled: !!site,
   });
 }
