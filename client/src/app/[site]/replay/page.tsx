@@ -37,9 +37,9 @@ export default function SessionReplayPage() {
             description={"Replays will appear here once session replay is enabled."}
           />
         ) : (
-          <div className="grid grid-cols-[200px_1fr_300px] gap-3">
+          <div className="grid grid-cols-[200px_1fr_300px] gap-3 h-[calc(100vh-100px)]">
             <ReplayList />
-            <div ref={ref} className="w-[calc(min(100vw, 2000px)-780px)]">
+            <div ref={ref} className="w-[calc(min(100vw, 2000px)-780px)] h-full overflow-hidden">
               {resolvedWidth && resolvedHeight && <ReplayPlayer width={resolvedWidth} height={resolvedHeight - 1} />}
             </div>
             <ReplayBreadcrumbs />
