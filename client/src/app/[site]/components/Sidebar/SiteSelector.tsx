@@ -31,10 +31,10 @@ function SiteSelectorContent({ onSiteSelect }: { onSiteSelect: () => void }) {
       <PopoverContent align="start" className="w-52 p-2">
         <div className="max-h-96 overflow-y-auto">
           {[
-            {
-              siteId: 21,
-              domain: "rybbit.com",
-            },
+            // {
+            //   siteId: 21,
+            //   domain: "rybbit.com",
+            // },
             {
               siteId: 1,
               domain: "tomato.gg",

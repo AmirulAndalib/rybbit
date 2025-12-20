@@ -162,11 +162,10 @@ export function useGetSite(siteId?: string | number) {
         return null;
       }
 
-      // Use regular fetch instead of authedFetch to support public sites
       const data = await authedFetch<SiteResponse>(`/sites/${siteIdToUse}`);
       return data;
     },
-    staleTime: 60000, // 1 minute
+    staleTime: 60000,
     enabled: !!siteId,
   });
 }
@@ -187,7 +186,7 @@ export function useGetSiteIsPublic(siteId?: string | number) {
         return false;
       }
     },
-    staleTime: 60000, // 1 minute
+    staleTime: 60000,
     enabled: !!siteId,
   });
 }
