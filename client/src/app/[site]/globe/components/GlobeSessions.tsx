@@ -66,8 +66,8 @@ function SessionCardSkeleton() {
 
 function SessionCard({ session, onClick }: { session: GetSessionsResponse[number]; onClick?: () => void }) {
   // Calculate session duration in minutes
-  const start = DateTime.fromSQL(session.session_start);
-  const end = DateTime.fromSQL(session.session_end);
+  const start = DateTime.fromSQL(session.session_start, { zone: "utc" });
+  const end = DateTime.fromSQL(session.session_end, { zone: "utc" });
   const totalSeconds = Math.floor(end.diff(start).milliseconds / 1000);
   const duration = formatShortDuration(totalSeconds);
   const siteId = useCurrentSite();

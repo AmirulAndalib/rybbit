@@ -60,10 +60,12 @@ export function generateTimeWindows(startTime: DateTime, endTime: DateTime, wind
 export function sessionOverlapsWindow(
   session: GetSessionsResponse[number],
   windowStart: DateTime,
-  windowEnd: DateTime
+  windowEnd: DateTime,
+  timezone?: string
 ): boolean {
-  const sessionStart = DateTime.fromSQL(session.session_start, { zone: "utc" }).setZone(getTimezone());
-  const sessionEnd = DateTime.fromSQL(session.session_end, { zone: "utc" }).setZone(getTimezone());
+  const tz = timezone ?? getTimezone();
+  const sessionStart = DateTime.fromSQL(session.session_start, { zone: "utc" }).setZone(tz);
+  const sessionEnd = DateTime.fromSQL(session.session_end, { zone: "utc" }).setZone(tz);
 
   // Session overlaps if:
   // - It starts before the window ends AND
@@ -77,11 +79,12 @@ export function sessionOverlapsWindow(
 export function getActiveSessions(
   sessions: GetSessionsResponse,
   windowStart: DateTime,
-  windowSize: number
+  windowSize: number,
+  timezone?: string
 ): GetSessionsResponse {
   const windowEnd = windowStart.plus({ minutes: windowSize });
 
-  return sessions.filter(session => sessionOverlapsWindow(session, windowStart, windowEnd));
+  return sessions.filter(session => sessionOverlapsWindow(session, windowStart, windowEnd, timezone));
 }
 
 /**
@@ -91,15 +94,17 @@ export function getActiveSessions(
 export function getSessionCountsPerWindow(
   sessions: GetSessionsResponse,
   timeWindows: DateTime[],
-  windowSize: number
+  windowSize: number,
+  timezone?: string
 ): number[] {
+  const tz = timezone ?? getTimezone();
   // Parse all session times once upfront and convert to epoch ms
   const startTimes: number[] = [];
   const endTimes: number[] = [];
 
   for (const session of sessions) {
-    const start = DateTime.fromSQL(session.session_start, { zone: "utc" }).setZone(getTimezone());
-    const end = DateTime.fromSQL(session.session_end, { zone: "utc" }).setZone(getTimezone());
+    const start = DateTime.fromSQL(session.session_start, { zone: "utc" }).setZone(tz);
+    const end = DateTime.fromSQL(session.session_end, { zone: "utc" }).setZone(tz);
     startTimes.push(start.toMillis());
     endTimes.push(end.toMillis());
   }

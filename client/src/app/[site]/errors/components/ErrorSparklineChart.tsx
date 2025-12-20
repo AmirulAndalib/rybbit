@@ -17,6 +17,7 @@ interface ErrorSparklineChartProps {
 
 export function ErrorSparklineChart({ data, isHovering, errorMessage, isLoading }: ErrorSparklineChartProps) {
   const nivoTheme = useNivoTheme();
+  const timezone = getTimezone();
 
   const chartData = useMemo(() => {
     if (!data || data.length === 0) {
@@ -26,13 +27,13 @@ export function ErrorSparklineChart({ data, isHovering, errorMessage, isLoading 
     return data
       .filter(e => {
         // Filter out dates from the future
-        return DateTime.fromSQL(e.time).toUTC() <= DateTime.now();
+        return DateTime.fromSQL(e.time, { zone: timezone }).toUTC() <= DateTime.now();
       })
       .map(e => ({
-        time: DateTime.fromSQL(e.time).toUTC().toFormat("yyyy-MM-dd HH:mm:ss"),
+        time: DateTime.fromSQL(e.time, { zone: timezone }).toUTC().toFormat("yyyy-MM-dd HH:mm:ss"),
         errors: e.error_count || 0,
       }));
-  }, [data]);
+  }, [data, timezone]);
 
   if (isLoading) {
     return (
@@ -86,7 +87,7 @@ export function ErrorSparklineChart({ data, isHovering, errorMessage, isLoading 
             style={{ zIndex: 9999, position: "relative" }}
           >
             <div className="font-semibold mb-1 text-neutral-700 dark:text-neutral-200">
-              {formatDateTime(currentTime)}
+              {formatDateTime(currentTime, timezone)}
             </div>
             <div className="flex justify-between items-center">
               <span className="font-medium text-red-400">
@@ -103,13 +104,14 @@ export function ErrorSparklineChart({ data, isHovering, errorMessage, isLoading 
   );
 }
 
-const formatDateTime = (dt: DateTime) => {
+const formatDateTime = (dt: DateTime, tz: string) => {
   const options: Intl.DateTimeFormatOptions = {
     month: "short",
     day: "numeric",
     hour: "numeric",
     minute: "numeric",
     hour12: hour12,
+    timeZone: tz,
   };
 
   return new Intl.DateTimeFormat(userLocale, options).format(dt.toJSDate());
