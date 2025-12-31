@@ -45,12 +45,12 @@ const updateSiteConfigSchema = z.object({
 type UpdateSiteConfigRequest = z.infer<typeof updateSiteConfigSchema>;
 
 export async function updateSiteConfig(
-  request: FastifyRequest<{ Params: { id: string }; Body: UpdateSiteConfigRequest }>,
+  request: FastifyRequest<{ Params: { siteId: string }; Body: UpdateSiteConfigRequest }>,
   reply: FastifyReply
 ) {
   try {
     // Get siteId from path params
-    const siteId = parseInt(request.params.id, 10);
+    const siteId = parseInt(request.params.siteId, 10);
     if (isNaN(siteId) || siteId <= 0) {
       return reply.status(400).send({
         success: false,

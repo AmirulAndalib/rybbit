@@ -12,7 +12,7 @@ import { IS_CLOUD } from "../../lib/const.js";
 const createSiteImportRequestSchema = z
   .object({
     params: z.object({
-      site: z.coerce.number().int().positive(),
+      siteId: z.coerce.number().int().positive(),
     }),
     body: z.object({
       platform: z.enum(importPlatforms),
@@ -36,7 +36,7 @@ export async function createSiteImport(request: FastifyRequest<CreateSiteImportR
       return reply.status(400).send({ error: "Validation error" });
     }
 
-    const { site } = parsed.data.params;
+    const { siteId } = parsed.data.params;
     const { platform } = parsed.data.body;
 
     const [siteRecord] = await db
@@ -46,7 +46,7 @@ export async function createSiteImport(request: FastifyRequest<CreateSiteImportR
       })
       .from(sites)
       .leftJoin(organization, eq(sites.organizationId, organization.id))
-      .where(eq(sites.siteId, site))
+      .where(eq(sites.siteId, siteId))
       .limit(1);
 
     if (!siteRecord || !siteRecord.organizationId) {
@@ -79,7 +79,7 @@ export async function createSiteImport(request: FastifyRequest<CreateSiteImportR
       const latestAllowedDate = DateTime.utc().toFormat("yyyy-MM-dd");
 
       const importRecord = await createImport({
-        siteId: site,
+        siteId,
         organizationId,
         platform,
       });

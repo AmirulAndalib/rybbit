@@ -13,10 +13,9 @@ import { db } from "../db/postgres/postgres.js";
 
 type AuthMiddleware = (request: FastifyRequest, reply: FastifyReply) => Promise<void>;
 
-// Helper to extract site ID from various param names
 const getSiteIdFromParams = (request: FastifyRequest): string | undefined => {
   const params = request.params as Record<string, string>;
-  return params.site || params.siteId || params.id;
+  return params.siteId;
 };
 
 /**
@@ -32,10 +31,7 @@ export const resolveSiteId: AuthMiddleware = async (request, reply) => {
     if (!numericId) {
       return reply.status(404).send({ error: "Site not found" });
     }
-    // Update all possible param names
-    if (params.site) params.site = String(numericId);
-    if (params.siteId) params.siteId = String(numericId);
-    if (params.id) params.id = String(numericId);
+    params.siteId = String(numericId);
   }
 };
 
@@ -151,13 +147,13 @@ export const requireOrgMember: AuthMiddleware = async (request, reply) => {
   const params = request.params as Record<string, string>;
   const organizationId = params.organizationId;
 
+  if (!organizationId) {
+    return reply.status(400).send({ error: "Organization ID required" });
+  }
+
   const apiKeyResult = await checkApiKey(request, { organizationId });
   if (apiKeyResult.valid) {
     return;
-  }
-
-  if (!organizationId) {
-    return reply.status(400).send({ error: "Organization ID required" });
   }
 
   const isMember = await getUserIsInOrg(request, organizationId);

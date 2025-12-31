@@ -230,56 +230,56 @@ server.get("/api/metrics.js", async (_, reply) => reply.sendFile("web-vitals.iif
 // WEB & PRODUCT ANALYTICS
 
 // This endpoint gets called a lot so we don't want to log it
-server.get("/api/live-user-count/:site", { logLevel: "silent", ...publicSite }, getLiveUsercount);
-server.get("/api/overview/:site", publicSite, getOverview);
-server.get("/api/overview-bucketed/:site", publicSite, getOverviewBucketed);
-server.get("/api/metric/:site", publicSite, getMetric);
-server.get("/api/page-titles/:site", publicSite, getPageTitles);
-server.get("/api/error-names/:site", publicSite, getErrorNames);
-server.get("/api/error-events/:site", publicSite, getErrorEvents);
-server.get("/api/error-bucketed/:site", publicSite, getErrorBucketed);
-server.get("/api/retention/:site", publicSite, getRetention);
-server.get("/api/site-has-data/:site", publicSite, getSiteHasData);
-server.get("/api/site-is-public/:site", publicSite, getSiteIsPublic);
-server.get("/api/sessions/:site", publicSite, getSessions);
-server.get("/api/sessions/:sessionId/:site", publicSite, getSession);
-server.get("/api/events/:site", publicSite, getEvents);
-server.get("/api/users/:site", publicSite, getUsers);
-server.get("/api/users/session-count/:site", publicSite, getUserSessionCount);
-server.get("/api/users/:userId/:site", publicSite, getUserInfo);
-server.get("/api/session-locations/:site", publicSite, getSessionLocations);
-server.get("/api/funnels/:site", publicSite, getFunnels);
-server.get("/api/journeys/:site", publicSite, getJourneys);
-server.post("/api/funnels/analyze/:site", publicSite, getFunnel);
-server.post("/api/funnels/:stepNumber/sessions/:site", publicSite, getFunnelStepSessions);
-server.post("/api/funnels/:site", authSite, createFunnel);
-server.delete("/api/funnels/:funnelId/:site", authSite, deleteFunnel);
-server.get("/api/goals/:site", publicSite, getGoals);
-server.get("/api/goals/:goalId/sessions/:site", publicSite, getGoalSessions);
-server.post("/api/goals/:site", authSite, createGoal);
-server.delete("/api/goals/:goalId/:site", authSite, deleteGoal);
-server.put("/api/goals/:goalId/:site", authSite, updateGoal);
-server.get("/api/events/names/:site", publicSite, getEventNames);
-server.get("/api/events/properties/:site", publicSite, getEventProperties);
-server.get("/api/events/outbound/:site", publicSite, getOutboundLinks);
+server.get("/api/live-user-count/:siteId", { logLevel: "silent", ...publicSite }, getLiveUsercount);
+server.get("/api/overview/:siteId", publicSite, getOverview);
+server.get("/api/overview-bucketed/:siteId", publicSite, getOverviewBucketed);
+server.get("/api/metric/:siteId", publicSite, getMetric);
+server.get("/api/page-titles/:siteId", publicSite, getPageTitles);
+server.get("/api/error-names/:siteId", publicSite, getErrorNames);
+server.get("/api/error-events/:siteId", publicSite, getErrorEvents);
+server.get("/api/error-bucketed/:siteId", publicSite, getErrorBucketed);
+server.get("/api/retention/:siteId", publicSite, getRetention);
+server.get("/api/site-has-data/:siteId", publicSite, getSiteHasData);
+server.get("/api/site-is-public/:siteId", publicSite, getSiteIsPublic);
+server.get("/api/sessions/:siteId", publicSite, getSessions);
+server.get("/api/sessions/:sessionId/:siteId", publicSite, getSession);
+server.get("/api/events/:siteId", publicSite, getEvents);
+server.get("/api/users/:siteId", publicSite, getUsers);
+server.get("/api/users/session-count/:siteId", publicSite, getUserSessionCount);
+server.get("/api/users/:userId/:siteId", publicSite, getUserInfo);
+server.get("/api/session-locations/:siteId", publicSite, getSessionLocations);
+server.get("/api/funnels/:siteId", publicSite, getFunnels);
+server.get("/api/journeys/:siteId", publicSite, getJourneys);
+server.post("/api/funnels/analyze/:siteId", publicSite, getFunnel);
+server.post("/api/funnels/:stepNumber/sessions/:siteId", publicSite, getFunnelStepSessions);
+server.post("/api/funnels/:siteId", authSite, createFunnel);
+server.delete("/api/funnels/:funnelId/:siteId", authSite, deleteFunnel);
+server.get("/api/goals/:siteId", publicSite, getGoals);
+server.get("/api/goals/:goalId/sessions/:siteId", publicSite, getGoalSessions);
+server.post("/api/goals/:siteId", authSite, createGoal);
+server.delete("/api/goals/:goalId/:siteId", authSite, deleteGoal);
+server.put("/api/goals/:goalId/:siteId", authSite, updateGoal);
+server.get("/api/events/names/:siteId", publicSite, getEventNames);
+server.get("/api/events/properties/:siteId", publicSite, getEventProperties);
+server.get("/api/events/outbound/:siteId", publicSite, getOutboundLinks);
 server.get("/api/org-event-count/:organizationId", orgMember, getOrgEventCount);
 
 // Performance Analytics
-server.get("/api/performance/overview/:site", publicSite, getPerformanceOverview);
-server.get("/api/performance/time-series/:site", publicSite, getPerformanceTimeSeries);
-server.get("/api/performance/by-dimension/:site", publicSite, getPerformanceByDimension);
+server.get("/api/performance/overview/:siteId", publicSite, getPerformanceOverview);
+server.get("/api/performance/time-series/:siteId", publicSite, getPerformanceTimeSeries);
+server.get("/api/performance/by-dimension/:siteId", publicSite, getPerformanceByDimension);
 
 // Session Replay
-server.post("/api/session-replay/record/:site", recordSessionReplay); // Public - tracking endpoint
-server.get("/api/session-replay/list/:site", publicSite, getSessionReplays);
-server.get("/api/session-replay/:sessionId/:site", publicSite, getSessionReplayEvents);
-server.delete("/api/session-replay/:sessionId/:site", authSite, deleteSessionReplay);
+server.post("/api/session-replay/record/:siteId", recordSessionReplay); // Public - tracking endpoint
+server.get("/api/session-replay/list/:siteId", publicSite, getSessionReplays);
+server.get("/api/session-replay/:sessionId/:siteId", publicSite, getSessionReplayEvents);
+server.delete("/api/session-replay/:sessionId/:siteId", authSite, deleteSessionReplay);
 
 // Sites
-server.get("/api/sites/:id", publicSite, getSite);
+server.get("/api/sites/:siteId", publicSite, getSite);
 server.post("/api/sites/:organizationId", orgAdminParams, addSite);
-server.put("/api/sites/:id/config", adminSite, updateSiteConfig);
-server.delete("/api/sites/:id", adminSite, deleteSite);
+server.put("/api/sites/:siteId/config", adminSite, updateSiteConfig);
+server.delete("/api/sites/:siteId", adminSite, deleteSite);
 server.get("/api/sites/:siteId/private-link-config", adminSite, getSitePrivateLinkConfig);
 server.post("/api/sites/:siteId/private-link-config", adminSite, updateSitePrivateLinkConfig);
 server.get("/api/site/tracking-config/:siteId", getTrackingConfig); // Public - used by tracking script
@@ -287,10 +287,10 @@ server.get("/api/sites/:siteId/excluded-ips", authSite, getSiteExcludedIPs);
 server.get("/api/sites/:siteId/excluded-countries", authSite, getSiteExcludedCountries);
 
 // Site Imports
-server.get("/api/sites/:site/imports", adminSite, getSiteImports);
-server.post("/api/sites/:site/imports", adminSite, createSiteImport);
-server.post("/api/sites/:site/imports/:importId/events", adminSite, batchImportEvents);
-server.delete("/api/sites/:site/imports/:importId", adminSite, deleteSiteImport);
+server.get("/api/sites/:siteId/imports", adminSite, getSiteImports);
+server.post("/api/sites/:siteId/imports", adminSite, createSiteImport);
+server.post("/api/sites/:siteId/imports/:importId/events", adminSite, batchImportEvents);
+server.delete("/api/sites/:siteId/imports/:importId", adminSite, deleteSiteImport);
 
 // Organizations
 server.get("/api/organizations/:organizationId/sites", orgMember, getSitesFromOrg);
@@ -306,12 +306,12 @@ server.post("/api/user/api-keys", authOnly, createApiKey);
 server.delete("/api/user/api-keys/:keyId", authOnly, deleteApiKey);
 
 // GOOGLE SEARCH CONSOLE
-server.get("/api/gsc/connect/:site", authSite, connectGSC);
+server.get("/api/gsc/connect/:siteId", authSite, connectGSC);
 server.get("/api/gsc/callback", gscCallback); // Public - OAuth callback
-server.get("/api/gsc/status/:site", publicSite, getGSCStatus);
-server.delete("/api/gsc/disconnect/:site", authSite, disconnectGSC);
-server.post("/api/gsc/select-property/:site", authSite, selectGSCProperty);
-server.get("/api/gsc/data/:site", publicSite, getGSCData);
+server.get("/api/gsc/status/:siteId", publicSite, getGSCStatus);
+server.delete("/api/gsc/disconnect/:siteId", authSite, disconnectGSC);
+server.post("/api/gsc/select-property/:siteId", authSite, selectGSCProperty);
+server.get("/api/gsc/data/:siteId", publicSite, getGSCData);
 
 // UPTIME MONITORING
 // Only register uptime routes when IS_CLOUD is true (Redis is available)

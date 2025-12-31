@@ -12,7 +12,7 @@ import { IS_CLOUD } from "../../lib/const.js";
 const deleteImportRequestSchema = z
   .object({
     params: z.object({
-      site: z.coerce.number().int().positive(),
+      siteId: z.coerce.number().int().positive(),
       importId: z.string().uuid(),
     }),
   })
@@ -32,14 +32,14 @@ export async function deleteSiteImport(request: FastifyRequest<DeleteImportReque
       return reply.status(400).send({ error: "Validation error" });
     }
 
-    const { site, importId } = parsed.data.params;
+    const { siteId, importId } = parsed.data.params;
 
     const importRecord = await getImportById(importId);
     if (!importRecord) {
       return reply.status(404).send({ error: "Import not found" });
     }
 
-    if (importRecord.siteId !== site) {
+    if (importRecord.siteId !== siteId) {
       return reply.status(403).send({ error: "Import does not belong to this site" });
     }
 
@@ -55,7 +55,7 @@ export async function deleteSiteImport(request: FastifyRequest<DeleteImportReque
         })
         .from(sites)
         .leftJoin(organization, eq(sites.organizationId, organization.id))
-        .where(eq(sites.siteId, site))
+        .where(eq(sites.siteId, siteId))
         .limit(1);
 
       if (siteRecord.organizationId) {
@@ -74,7 +74,7 @@ export async function deleteSiteImport(request: FastifyRequest<DeleteImportReque
         query: "DELETE FROM events WHERE import_id = {importId:UUID} AND site_id = {siteId:UInt16}",
         query_params: {
           importId: importId,
-          siteId: site,
+          siteId: siteId,
         },
       });
     } catch (chError) {

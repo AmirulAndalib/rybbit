@@ -4,8 +4,8 @@ import { db } from "../../db/postgres/postgres.js";
 import { sites } from "../../db/postgres/schema.js";
 import { siteConfig } from "../../lib/siteConfig.js";
 
-export async function deleteSite(request: FastifyRequest<{ Params: { id: string } }>, reply: FastifyReply) {
-  const { id } = request.params;
+export async function deleteSite(request: FastifyRequest<{ Params: { siteId: string } }>, reply: FastifyReply) {
+  const { siteId: id } = request.params;
 
   // Auth is handled by requireSiteAdminAccess middleware
 
