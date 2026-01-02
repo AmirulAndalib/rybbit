@@ -1,7 +1,9 @@
 import { Expand, Info, Monitor, Smartphone, SquareArrowOutUpRight, Tablet } from "lucide-react";
 import { useState } from "react";
-import { useConnectGSC, useGSCConnection } from "../../../../../api/gsc/useGSCConnection";
-import { GSCDimension, useGSCData } from "../../../../../api/gsc/useGSCData";
+import { useConnectGSC } from "../../../../../api/gsc/hooks/useConnectGSC";
+import { useGetGSCConnection } from "../../../../../api/gsc/hooks/useGetGSCConnection";
+import { useGetGSCData } from "../../../../../api/gsc/hooks/useGetGSCData";
+import { GSCDimension } from "../../../../../api/gsc/endpoints";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../../../../components/ui/basic-tabs";
 import { Button } from "../../../../../components/ui/button";
 import { Card, CardContent, CardLoader } from "../../../../../components/ui/card";
@@ -40,7 +42,7 @@ interface DataListProps {
 }
 
 function DataList({ dimension, label, renderName, expanded, close }: DataListProps) {
-  const { data, isLoading, isFetching } = useGSCData(dimension);
+  const { data, isLoading, isFetching } = useGetGSCData(dimension);
 
   const totalClicks = data?.reduce((acc, item) => acc + item.clicks, 0) || 0;
 
@@ -125,7 +127,7 @@ export function SearchConsole() {
   const [tab, setTab] = useState<Tab>("queries");
   const [expanded, setExpanded] = useState(false);
   const close = () => setExpanded(false);
-  const { data: connection, isLoading: isLoadingConnection } = useGSCConnection();
+  const { data: connection, isLoading: isLoadingConnection } = useGetGSCConnection();
 
   const topSection = (
     <div className="flex flex-row gap-2 justify-between items-center">

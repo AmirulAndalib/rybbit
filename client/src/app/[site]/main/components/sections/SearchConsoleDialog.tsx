@@ -16,7 +16,8 @@ import {
 import { useDebounce } from "@uidotdev/usehooks";
 import { ChevronDown, ChevronUp, Loader2, Search } from "lucide-react";
 import { ReactNode, useMemo, useState } from "react";
-import { GSCData, GSCDimension, useGSCData } from "../../../../../api/gsc/useGSCData";
+import { useGetGSCData } from "../../../../../api/gsc/hooks/useGetGSCData";
+import { GSCData, GSCDimension } from "../../../../../api/gsc/endpoints";
 import { cn } from "../../../../../lib/utils";
 
 interface SearchConsoleDialogProps {
@@ -30,7 +31,7 @@ interface SearchConsoleDialogProps {
 const columnHelper = createColumnHelper<GSCData>();
 
 export function SearchConsoleDialog({ title, dimension, renderName, expanded, close }: SearchConsoleDialogProps) {
-  const { data, isLoading } = useGSCData(dimension);
+  const { data, isLoading } = useGetGSCData(dimension);
 
   const [searchTerm, setSearchTerm] = useState("");
   const debouncedSearchTerm = useDebounce(searchTerm, 200);

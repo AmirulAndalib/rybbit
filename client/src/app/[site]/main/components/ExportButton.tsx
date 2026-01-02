@@ -11,8 +11,7 @@ import {
   fetchOverviewBucketed,
 } from "../../../../api/analytics/endpoints";
 import { getStartAndEndDate } from "../../../../api/utils";
-import { fetchGSCConnectionStatus } from "../../../../api/gsc/useGSCConnection";
-import { fetchGSCData, GSCDimension } from "../../../../api/gsc/useGSCData";
+import { fetchGSCConnectionStatus, fetchGSCData, GSCDimension } from "../../../../api/gsc/endpoints";
 import { Button } from "../../../../components/ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../../../components/ui/tooltip";
 import { IS_CLOUD } from "../../../../lib/const";
@@ -182,7 +181,13 @@ export function ExportButton() {
           const gscResults = await Promise.all(
             GSC_DIMENSIONS.map(async ({ dimension, filename }) => {
               try {
-                const data = await fetchGSCData(site, dimension, time);
+                const { startDate, endDate } = getStartAndEndDate(time);
+                const data = await fetchGSCData(site, {
+                  dimension,
+                  startDate: startDate ?? "",
+                  endDate: endDate ?? "",
+                  timeZone,
+                });
                 return {
                   filename,
                   data: data as unknown as Record<string, unknown>[],
