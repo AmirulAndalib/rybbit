@@ -11,6 +11,7 @@ import { cn } from "../lib/utils";
 import { RybbitLogo } from "./RybbitLogo";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 import { authClient } from "../lib/auth";
+import { useSignout } from "../hooks/useSignout";
 
 function AdminLink({ isExpanded }: { isExpanded: boolean }) {
   const pathname = usePathname();
@@ -33,6 +34,7 @@ function AppSidebarContent() {
   const { data: session } = authClient.useSession();
   const [isExpanded, setIsExpanded] = useState(false);
   const embed = useEmbedablePage();
+  const signout = useSignout();
 
   if (embed) return null;
 
@@ -87,7 +89,7 @@ function AppSidebarContent() {
               expanded={isExpanded}
             />
             <SidebarLink
-              onClick={() => authClient.signOut()}
+              onClick={signout}
               icon={<LogOut className="w-5 h-5" />}
               label="Sign out"
               expanded={isExpanded}
